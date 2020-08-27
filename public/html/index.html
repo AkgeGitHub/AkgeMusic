@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AkgeMusic</title>
+    <link rel="stylesheet" href="../css/fontawesome/css/all.min.css">
+    <style>
+        *{margin: 0;padding: 0;border: 0;}
+        li{list-style:none}
+        a{text-decoration: none;}
+        input{border: none;outline:none}
+
+        html,body{height: 100%;}
+        .main{height: 100%;display: flex;min-width: 980px;}
+        .main .left{display: flex;flex-direction: column;}
+        .main .left .logo{padding: 24px;background: rgb(240, 240, 240);}
+        .main .left .logo img{height: 25px;padding-left: 12px;}
+        .main .left .leftContainer{width: 170px;height: 100%; padding: 24px;background: rgb(240, 240, 240);overflow: auto;display: flex;flex-direction: column;}
+        .main .left .leftContainer .menu{padding-bottom: 46px;}
+        .main .left .leftContainer .menu .title{color:rgb(136, 136, 136);font-size: 12px;padding-left: 12px;position: relative;}
+        .main .left .leftContainer .menu .title .add{position: absolute;right: 18px;top: 2px;}
+        .main .left .leftContainer .menu .title .chevron{position: absolute;right: 0px;top: 2px;}
+        .main .left .leftContainer .menu .title i:hover{color: rgb(0, 0, 0);}
+        .main .left .leftContainer .menu ul li{height: 30px;margin-top: 10px;font-size: 14px;line-height: 30px;padding-left: 12px;border-radius: 6px;}
+        .main .left .leftContainer .menu ul li.active{background: rgb(30, 208, 160);color: white;}
+        .main .left .leftContainer .menu ul li:not(.active):hover{background: rgb(216, 216, 216)}
+        .main .left .leftContainer .menu ul li i{margin-right: 10px;}
+        .main .right{width: 100%; padding: 22px 40px;background: rgb(246, 246, 246);display: flex;flex-direction: column;}
+        .main .right .top{display: flex;justify-content: space-between;}
+        .main .right .top .fa{color: rgb(131, 131, 131);}
+        .main .right .top .search{display: flex;}
+        .main .right .top .search .page{width: 70px;}
+        .main .right .top .search .page i{float: left;margin-right: 25px;line-height: 34px;}
+        .main .right .top .search .page i:hover{color: rgb(30, 208, 160);}
+        .main .right .top .search .searchContainer{position: relative;margin-right: 25px;}
+        .main .right .top .search .searchContainer .searchtext{width: 200px;height: 34px; border-radius: 20px;background: rgb(216, 216, 216);font-size: 15px;padding:0px 15px;}
+        .main .right .top .search .searchContainer .searchbutton{position: absolute;right: 10px;top: 9px;}
+        .main .right .top .search .searchContainer .searchbutton:hover{color: rgb(30, 208, 160);}
+        .main .right .top .search .musicradar{line-height: 34px;}
+        .main .right .top .search .musicradar i:hover{color: rgb(30, 208, 160);}
+        .main .right .top .information{display: flex;}
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="left">
+            <div class="logo">
+                <img src="../logo.png" alt="">
+            </div>
+            <div class="leftContainer">
+                <div class="menu">
+                    <div class="title">
+                        <span>在线音乐</span>
+                    </div>
+                    <ul>
+                        <li><i class="fa fa-music fa-fw"></i>音乐馆</li>
+                        <li><i class="fa fa-video fa-fw"></i>视频</li>
+                        <li><i class="fa fa-broadcast-tower fa-fw"></i>电台</li>
+                    </ul>
+                </div>
+                <div class="menu">
+                    <div class="title">
+                        <span>我的音乐</span>
+                    </div>
+                    <ul>
+                        <li class="active"><i class="far fa-heart fa-fw"></i>我喜欢</li>
+                        <li><i class="fa fa-desktop fa-fw"></i>本地和下载</li>
+                        <li><i class="fa fa-history fa-fw"></i>播放历史</li>
+                        <li><i class="fa fa-headphones-alt fa-fw"></i>试听列表</li>
+                    </ul>
+                </div>
+                <div class="menu">
+                    <div class="title">
+                        <span>创建的歌单</span>
+                        <i class="far fa-plus-square add"></i>
+                        <i class="fa fa-chevron-up chevron"></i>
+                    </div>
+                    <ul>
+                        <li>新建歌单1</li>
+                        <li>新建歌单2</li>
+                        <li>新建歌单3</li>
+                    </ul>
+                </div>
+                <div class="menu">
+                    <div class="title">
+                        <span>收藏的歌单</span>
+                        <i class="far fa-plus-square add"></i>
+                        <i class="fa fa-chevron-down chevron"></i>
+                    </div>
+                    <ul>
+                        <li>收藏歌单1</li>
+                        <li>收藏歌单2</li>
+                        <li>收藏歌单3</li>
+                    </ul>
+                </div>
+
+        </div>
+        </div>
+        <div class="right">
+            <div class="top">
+                <div class="search">
+                    <div class="page">
+                        <i class="fa fa-chevron-left"></i>
+                        <i class="fa fa-chevron-right"></i>
+                    </div>
+                    <div class="searchContainer">
+                        <input type="text" class="searchtext">
+                        <i class="fa fa-search searchbutton"></i>
+                    </div>
+                    <div class="musicradar">
+                        <i class="fa fa-microphone-alt fa-lg"></i>
+                    </div>
+                </div>
+                <div class="information">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
