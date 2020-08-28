@@ -27,19 +27,49 @@
         .main .left .leftContainer .menu ul li:not(.active):hover{background: rgb(216, 216, 216)}
         .main .left .leftContainer .menu ul li i{margin-right: 10px;}
         .main .right{width: 100%; padding: 22px 40px;background: rgb(246, 246, 246);display: flex;flex-direction: column;}
-        .main .right .top{display: flex;justify-content: space-between;}
-        .main .right .top .fa{color: rgb(131, 131, 131);}
+        .main .right .top{display: flex;justify-content: space-between;margin-bottom: 40px;}
+        .main .right .top .fas{color: rgb(159,159,159);}
         .main .right .top .search{display: flex;}
         .main .right .top .search .page{width: 70px;}
         .main .right .top .search .page i{float: left;margin-right: 25px;line-height: 34px;}
-        .main .right .top .search .page i:hover{color: rgb(30, 208, 160);}
+        .main .right .top .search .page i:hover{color: rgb(79,192,141);}
         .main .right .top .search .searchContainer{position: relative;margin-right: 25px;}
-        .main .right .top .search .searchContainer .searchtext{width: 200px;height: 34px; border-radius: 20px;background: rgb(216, 216, 216);font-size: 15px;padding:0px 15px;}
+        .main .right .top .search .searchContainer .searchtext{width: 200px;height: 34px; border-radius: 20px;background: rgb(227,227,227);font-size: 15px;padding-left: 15px;padding-right: 32px;}
         .main .right .top .search .searchContainer .searchbutton{position: absolute;right: 10px;top: 9px;}
-        .main .right .top .search .searchContainer .searchbutton:hover{color: rgb(30, 208, 160);}
+        .main .right .top .search .searchContainer .searchbutton:hover{color: rgb(79,192,141);}
         .main .right .top .search .musicradar{line-height: 34px;}
-        .main .right .top .search .musicradar i:hover{color: rgb(30, 208, 160);}
-        .main .right .top .information{display: flex;}
+        .main .right .top .search .musicradar i:hover{color: rgb(79,192,141);}
+        .main .right .top .information{display: flex;margin-left: 25px;}
+        .main .right .top .information .saying{display: flex;}
+        .main .right .top .information .saying i{margin:0px 10px;color: rgb(159,159,159);line-height: 34px;}
+        .main .right .top .information .saying div{width: 200px;line-height: 34px;text-align: center; color: rgb(131, 131, 131); overflow: hidden;font-size: 13px;text-overflow: ellipsis;white-space: nowrap;}
+        .main .right .top .information .mine{display: flex;margin-right: 14px;margin-left: 10px;}
+        .main .right .top .information .mine .photo{min-width: 32px; width: 32px;height: 32px; border:1px solid rgb(131, 131, 131);border-radius: 50%;}
+        .main .right .top .information .mine .name{line-height: 34px;margin:0px 6px 0px 8px;font-size: 14px;color: rgb(131, 131, 131);white-space: nowrap;}
+        .main .right .top .information .mine i{line-height: 34px;}
+        .main .right .top .information .mine i:hover{color: rgb(79,192,141);}
+        .main .right .top .information .weather{margin-right: 10px;font-size: 14px;}
+        .main .right .top .information .weather i{line-height: 34px;}
+        .main .right .top .information .vip{font-size: 13px;color: rgb(65,184,131);}
+        .main .right .top .information .vip i{line-height: 34px;}
+        .main .right .rightContainer{display: flex;flex-direction: column;overflow: auto;}
+        .main .right .rightContainer .designation{font-size: 30px;margin-bottom: 22px;}
+        .main .right .rightContainer .classify{margin-bottom: 12px;}
+        .main .right .rightContainer .classify ul li{float: left;height: 36px;margin-right: 54px; line-height: 36px;font-size: 14px;}
+        .main .right .rightContainer .classify ul li.activeclass{border-bottom: 1.5px solid rgb(79,192,141);color: rgb(79,192,141);}
+        .main .right .rightContainer .classify ul li:not(.activeclass):hover{color: rgb(79,192,141);}
+        .main .right .rightContainer .banner{height: 185px;background-color: rgb(159,159,159);font-size: 40px;text-align: center;line-height: 200px;}
+        .main .right .rightContainer .showContainer .show{margin-top: 24px;}
+        .main .right .rightContainer .showContainer .show .showtop{display: flex;justify-content: space-between;margin-bottom: 20px;}
+        .main .right .rightContainer .showContainer .show .showtop .showname{font-size: 22px;}
+        .main .right .rightContainer .showContainer .show .showtop .showmore{font-size: 14px;color: rgb(159,159,159);}
+        .main .right .rightContainer .showContainer .show .showtop .showmore:hover{color: rgb(79,192,141);}
+        .main .right .rightContainer .showContainer .show .showtop .showmore span{margin-right: 10px;}
+        .main .right .rightContainer .showContainer .show .showcontent{height: 215px;overflow: hidden;}
+        .main .right .rightContainer .showContainer .show .showcontent ul{display: flex;justify-content: space-between;flex-wrap: wrap;}
+        .main .right .rightContainer .showContainer .show .showcontent ul li{margin-right: 20px;}
+        .main .right .rightContainer .showContainer .show .showcontent ul li:last-child{margin-right: 0px;}
+        .main .right .rightContainer .showContainer .show .showcontent ul li img{display: block; width: 185px;height: 185px;margin-bottom: 10px;border-radius: 12px;}
     </style>
 </head>
 <body>
@@ -54,9 +84,9 @@
                         <span>在线音乐</span>
                     </div>
                     <ul>
-                        <li><i class="fa fa-music fa-fw"></i>音乐馆</li>
-                        <li><i class="fa fa-video fa-fw"></i>视频</li>
-                        <li><i class="fa fa-broadcast-tower fa-fw"></i>电台</li>
+                        <li><i class="fas fa-music fa-fw"></i>音乐馆</li>
+                        <li><i class="fas fa-video fa-fw"></i>视频</li>
+                        <li><i class="fas fa-broadcast-tower fa-fw"></i>电台</li>
                     </ul>
                 </div>
                 <div class="menu">
@@ -65,16 +95,16 @@
                     </div>
                     <ul>
                         <li class="active"><i class="far fa-heart fa-fw"></i>我喜欢</li>
-                        <li><i class="fa fa-desktop fa-fw"></i>本地和下载</li>
-                        <li><i class="fa fa-history fa-fw"></i>播放历史</li>
-                        <li><i class="fa fa-headphones-alt fa-fw"></i>试听列表</li>
+                        <li><i class="fas fa-desktop fa-fw"></i>本地和下载</li>
+                        <li><i class="fas fa-history fa-fw"></i>播放历史</li>
+                        <li><i class="fas fa-headphones-alt fa-fw"></i>试听列表</li>
                     </ul>
                 </div>
                 <div class="menu">
                     <div class="title">
                         <span>创建的歌单</span>
                         <i class="far fa-plus-square add"></i>
-                        <i class="fa fa-chevron-up chevron"></i>
+                        <i class="fas fa-chevron-up chevron"></i>
                     </div>
                     <ul>
                         <li>新建歌单1</li>
@@ -86,7 +116,7 @@
                     <div class="title">
                         <span>收藏的歌单</span>
                         <i class="far fa-plus-square add"></i>
-                        <i class="fa fa-chevron-down chevron"></i>
+                        <i class="fas fa-chevron-down chevron"></i>
                     </div>
                     <ul>
                         <li>收藏歌单1</li>
@@ -101,20 +131,134 @@
             <div class="top">
                 <div class="search">
                     <div class="page">
-                        <i class="fa fa-chevron-left"></i>
-                        <i class="fa fa-chevron-right"></i>
+                        <i class="fas fa-chevron-left"></i>
+                        <i class="fas fa-chevron-right"></i>
                     </div>
                     <div class="searchContainer">
-                        <input type="text" class="searchtext">
-                        <i class="fa fa-search searchbutton"></i>
+                        <input type="text" class="searchtext" placeholder="搜索音乐">
+                        <i class="fas fa-search searchbutton"></i>
                     </div>
                     <div class="musicradar">
-                        <i class="fa fa-microphone-alt fa-lg"></i>
+                        <i class="fas fa-microphone-alt fa-lg"></i>
                     </div>
                 </div>
                 <div class="information">
+                    <div class="saying">
+                        <i class="fas fa-quote-left fa-fw fa-sm"></i>
+                        <div>凡事以理想为因，实行为果。凡事以理想为因，实行为果。凡事以理想为因，实行为果。</div>
+                        <i class="fas fa-quote-right fa-fw fa-sm"></i>
+                    </div>
+                    <div class="mine">
+                        <div class="photo"></div>
+                        <div class="name">名字最多六字</div>
+                        <i class="fas fa-chevron-down fa-fw"></i>
+                    </div>
+                    <div class="weather">
+                        <i class="fas fa-cloud-sun fa-fw"></i>
+                    </div>
+                    <div class="vip">
+                        <i class="fab fa-vuejs fa-2x fa-fw"></i>
+                    </div>
 
                 </div>
+            </div>
+            <div class="rightContainer">
+                <div class="designation">
+                        音乐馆
+                </div>
+                <div class="classify">
+                    <ul>
+                        <li class="activeclass">精选</li>
+                        <li>排行</li>
+                        <li>歌手</li>
+                        <li>分类歌单</li>
+                        <li>数字专辑</li>
+                    </ul>
+                </div>
+                <div class="banner">
+                    轮播图
+                </div>
+                <div class="showContainer">
+                    <div class="show">
+                        <div class="showtop">
+                            <div class="showname">官方歌单</div>
+                            <div class="showmore">
+                                <span>更多</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <div class="showcontent">
+                            <ul>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第一个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第二个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第三个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第四个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第五个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第六个</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="show">
+                        <div class="showtop">
+                            <div class="showname">推荐歌单</div>
+                            <div class="showmore">
+                                <span>更多</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <div class="showcontent">
+                            <ul>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第一个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第二个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第三个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第四个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第五个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第六个</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="play">
+
             </div>
         </div>
     </div>
