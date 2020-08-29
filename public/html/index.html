@@ -12,7 +12,7 @@
         input{border: none;outline:none}
 
         html,body{height: 100%;}
-        .main{height: 100%;display: flex;min-width: 980px;}
+        .main{height: 100%;display: flex;min-width: 980px;max-width: 1920px;margin: 0 auto;}
         .main .left{display: flex;flex-direction: column;}
         .main .left .logo{padding: 24px;background: rgb(240, 240, 240);}
         .main .left .logo img{height: 25px;padding-left: 12px;}
@@ -26,8 +26,9 @@
         .main .left .leftContainer .menu ul li.active{background: rgb(30, 208, 160);color: white;}
         .main .left .leftContainer .menu ul li:not(.active):hover{background: rgb(216, 216, 216)}
         .main .left .leftContainer .menu ul li i{margin-right: 10px;}
-        .main .right{width: 100%; padding: 22px 40px;background: rgb(246, 246, 246);display: flex;flex-direction: column;}
-        .main .right .top{display: flex;justify-content: space-between;margin-bottom: 40px;}
+        .main .right{width: 100%; background: rgb(246, 246, 246);display: flex;flex-direction: column;}
+        .main .right .active{color: rgb(30, 208, 160);}
+        .main .right .top{display: flex;justify-content: space-between;margin-bottom: 40px;padding: 22px 40px 0px 40px;}
         .main .right .top .fas{color: rgb(159,159,159);}
         .main .right .top .search{display: flex;}
         .main .right .top .search .page{width: 70px;}
@@ -52,14 +53,16 @@
         .main .right .top .information .weather i{line-height: 34px;}
         .main .right .top .information .vip{font-size: 13px;color: rgb(65,184,131);}
         .main .right .top .information .vip i{line-height: 34px;}
-        .main .right .rightContainer{display: flex;flex-direction: column;overflow: auto;}
+        .main .right .rightContainer{display: flex;flex-direction: column;overflow: auto;padding: 0px 40px;}
+        /* 注意:滚动条占了一定的空间，等编写项目时可以用第三方插件改善滚动条 */
         .main .right .rightContainer .designation{font-size: 30px;margin-bottom: 22px;}
         .main .right .rightContainer .classify{margin-bottom: 12px;}
         .main .right .rightContainer .classify ul li{float: left;height: 36px;margin-right: 54px; line-height: 36px;font-size: 14px;}
-        .main .right .rightContainer .classify ul li.activeclass{border-bottom: 1.5px solid rgb(79,192,141);color: rgb(79,192,141);}
-        .main .right .rightContainer .classify ul li:not(.activeclass):hover{color: rgb(79,192,141);}
+        .main .right .rightContainer .classify ul li.active{border-bottom: 1.5px solid rgb(79,192,141);}
+        .main .right .rightContainer .classify ul li:not(.active):hover{color: rgb(79,192,141);}
         .main .right .rightContainer .banner{height: 185px;background-color: rgb(159,159,159);font-size: 40px;text-align: center;line-height: 200px;}
-        .main .right .rightContainer .showContainer .show{margin-top: 24px;}
+        .main .right .rightContainer .showContainer .show{margin-top: 24px;margin-bottom: 10px;}
+        /* show之间触发了BFC */
         .main .right .rightContainer .showContainer .show .showtop{display: flex;justify-content: space-between;margin-bottom: 20px;}
         .main .right .rightContainer .showContainer .show .showtop .showname{font-size: 22px;}
         .main .right .rightContainer .showContainer .show .showtop .showmore{font-size: 14px;color: rgb(159,159,159);}
@@ -67,9 +70,28 @@
         .main .right .rightContainer .showContainer .show .showtop .showmore span{margin-right: 10px;}
         .main .right .rightContainer .showContainer .show .showcontent{height: 215px;overflow: hidden;}
         .main .right .rightContainer .showContainer .show .showcontent ul{display: flex;justify-content: space-between;flex-wrap: wrap;}
-        .main .right .rightContainer .showContainer .show .showcontent ul li{margin-right: 20px;}
-        .main .right .rightContainer .showContainer .show .showcontent ul li:last-child{margin-right: 0px;}
+        .main .right .rightContainer .showContainer .show .showcontent ul li{margin-left: 22px;}
+        .main .right .rightContainer .showContainer .show .showcontent ul li:first-child{margin-left: 0px;}
         .main .right .rightContainer .showContainer .show .showcontent ul li img{display: block; width: 185px;height: 185px;margin-bottom: 10px;border-radius: 12px;}
+        .main .right .rightContainer .showContainer .showmv .showcontent{height: 184px;}
+        .main .right .rightContainer .showContainer .showmv .showcontent ul li{margin-left: 25px;}
+        .main .right .rightContainer .showContainer .showmv .showcontent ul li:first-child{margin-left: 0px;}
+        .main .right .rightContainer .showContainer .showmv .showcontent ul li img{width: 275px;height: 154px;}
+        .main .right .play{display: flex;justify-content: space-between; height: 40px; padding: 10px 40px;border-top: 2px solid rgb(216, 216, 216);}
+        .main .right .play .playsong{width: 280px;display: flex;}
+        .main .right .play .playsong .songphoto{width: 38px;height: 38px;border-radius: 6px;border: 1px solid rgb(131, 131, 131);overflow: hidden;margin-right: 13px;}
+        .main .right .play .playsong .songphoto img{width: 40px;height: 40px;}
+        .main .right .play .playsong .songinfo{display: flex;flex-direction: column;width: 227px;height: 40px;justify-content: space-between;}
+        .main .right .play .playsong .songinfo .songname{ overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 13px;}
+        .main .right .play .playsong .songinfo .songfeature{white-space: nowrap;color: rgb(159,159,159);font-size: 14px;}
+        .main .right .play .playsong .songinfo .songfeature i{margin-right: 10px;}
+        .main .right .play .playbutton{display: flex; font-size: 10px;justify-content: space-between;}
+        .main .right .play .playbutton i{line-height: 40px;margin-right: 13px;}
+        .main .right .play .playbutton i.start{color: rgb(30, 208, 160);}
+        .main .right .play .playfeature{width: 280px; display: flex;line-height: 40px;font-size: 14px;justify-content: flex-end;}
+        .main .right .play .playfeature .feature{margin-left: 12px;}
+        .main .right .play .playfeature .feature:not(.active):hover{color: rgb(30, 208, 160);}
+        
     </style>
 </head>
 <body>
@@ -168,7 +190,7 @@
                 </div>
                 <div class="classify">
                     <ul>
-                        <li class="activeclass">精选</li>
+                        <li class="active">精选</li>
                         <li>排行</li>
                         <li>歌手</li>
                         <li>分类歌单</li>
@@ -181,7 +203,45 @@
                 <div class="showContainer">
                     <div class="show">
                         <div class="showtop">
-                            <div class="showname">官方歌单</div>
+                            <div class="showname">推荐歌单</div>
+                            <div class="showmore">
+                                <span>更多</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <div class="showcontent">
+                            <ul>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第一个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第二个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第三个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第四个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第五个</span>
+                                </li>
+                                <li>
+                                    <img src="../huayu.png" alt="">
+                                    <span>第六个</span>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="show showmv">
+                        <div class="showtop">
+                            <div class="showname">推荐视频</div>
                             <div class="showmore">
                                 <span>更多</span>
                                 <i class="fas fa-chevron-right"></i>
@@ -218,7 +278,7 @@
                     </div>
                     <div class="show">
                         <div class="showtop">
-                            <div class="showname">推荐歌单</div>
+                            <div class="showname">最新发行</div>
                             <div class="showmore">
                                 <span>更多</span>
                                 <i class="fas fa-chevron-right"></i>
@@ -258,6 +318,53 @@
 
             </div>
             <div class="play">
+                <div class="playsong">
+                    <div class="songphoto">
+                        <img src="../huayu.png" alt="">
+                    </div>
+                    <div class="songinfo">
+                        <div class="songname">
+                            <span>QQ音乐,让生活充满音乐</span>
+                            <span>-</span>
+                            <span>QQ</span>
+                        </div>
+                        <div class="songfeature">
+                            <i class="fas fa-heart fa-fw"></i>
+                            <i class="fas fa-download fa-fw"></i>
+                            <i class="fas fa-comment-dots fa-fw"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="playbutton">
+                    <i class="fas fa-random fa-2x fa-fw"></i>
+                    <i class="fas fa-step-backward fa-2x"></i>
+                    <i class="fas fa-play-circle fa-4x fa-fw start"></i>
+                    <i class="fas fa-step-forward fa-2x fa-fw"></i>
+                    <i class="fas fa-volume-up fa-2x fa-fw"></i>
+                    <audio>
+                        <!-- 音乐 -->
+                    </audio>
+                </div>
+                <div class="playfeature">
+                    <div class="feature">
+                        <span>倍速</span>
+                        <i class="fas fa-chevron-down fa-xs fa-fw"></i>
+                    </div>
+                    <div class="feature">
+                        <span>标准</span>
+                        <i class="fas fa-chevron-down fa-xs fa-fw"></i>
+                    </div>
+                    <div class="feature">
+                        <span>音效</span>
+                        <i class="fas fa-chevron-down fa-xs fa-fw"></i>
+                    </div>
+                    <div class="feature">
+                        <span class="active">词</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-list-ul fa-fw"></i>
+                    </div>
+                </div>
 
             </div>
         </div>
