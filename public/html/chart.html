@@ -60,23 +60,24 @@
         .main .right .rightContainer .classify ul li{float: left;height: 36px;margin-right: 54px; line-height: 36px;font-size: 14px;}
         .main .right .rightContainer .classify ul li.active{border-bottom: 1.5px solid rgb(30, 208, 160);}
         .main .right .rightContainer .classify ul li:not(.active):hover{color: rgb(30, 208, 160);}
-        .main .right .rightContainer .selection .banner{height: 185px;background-color: rgb(159,159,159);font-size: 40px;text-align: center;line-height: 200px;}
-        .main .right .rightContainer .selection .show{margin-top: 24px;margin-bottom: 10px;}
-        /* show之间触发了BFC */
-        .main .right .rightContainer .selection .show .showtop{display: flex;justify-content: space-between;margin-bottom: 20px;}
-        .main .right .rightContainer .selection .show .showtop .showname{font-size: 22px;}
-        .main .right .rightContainer .selection .show .showtop .showmore{font-size: 14px;color: rgb(159,159,159);}
-        .main .right .rightContainer .selection .show .showtop .showmore:hover{color: rgb(30, 208, 160);}
-        .main .right .rightContainer .selection .show .showtop .showmore span{margin-right: 10px;}
-        .main .right .rightContainer .selection .show .showcontent{height: 215px;overflow: hidden;}
-        .main .right .rightContainer .selection .show .showcontent ul{display: flex;justify-content: space-between;flex-wrap: wrap;}
-        .main .right .rightContainer .selection .show .showcontent ul li{margin-left: 22px;}
-        .main .right .rightContainer .selection .show .showcontent ul li:first-child{margin-left: 0px;}
-        .main .right .rightContainer .selection .show .showcontent ul li img{display: block; width: 185px;height: 185px;margin-bottom: 10px;border-radius: 12px;}
-        .main .right .rightContainer .selection .showmv .showcontent{height: 184px;}
-        .main .right .rightContainer .selection .showmv .showcontent ul li{margin-left: 25px;}
-        .main .right .rightContainer .selection .showmv .showcontent ul li:first-child{margin-left: 0px;}
-        .main .right .rightContainer .selection .showmv .showcontent ul li img{width: 275px;height: 154px;}
+
+        .main .right .rightContainer .chart .ranklist{margin-bottom: 20px;display: flex;justify-content: space-between;flex-wrap: wrap;}
+        .main .right .rightContainer .chart .ranklist .rank{flex-grow: 1;width: 390px;height: 146px;margin-right: 17px;margin-bottom: 15px; background: rgb(239,239,239);border-radius: 10px;display: flex;}
+        .main .right .rightContainer .chart .ranklist .rank .rankimage{width: 146px;height: 146px;border-radius: 10px;overflow: hidden;}
+        .main .right .rightContainer .chart .ranklist .rank .rankimage img{width: 146px;height: 146px;}
+        .main .right .rightContainer .chart .ranklist .rank .rankres{padding: 15px;}
+        .main .right .rightContainer .chart .ranklist .rank .rankres ul{margin-top: 13px;font-size: 13px;overflow: hidden;color: rgb(136, 136, 136);}
+        .main .right .rightContainer .chart .ranklist .rank .rankres ul li{ width: 220px; height: 26px;line-height: 26px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+        .main .right .rightContainer .chart .ranklist .rank .rankres ul li span{margin-right: 5px;}
+        .main .right .rightContainer .chart .areachart{margin-bottom: 1px;}
+        .main .right .rightContainer .chart .areachart .charttitle{font-size: 23px;margin-bottom: 20px;}
+        .main .right .rightContainer .chart .areachart .areagroup{display: flex;flex-wrap: wrap;}
+        .main .right .rightContainer .chart .areachart .areagroup .area{margin:0px 15px 15px 0px;}
+        .main .right .rightContainer .chart .areachart .areagroup .area .areaimage{width: 146px;height: 146px;border-radius: 10px;overflow: hidden;}
+        .main .right .rightContainer .chart .areachart .areagroup .area .areaimage img{width: 100%;height: 100%;}
+        
+        
+
         .main .right .play{display: flex;justify-content: space-between; height: 40px; padding: 10px 40px;border-top: 2px solid rgb(216, 216, 216);}
         .main .right .play .playsong{width: 280px;display: flex;}
         .main .right .play .playsong .songphoto{width: 38px;height: 38px;border-radius: 6px;border: 1px solid rgb(131, 131, 131);overflow: hidden;margin-right: 13px;}
@@ -224,129 +225,230 @@
                 </div>
                 <div class="classify">
                     <ul>
-                        <li class="active">精选</li>
-                        <li>排行</li>
+                        <li>精选</li>
+                        <li class="active">排行</li>
                         <li>歌手</li>
                         <li>分类歌单</li>
                         <li>数字专辑</li>
                     </ul>
                 </div>
-                <div class="selection">
-                    <div class="banner">
-                        轮播图
-                    </div>
-                    <div class="show">
-                        <div class="showtop">
-                            <div class="showname">推荐歌单</div>
-                            <div class="showmore">
-                                <span>更多</span>
-                                <i class="fas fa-chevron-right"></i>
+                <div class="chart">
+                    <div class="ranklist">
+                        <div class="rank">
+                            <div class="rankimage">
+                                <img src="../huayu.png" alt="">
+                            </div>
+                            <div class="rankres">
+                                <h3>飙升榜</h3>
+                                <ul>
+                                    <li>
+                                        <span>1</span>
+                                        QQ音乐,让生活充满音乐。QQ音乐,让生活充满音乐。
+                                    </li>
+                                    <li>
+                                        <span>2</span>
+                                        QQ音乐,让生活充满音乐。
+                                    </li>
+                                    <li>
+                                        <span>3</span>
+                                        QQ音乐,让生活充满音乐。
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="showcontent">
-                            <ul>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第一个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第二个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第三个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第四个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第五个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第六个</span>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="show showmv">
-                        <div class="showtop">
-                            <div class="showname">推荐视频</div>
-                            <div class="showmore">
-                                <span>更多</span>
-                                <i class="fas fa-chevron-right"></i>
+                        <div class="rank">
+                            <div class="rankimage">
+                                <img src="../huayu.png" alt="">
+                            </div>
+                            <div class="rankres">
+                                <h3>热歌榜</h3>
+                                <ul>
+                                    <li>
+                                        <span>1</span>
+                                        QQ音乐,让生活充满音乐。QQ音乐,让生活充满音乐。
+                                    </li>
+                                    <li>
+                                        <span>2</span>
+                                        QQ音乐,让生活充满音乐。
+                                    </li>
+                                    <li>
+                                        <span>3</span>
+                                        QQ音乐,让生活充满音乐。
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="showcontent">
-                            <ul>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第一个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第二个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第三个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第四个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第五个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第六个</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <div class="showtop">
-                            <div class="showname">最新发行</div>
-                            <div class="showmore">
-                                <span>更多</span>
-                                <i class="fas fa-chevron-right"></i>
+                        <div class="rank">
+                            <div class="rankimage">
+                                <img src="../huayu.png" alt="">
+                            </div>
+                            <div class="rankres">
+                                <h3>新歌榜</h3>
+                                <ul>
+                                    <li>
+                                        <span>1</span>
+                                        QQ音乐,让生活充满音乐。QQ音乐,让生活充满音乐。
+                                    </li>
+                                    <li>
+                                        <span>2</span>
+                                        QQ音乐,让生活充满音乐。
+                                    </li>
+                                    <li>
+                                        <span>3</span>
+                                        QQ音乐,让生活充满音乐。
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="showcontent">
-                            <ul>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第一个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第二个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第三个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第四个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第五个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第六个</span>
-                                </li>
-                            </ul>
+                        <div class="rank">
+                            <div class="rankimage">
+                                <img src="../huayu.png" alt="">
+                            </div>
+                            <div class="rankres">
+                                <h3>原创榜</h3>
+                                <ul>
+                                    <li>
+                                        <span>1</span>
+                                        QQ音乐,让生活充满音乐。QQ音乐,让生活充满音乐。
+                                    </li>
+                                    <li>
+                                        <span>2</span>
+                                        QQ音乐,让生活充满音乐。
+                                    </li>
+                                    <li>
+                                        <span>3</span>
+                                        QQ音乐,让生活充满音乐。
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="rank">
+                            <div class="rankimage">
+                                <img src="../huayu.png" alt="">
+                            </div>
+                            <div class="rankres">
+                                <h3>飙升榜</h3>
+                                <ul>
+                                    <li>
+                                        <span>1</span>
+                                        QQ音乐,让生活充满音乐。QQ音乐,让生活充满音乐。
+                                    </li>
+                                    <li>
+                                        <span>2</span>
+                                        QQ音乐,让生活充满音乐。
+                                    </li>
+                                    <li>
+                                        <span>3</span>
+                                        QQ音乐,让生活充满音乐。
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="rank">
+                            <div class="rankimage">
+                                <img src="../huayu.png" alt="">
+                            </div>
+                            <div class="rankres">
+                                <h3>飙升榜</h3>
+                                <ul>
+                                    <li>
+                                        <span>1</span>
+                                        QQ音乐,让生活充满音乐。QQ音乐,让生活充满音乐。
+                                    </li>
+                                    <li>
+                                        <span>2</span>
+                                        QQ音乐,让生活充满音乐。
+                                    </li>
+                                    <li>
+                                        <span>3</span>
+                                        QQ音乐,让生活充满音乐。
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
+                    <div class="areachart">
+                        <div class="charttitle">地区榜</div>
+                        <div class="areagroup">
+                            <div class="area">
+                                <div class="areaimage">
+                                    <img src="../huayu.png" alt="">
+                                </div>
+                            </div>
+                            <div class="area">
+                                <div class="areaimage">
+                                    <img src="../huayu.png" alt="">
+                                </div>
+                            </div>
+                            <div class="area">
+                                <div class="areaimage">
+                                    <img src="../huayu.png" alt="">
+                                </div>
+                            </div>
+                            <div class="area">
+                                <div class="areaimage">
+                                    <img src="../huayu.png" alt="">
+                                </div>
+                            </div>
+                            <div class="area">
+                                <div class="areaimage">
+                                    <img src="../huayu.png" alt="">
+                                </div>
+                            </div>
+                            <div class="area">
+                                <div class="areaimage">
+                                    <img src="../huayu.png" alt="">
+                                </div>
+                            </div>
+                            <div class="area">
+                                <div class="areaimage">
+                                    <img src="../huayu.png" alt="">
+                                </div>
+                            </div>
+                            <div class="area">
+                                <div class="areaimage">
+                                    <img src="../huayu.png" alt="">
+                                </div>
+                            </div>
+                            <div class="area">
+                                <div class="areaimage">
+                                    <img src="../huayu.png" alt="">
+                                </div>
+                            </div>
+                            <div class="area">
+                                <div class="areaimage">
+                                    <img src="../huayu.png" alt="">
+                                </div>
+                            </div>
+                            <div class="area">
+                                <div class="areaimage">
+                                    <img src="../huayu.png" alt="">
+                                </div>
+                            </div>
+                            <div class="area">
+                                <div class="areaimage">
+                                    <img src="../huayu.png" alt="">
+                                </div>
+                            </div>
+                            <div class="area">
+                                <div class="areaimage">
+                                    <img src="../huayu.png" alt="">
+                                </div>
+                            </div>
+                            <div class="area">
+                                <div class="areaimage">
+                                    <img src="../huayu.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="areachart">
+
+                    </div>
+                    <div class="areachart">
+
+                    </div>
+                    
 
                 </div>
 

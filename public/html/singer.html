@@ -60,23 +60,21 @@
         .main .right .rightContainer .classify ul li{float: left;height: 36px;margin-right: 54px; line-height: 36px;font-size: 14px;}
         .main .right .rightContainer .classify ul li.active{border-bottom: 1.5px solid rgb(30, 208, 160);}
         .main .right .rightContainer .classify ul li:not(.active):hover{color: rgb(30, 208, 160);}
-        .main .right .rightContainer .selection .banner{height: 185px;background-color: rgb(159,159,159);font-size: 40px;text-align: center;line-height: 200px;}
-        .main .right .rightContainer .selection .show{margin-top: 24px;margin-bottom: 10px;}
-        /* show之间触发了BFC */
-        .main .right .rightContainer .selection .show .showtop{display: flex;justify-content: space-between;margin-bottom: 20px;}
-        .main .right .rightContainer .selection .show .showtop .showname{font-size: 22px;}
-        .main .right .rightContainer .selection .show .showtop .showmore{font-size: 14px;color: rgb(159,159,159);}
-        .main .right .rightContainer .selection .show .showtop .showmore:hover{color: rgb(30, 208, 160);}
-        .main .right .rightContainer .selection .show .showtop .showmore span{margin-right: 10px;}
-        .main .right .rightContainer .selection .show .showcontent{height: 215px;overflow: hidden;}
-        .main .right .rightContainer .selection .show .showcontent ul{display: flex;justify-content: space-between;flex-wrap: wrap;}
-        .main .right .rightContainer .selection .show .showcontent ul li{margin-left: 22px;}
-        .main .right .rightContainer .selection .show .showcontent ul li:first-child{margin-left: 0px;}
-        .main .right .rightContainer .selection .show .showcontent ul li img{display: block; width: 185px;height: 185px;margin-bottom: 10px;border-radius: 12px;}
-        .main .right .rightContainer .selection .showmv .showcontent{height: 184px;}
-        .main .right .rightContainer .selection .showmv .showcontent ul li{margin-left: 25px;}
-        .main .right .rightContainer .selection .showmv .showcontent ul li:first-child{margin-left: 0px;}
-        .main .right .rightContainer .selection .showmv .showcontent ul li img{width: 275px;height: 154px;}
+
+        .main .right .rightContainer .singer{display: flex;flex-direction: column;}
+        .main .right .rightContainer .singer .singersort .language{display: flex;font-size: 13px;margin:5px 0px 15px 0px;}
+        .main .right .rightContainer .singer .singersort .language div{width: 80px;height: 32px;border: 1px solid rgb(216, 216, 216);border-radius: 20px;line-height: 32px;text-align: center;margin-right: 10px;}
+        .main .right .rightContainer .singer .singersort .language div.activesinger{background: rgb(30, 208, 160);color: white;}
+        .main .right .rightContainer .singer .singersort .sex{display: flex;font-size: 13px;margin-bottom: 20px;}
+        .main .right .rightContainer .singer .singersort .sex div{width: 80px;height: 32px;border: 1px solid rgb(216, 216, 216);border-radius: 20px;line-height: 32px;text-align: center;margin-right: 10px;}
+        .main .right .rightContainer .singer .singersort .sex div.activesinger{background: rgb(30, 208, 160);color: white;}
+        .main .right .rightContainer .singer .showsinger .popular{display: flex;flex-wrap: wrap;}
+        .main .right .rightContainer .singer .showsinger .popular .personalinfo{width: 190px;height: 226px;overflow: hidden;margin-right: 12px;flex-grow: 1;}
+        .main .right .rightContainer .singer .showsinger .popular .personalinfo img{display: block; width: 190px;height: 190px;border-radius: 50%;margin-bottom: 6px;}
+        .main .right .rightContainer .singer .showsinger .popular .personalinfo div{text-align: center;width: 190px; height: 30px;line-height: 30px;}
+        .main .right .rightContainer .singer .showsinger .popular .personalinfo:empty{height: 0;width: 190px;}
+
+
         .main .right .play{display: flex;justify-content: space-between; height: 40px; padding: 10px 40px;border-top: 2px solid rgb(216, 216, 216);}
         .main .right .play .playsong{width: 280px;display: flex;}
         .main .right .play .playsong .songphoto{width: 38px;height: 38px;border-radius: 6px;border: 1px solid rgb(131, 131, 131);overflow: hidden;margin-right: 13px;}
@@ -224,130 +222,128 @@
                 </div>
                 <div class="classify">
                     <ul>
-                        <li class="active">精选</li>
+                        <li>精选</li>
                         <li>排行</li>
-                        <li>歌手</li>
+                        <li class="active">歌手</li>
                         <li>分类歌单</li>
                         <li>数字专辑</li>
                     </ul>
                 </div>
-                <div class="selection">
-                    <div class="banner">
-                        轮播图
-                    </div>
-                    <div class="show">
-                        <div class="showtop">
-                            <div class="showname">推荐歌单</div>
-                            <div class="showmore">
-                                <span>更多</span>
-                                <i class="fas fa-chevron-right"></i>
-                            </div>
+                <div class="singer">
+                    <div class="singersort">
+                        <div class="language">
+                            <div class="activesinger">全部</div>
+                            <div>华语</div>
+                            <div>欧美</div>
+                            <div>日本</div>
+                            <div>韩国</div>
+                            <div>其他</div>
                         </div>
-                        <div class="showcontent">
-                            <ul>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第一个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第二个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第三个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第四个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第五个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第六个</span>
-                                </li>
+                        <div class="sex">
+                            <div class="activesinger">全部</div>
+                            <div>男</div>
+                            <div>女</div>
+                            <div>组合</div>
+                        </div>
+                    </div>
+                    <div class="showsinger">
+                        <div class="popular">
+                            <div class="personalinfo">
+                                <img src="../huayu.png" alt="">
+                                <div>
+                                    <i class=""></i>
+                                    <span>名字</span>
+                                </div>
+                            </div>
+                            <div class="personalinfo">
+                                <img src="../huayu.png" alt="">
+                                <div>
+                                    <i class=""></i>
+                                    <span>名字</span>
+                                </div>
+                            </div>
+                            <div class="personalinfo">
+                                <img src="../huayu.png" alt="">
+                                <div>
+                                    <i class=""></i>
+                                    <span>名字</span>
+                                </div>
+                            </div>
+                            <div class="personalinfo">
+                                <img src="../huayu.png" alt="">
+                                <div>
+                                    <i class=""></i>
+                                    <span>名字</span>
+                                </div>
+                            </div>
+                            <div class="personalinfo">
+                                <img src="../huayu.png" alt="">
+                                <div>
+                                    <i class=""></i>
+                                    <span>名字</span>
+                                </div>
+                            </div>
+                            <div class="personalinfo">
+                                <img src="../huayu.png" alt="">
+                                <div>
+                                    <i class=""></i>
+                                    <span>名字</span>
+                                </div>
+                            </div>
+                            <div class="personalinfo">
+                                <img src="../huayu.png" alt="">
+                                <div>
+                                    <i class=""></i>
+                                    <span>名字</span>
+                                </div>
+                            </div>
+                            <div class="personalinfo">
+                                <img src="../huayu.png" alt="">
+                                <div>
+                                    <i class=""></i>
+                                    <span>名字</span>
+                                </div>
+                            </div>
+                            <div class="personalinfo">
+                                <img src="../huayu.png" alt="">
+                                <div>
+                                    <i class=""></i>
+                                    <span>名字</span>
+                                </div>
+                            </div>
+                            <div class="personalinfo">
+                                <img src="../huayu.png" alt="">
+                                <div>
+                                    <i class=""></i>
+                                    <span>名字</span>
+                                </div>
+                            </div>
+                            <div class="personalinfo">
+                                <img src="../huayu.png" alt="">
+                                <div>
+                                    <i class=""></i>
+                                    <span>名字</span>
+                                </div>
+                            </div>
+                            <div class="personalinfo">
+                                <img src="../huayu.png" alt="">
+                                <div>
+                                    <i class=""></i>
+                                    <span>名字</span>
+                                </div>
+                            </div>
+                            <div class="personalinfo"></div>
+                            <div class="personalinfo"></div>
+                            <div class="personalinfo"></div>
+                            <div class="personalinfo"></div>
+                            <div class="personalinfo"></div>
+                            <div class="personalinfo"></div>
                                 
-                            </ul>
+                        </div>
+                        <div class="singerlist">
+                            
                         </div>
                     </div>
-                    <div class="show showmv">
-                        <div class="showtop">
-                            <div class="showname">推荐视频</div>
-                            <div class="showmore">
-                                <span>更多</span>
-                                <i class="fas fa-chevron-right"></i>
-                            </div>
-                        </div>
-                        <div class="showcontent">
-                            <ul>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第一个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第二个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第三个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第四个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第五个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第六个</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <div class="showtop">
-                            <div class="showname">最新发行</div>
-                            <div class="showmore">
-                                <span>更多</span>
-                                <i class="fas fa-chevron-right"></i>
-                            </div>
-                        </div>
-                        <div class="showcontent">
-                            <ul>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第一个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第二个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第三个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第四个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第五个</span>
-                                </li>
-                                <li>
-                                    <img src="../huayu.png" alt="">
-                                    <span>第六个</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
