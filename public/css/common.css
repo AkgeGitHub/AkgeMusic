@@ -1,0 +1,10 @@
+*{margin: 0;padding: 0;border: 0;}
+ul,li{list-style:none}
+img{display: block;}
+a{text-decoration: none;}
+input{border: none;outline:none}
+html,body{height: 100%;}
+#main{height: 100%;display: flex;}
+::-webkit-scrollbar{
+    display:none;
+}
