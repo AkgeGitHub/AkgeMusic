@@ -55,24 +55,28 @@
         .main .right .top .information .vip i{line-height: 34px;}
         .main .right .rightContainer{display: flex;flex-direction: column;overflow: auto;padding: 0px 40px;}
         /* 注意:滚动条占了一定的空间，等编写项目时可以用第三方插件改善滚动条 */
-        .main .right .rightContainer .designation{font-size: 30px;margin-bottom: 22px;}
-        .main .right .rightContainer .classify{margin-bottom: 12px;}
-        .main .right .rightContainer .classify ul li{float: left;height: 36px;margin-right: 54px; line-height: 36px;font-size: 14px;}
-        .main .right .rightContainer .classify ul li.active{border-bottom: 1.5px solid rgb(30, 208, 160);}
-        .main .right .rightContainer .classify ul li:not(.active):hover{color: rgb(30, 208, 160);}
-
-        .main .right .rightContainer .singer{display: flex;flex-direction: column;}
-        .main .right .rightContainer .singer .singersort .language{display: flex;font-size: 13px;margin:5px 0px 15px 0px;}
-        .main .right .rightContainer .singer .singersort .language div{width: 80px;height: 32px;border: 1px solid rgb(216, 216, 216);border-radius: 20px;line-height: 32px;text-align: center;margin-right: 10px;}
-        .main .right .rightContainer .singer .singersort .language div.activesinger{background: rgb(30, 208, 160);color: white;}
-        .main .right .rightContainer .singer .singersort .sex{display: flex;font-size: 13px;margin-bottom: 20px;}
-        .main .right .rightContainer .singer .singersort .sex div{width: 80px;height: 32px;border: 1px solid rgb(216, 216, 216);border-radius: 20px;line-height: 32px;text-align: center;margin-right: 10px;}
-        .main .right .rightContainer .singer .singersort .sex div.activesinger{background: rgb(30, 208, 160);color: white;}
-        .main .right .rightContainer .singer .showsinger .popular{display: flex;flex-wrap: wrap;}
-        .main .right .rightContainer .singer .showsinger .popular .personalinfo{width: 190px;height: 226px;overflow: hidden;margin-right: 12px;flex-grow: 1;}
-        .main .right .rightContainer .singer .showsinger .popular .personalinfo img{display: block; width: 190px;height: 190px;border-radius: 50%;margin-bottom: 6px;}
-        .main .right .rightContainer .singer .showsinger .popular .personalinfo div{text-align: center;width: 190px; height: 30px;line-height: 30px;}
-        .main .right .rightContainer .singer .showsinger .popular .personalinfo:empty{height: 0;width: 190px;}
+        .main .right .rightContainer .songsheetinfo{display: flex;}
+        .main .right .rightContainer .songsheetinfo .sheetimg{width: 170px;height: 170px;overflow: hidden;flex-shrink: 0;}
+        .main .right .rightContainer .songsheetinfo .sheetimg img{width: 170px;height: 170px;border-radius: 10px;}
+        .main .right .rightContainer .songsheetinfo .sheetintro{margin-left: 20px;height: 170px;display: flex;flex-direction: column;justify-content: space-between;}
+        .main .right .rightContainer .songsheetinfo .sheetintro .info{margin-top: 15px;}
+        .main .right .rightContainer .songsheetinfo .sheetintro .info .createinfo{display: flex;flex-wrap: wrap;line-height: 40px;}
+        .main .right .rightContainer .songsheetinfo .sheetintro .info .createinfo img{width: 40px;height: 40px;border-radius: 50%;overflow: hidden;}
+        .main .right .rightContainer .songsheetinfo .sheetintro .info .createinfo div{margin-left: 10px;font-size: 13px;color: rgb(159,159,159);}
+        .main .right .rightContainer .songsheetinfo .sheetintro .info .brief{width: 1000px; font-size: 14px;margin: 10px 0px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+        .main .right .rightContainer .songsheetinfo .sheetintro .sheetfeature{display: flex;flex-wrap: wrap;margin-bottom: 5px;}
+        .main .right .rightContainer .songsheetinfo .sheetintro .sheetfeature div{width: 110px;height: 35px;color: rgb(41, 40, 40); background: rgb(219,219,219);text-align: center;line-height: 35px;border-radius: 20px;margin-right: 10px;font-size: 14px;}
+        .main .right .rightContainer .songsheet .sheettop{display: flex;flex-wrap: wrap;overflow: hidden;margin-top: 20px;justify-content: space-between;}
+        .main .right .rightContainer .songsheet .sheettop .sheetchoice{display: flex;flex-wrap:wrap; overflow: hidden;;}
+        .main .right .rightContainer .songsheet .sheettop .sheetchoice div{height: 36px;margin-right: 50px;line-height: 36px;}
+        .main .right .rightContainer .songsheet .sheettop .sheetchoice div.active{color: rgb(30, 208, 160);border-bottom: 1px solid rgb(30, 208, 160);}
+        .main .right .rightContainer .songsheet .sheettop .sheetsearch{display: flex;flex-wrap: wrap;overflow: hidden;font-size: 13px;}
+        .main .right .rightContainer .songsheet .sheettop .sheetsearch div{height: 36px;margin-left: 30px;line-height: 36px;}
+        .main .right .rightContainer .songsheet .sheetbody .song{display: flex;flex-wrap: wrap;height: 40px;overflow: hidden;justify-content: space-between;font-size: 14px;}
+        .main .right .rightContainer .songsheet .sheetbody .song div{width: 300px;line-height: 40px;}
+        .main .right .rightContainer .songsheet .sheetbody .song div i{color: rgb(159,159,159);}
+        .main .right .rightContainer .songsheet .sheetbody .song div i.active{color: rgb(255,106,106);}
+        .main .right .rightContainer .songsheet .sheetbody .song.songtitle{color: rgb(136, 136, 136);font-size: 12px;}
 
 
         .main .right .play{display: flex;justify-content: space-between; height: 40px; padding: 10px 40px;border-top: 2px solid rgb(216, 216, 216);}
@@ -217,134 +221,166 @@
                 </div>
             </div>
             <div class="rightContainer">
-                <div class="designation">
-                        音乐馆
-                </div>
-                <div class="classify">
-                    <ul>
-                        <li>精选</li>
-                        <li>排行</li>
-                        <li class="active">歌手</li>
-                        <li>分类歌单</li>
-                        <li>数字专辑</li>
-                    </ul>
-                </div>
-                <div class="singer">
-                    <div class="singersort">
-                        <div class="language">
-                            <div class="activesinger">全部</div>
-                            <div>华语</div>
-                            <div>欧美</div>
-                            <div>日本</div>
-                            <div>韩国</div>
-                            <div>其他</div>
+               <div class="songsheetinfo">
+                   <div class="sheetimg">
+                        <img src="../huayu.png" alt="">
+                   </div>
+                   <div class="sheetintro">
+                       <h2>歌单名字</h2>
+                       <div class="info">
+                           <div class="createinfo">
+                                <img src="../huayu.png" alt="">
+                                <div>创建人</div>
+                                <div>创建时间</div>
+                           </div>
+                           <div class="brief">
+                               简介简介简介
+                               简介简介简介
+                               简介简介简介
+                               简介简介简介
+                               简介简介简介
+                               简介简介简介
+                               简介简介简介
+                               简介简介简介
+                               简介简介简介
+                               简介简介简介
+                               简介简介简介
+                               简介简介简介
+                               简介简介简介
+                           </div>
+                       </div>
+                       <div class="sheetfeature">
+                            <div>
+                                <i class="far fa-play-circle"></i>
+                                全部播放
+                            </div>
+                            <div>
+                                <i class="far fa-heart"></i>
+                                收藏
+                            </div>
+                            <div>
+                                <i class="far fa-share-square"></i>
+                                分享
+                            </div>
+                       </div>
+
+                   </div>
+               </div>
+               <div class="songsheet">
+                   <div class="sheettop">
+                       <div class="sheetchoice">
+                            <div class="active">歌曲</div>
+                            <div>评论</div>
+                       </div>
+                       <div class="sheetsearch">
+                           <div>
+                               <i class="fas fa-search"></i>
+                               搜索
+                            </div>
+                           <div>
+                               <i class="fas fa-sort-alpha-down"></i>
+                               排序
+                            </div>
+                       </div>
+                   </div>
+                   <div class="sheetbody">
+                       <div class="song songtitle">
+                           <div>歌曲</div>
+                           <div>歌手</div>
+                           <div>专辑</div>
+                       </div>
+                       <div class="song">
+                            <div>
+                                <i class="far fa-heart fas fa-heart active"></i>
+                                歌名
+                            </div>
+                            <div>歌手名</div>
+                            <div>专辑名</div>
                         </div>
-                        <div class="sex">
-                            <div class="activesinger">全部</div>
-                            <div>男</div>
-                            <div>女</div>
-                            <div>组合</div>
+                        <div class="song">
+                            <div>
+                                <i class="far fa-heart"></i>
+                                歌名
+                            </div>
+                            <div>歌手名</div>
+                            <div>专辑名</div>
                         </div>
-                    </div>
-                    <div class="showsinger">
-                        <div class="popular">
-                            <div class="personalinfo">
-                                <img src="../huayu.png" alt="">
-                                <div>
-                                    <i class=""></i>
-                                    <span>名字</span>
-                                </div>
+                        <div class="song">
+                            <div>
+                                <i class="far fa-heart"></i>
+                                歌名
                             </div>
-                            <div class="personalinfo">
-                                <img src="../huayu.png" alt="">
-                                <div>
-                                    <i class=""></i>
-                                    <span>名字</span>
-                                </div>
-                            </div>
-                            <div class="personalinfo">
-                                <img src="../huayu.png" alt="">
-                                <div>
-                                    <i class=""></i>
-                                    <span>名字</span>
-                                </div>
-                            </div>
-                            <div class="personalinfo">
-                                <img src="../huayu.png" alt="">
-                                <div>
-                                    <i class=""></i>
-                                    <span>名字</span>
-                                </div>
-                            </div>
-                            <div class="personalinfo">
-                                <img src="../huayu.png" alt="">
-                                <div>
-                                    <i class=""></i>
-                                    <span>名字</span>
-                                </div>
-                            </div>
-                            <div class="personalinfo">
-                                <img src="../huayu.png" alt="">
-                                <div>
-                                    <i class=""></i>
-                                    <span>名字</span>
-                                </div>
-                            </div>
-                            <div class="personalinfo">
-                                <img src="../huayu.png" alt="">
-                                <div>
-                                    <i class=""></i>
-                                    <span>名字</span>
-                                </div>
-                            </div>
-                            <div class="personalinfo">
-                                <img src="../huayu.png" alt="">
-                                <div>
-                                    <i class=""></i>
-                                    <span>名字</span>
-                                </div>
-                            </div>
-                            <div class="personalinfo">
-                                <img src="../huayu.png" alt="">
-                                <div>
-                                    <i class=""></i>
-                                    <span>名字</span>
-                                </div>
-                            </div>
-                            <div class="personalinfo">
-                                <img src="../huayu.png" alt="">
-                                <div>
-                                    <i class=""></i>
-                                    <span>名字</span>
-                                </div>
-                            </div>
-                            <div class="personalinfo">
-                                <img src="../huayu.png" alt="">
-                                <div>
-                                    <i class=""></i>
-                                    <span>名字</span>
-                                </div>
-                            </div>
-                            <div class="personalinfo">
-                                <img src="../huayu.png" alt="">
-                                <div>
-                                    <i class=""></i>
-                                    <span>名字</span>
-                                </div>
-                            </div>
-                            <div class="personalinfo"></div>
-                            <div class="personalinfo"></div>
-                            <div class="personalinfo"></div>
-                            <div class="personalinfo"></div>
-                            <div class="personalinfo"></div>
-                            <div class="personalinfo"></div>
-                                
+                            <div>歌手名</div>
+                            <div>专辑名</div>
                         </div>
-                        <div class="singerlist">
-                            
+                        <div class="song">
+                            <div>
+                                <i class="far fa-heart"></i>
+                                歌名
+                            </div>
+                            <div>歌手名</div>
+                            <div>专辑名</div>
                         </div>
-                    </div>
-                </div>
+                        <div class="song">
+                            <div>
+                                <i class="far fa-heart"></i>
+                                歌名
+                            </div>
+                            <div>歌手名</div>
+                            <div>专辑名</div>
+                        </div>
+                        <div class="song">
+                            <div>
+                                <i class="far fa-heart"></i>
+                                歌名
+                            </div>
+                            <div>歌手名</div>
+                            <div>专辑名</div>
+                        </div>
+                        <div class="song">
+                            <div>
+                                <i class="far fa-heart"></i>
+                                歌名
+                            </div>
+                            <div>歌手名</div>
+                            <div>专辑名</div>
+                        </div>
+                        <div class="song">
+                            <div>
+                                <i class="far fa-heart"></i>
+                                歌名
+                            </div>
+                            <div>歌手名</div>
+                            <div>专辑名</div>
+                        </div>
+                        <div class="song">
+                            <div>
+                                <i class="far fa-heart"></i>
+                                歌名
+                            </div>
+                            <div>歌手名</div>
+                            <div>专辑名</div>
+                        </div>
+                        <div class="song">
+                            <div>
+                                <i class="far fa-heart"></i>
+                                歌名
+                            </div>
+                            <div>歌手名</div>
+                            <div>专辑名</div>
+                        </div>
+                        <div class="song">
+                            <div>
+                                <i class="far fa-heart"></i>
+                                歌名
+                            </div>
+                            <div>歌手名</div>
+                            <div>专辑名</div>
+                        </div>
+                        
+                       
+                   </div>
+               </div>
 
             </div>
             <div class="play">

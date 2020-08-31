@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AkgeMusic</title>
+    <link rel="stylesheet" href="../css/fontawesome/css/all.min.css">
+    <style>
+        *{margin: 0;padding: 0;border: 0;}
+        li{list-style:none}
+        a{text-decoration: none;}
+        input{border: none;outline:none}
+
+        html,body{height: 100%;}
+        .main{height: 100%;display: flex;min-width: 980px;max-width: 1920px;margin: 0 auto;}
+        .main .left{display: flex;flex-direction: column;}
+        .main .left .logo{padding: 24px;background: rgb(240, 240, 240);}
+        .main .left .logo img{height: 25px;padding-left: 12px;}
+        .main .left .leftContainer{width: 170px;height: 100%; padding: 24px;background: rgb(240, 240, 240);overflow: auto;display: flex;flex-direction: column;}
+        .main .left .leftContainer .menu{padding-bottom: 46px;}
+        .main .left .leftContainer .menu .title{color:rgb(136, 136, 136);font-size: 12px;padding-left: 12px;position: relative;}
+        .main .left .leftContainer .menu .title .add{position: absolute;right: 18px;top: 2px;}
+        .main .left .leftContainer .menu .title .chevron{position: absolute;right: 0px;top: 2px;}
+        .main .left .leftContainer .menu .title i:hover{color: rgb(0, 0, 0);}
+        .main .left .leftContainer .menu ul li{height: 30px;margin-top: 10px;font-size: 14px;line-height: 30px;padding-left: 12px;border-radius: 6px;}
+        .main .left .leftContainer .menu ul li.active{background: rgb(30, 208, 160);color: white;}
+        .main .left .leftContainer .menu ul li:not(.active):hover{background: rgb(216, 216, 216)}
+        .main .left .leftContainer .menu ul li i{margin-right: 10px;}
+        .main .right{width: 100%; background: rgb(246, 246, 246);display: flex;flex-direction: column;}
+        .main .right .active{color: rgb(30, 208, 160);}
+        .main .right .top{display: flex;justify-content: space-between;margin-bottom: 40px;padding: 22px 40px 0px 40px;position: relative;}
+        .main .right .top .fas{color: rgb(159,159,159);}
+        .main .right .top .search{display: flex;}
+        .main .right .top .search .page{width: 70px;}
+        .main .right .top .search .page i{float: left;margin-right: 25px;line-height: 34px;}
+        .main .right .top .search .page i:hover{color: rgb(30, 208, 160);}
+        .main .right .top .search .searchContainer{position: relative;margin-right: 25px;}
+        .main .right .top .search .searchContainer .searchtext{width: 200px;height: 34px; border-radius: 20px;background: rgb(227,227,227);font-size: 15px;padding-left: 15px;padding-right: 32px;}
+        .main .right .top .search .searchContainer .searchbutton{position: absolute;right: 10px;top: 9px;}
+        .main .right .top .search .searchContainer .searchbutton:hover{color: rgb(30, 208, 160);}
+        .main .right .top .search .musicradar{line-height: 34px;}
+        .main .right .top .search .musicradar i:hover{color: rgb(30, 208, 160);}
+        .main .right .top .information{display: flex;margin-left: 25px;}
+        .main .right .top .information .saying{display: flex;}
+        .main .right .top .information .saying i{margin:0px 10px;color: rgb(159,159,159);line-height: 34px;}
+        .main .right .top .information .saying div{width: 200px;line-height: 34px;text-align: center; color: rgb(131, 131, 131); overflow: hidden;font-size: 13px;text-overflow: ellipsis;white-space: nowrap;}
+        .main .right .top .information .mine{display: flex;margin-right: 14px;margin-left: 10px;}
+        .main .right .top .information .mine .photo{min-width: 32px; width: 32px;height: 32px; border:1px solid rgb(131, 131, 131);border-radius: 50%;}
+        .main .right .top .information .mine .name{line-height: 34px;margin:0px 6px 0px 8px;font-size: 14px;color: rgb(131, 131, 131);white-space: nowrap;}
+        .main .right .top .information .mine i{line-height: 34px;}
+        .main .right .top .information .mine i:hover{color: rgb(30, 208, 160);}
+        .main .right .top .information .weather{margin-right: 10px;font-size: 14px;}
+        .main .right .top .information .weather i{line-height: 34px;}
+        .main .right .top .information .vip{font-size: 13px;color: rgb(65,184,131);}
+        .main .right .top .information .vip i{line-height: 34px;}
+        .main .right .rightContainer{display: flex;flex-direction: column;overflow: auto;padding: 0px 40px;}
+        /* 注意:滚动条占了一定的空间，等编写项目时可以用第三方插件改善滚动条 */
+        .main .right .rightContainer .designation{font-size: 30px;margin-bottom: 22px;}
+        .main .right .rightContainer .classify{margin-bottom: 12px;}
+        .main .right .rightContainer .classify ul li{float: left;height: 36px;margin-right: 54px; line-height: 36px;font-size: 14px;}
+        .main .right .rightContainer .classify ul li.active{border-bottom: 1.5px solid rgb(30, 208, 160);}
+        .main .right .rightContainer .classify ul li:not(.active):hover{color: rgb(30, 208, 160);}
+
+        .main .right .rightContainer .songlist .songsort{margin: 5px 0px 20px 0px;}
+        .main .right .rightContainer .songlist .songsort ul{display: flex;flex-wrap: wrap}
+        .main .right .rightContainer .songlist .songsort ul li{width: 80px;height: 32px;font-size: 13px;line-height: 32px;text-align: center;border: 1px solid rgb(216, 216, 216); border-radius: 20px;margin-right: 15px;}
+        .main .right .rightContainer .songlist .songsort ul li.activesong{background: rgb(30, 208, 160);color: white;}
+        .main .right .rightContainer .songlist .listgroup{display: flex;flex-wrap: wrap;}
+        .main .right .rightContainer .songlist .listgroup .list{width: 185px;height: 220px;margin-right: 15px;margin-bottom: 10px;}
+        .main .right .rightContainer .songlist .listgroup .list img{width: 185px;height: 185px;border-radius: 10px;}
+        .main .right .rightContainer .songlist .listgroup .list div{width: 185px;height: 25px; line-height: 25px;font-size: 14px; text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+
+
+        .main .right .play{display: flex;justify-content: space-between; height: 40px; padding: 10px 40px;border-top: 2px solid rgb(216, 216, 216);}
+        .main .right .play .playsong{width: 280px;display: flex;}
+        .main .right .play .playsong .songphoto{width: 38px;height: 38px;border-radius: 6px;border: 1px solid rgb(131, 131, 131);overflow: hidden;margin-right: 13px;}
+        .main .right .play .playsong .songphoto img{width: 40px;height: 40px;}
+        .main .right .play .playsong .songinfo{display: flex;flex-direction: column;width: 227px;height: 40px;justify-content: space-between;}
+        .main .right .play .playsong .songinfo .songname{ overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 13px;}
+        .main .right .play .playsong .songinfo .songfeature{white-space: nowrap;color: rgb(159,159,159);font-size: 14px;}
+        .main .right .play .playsong .songinfo .songfeature i{margin-right: 10px;}
+        .main .right .play .playbutton{display: flex; font-size: 10px;justify-content: space-between;}
+        .main .right .play .playbutton i{line-height: 40px;margin-right: 13px;}
+        .main .right .play .playbutton i.start{color: rgb(30, 208, 160);}
+        .main .right .play .playfeature{width: 280px; display: flex;line-height: 40px;font-size: 14px;justify-content: flex-end;}
+        .main .right .play .playfeature .feature{margin-left: 12px;}
+        .main .right .play .playfeature .feature:not(.active):hover{color: rgb(30, 208, 160);}
+        .main .right .top .detail{width: 270px;position: absolute;right: 78px;top: 78px;border-radius: 10px; box-shadow: 0px 0px 5px rgb(173, 173, 173); overflow: hidden; display: flex; flex-direction: column;background: rgb(255, 255, 255);}
+        .main .right .top .detail .myinfo{text-align: center;background: rgb(248, 248, 248);color: rgb(131, 131, 131);}
+        .main .right .top .detail .myinfo .myphoto{width: 52px;height: 52px;border: 1px solid rgb(131, 131, 131);border-radius: 50%;overflow: hidden;margin: 10px auto;}
+        .main .right .top .detail .myinfo .myname{margin: 10px 0px;font-size: 14px;}
+        .main .right .top .detail .mymusic{height: 42px;padding: 0px 10px;display: flex;justify-content: space-around;text-align: center;font-size: 14px;}
+        .main .right .top .detail .mymusic div{width: 70px; line-height: 42px;margin-right: 10px;}
+        .main .right .top .detail .myhomepage{display: flex;height: 28px; padding:10px 10px 15px 10px;justify-content: space-around;}
+        .main .right .top .detail .myhomepage div{line-height: 28px;text-align: center;border-right: 1px solid rgb(216, 216, 216);flex-grow: 1;}
+        .main .right .top .detail .myhomepage div:last-child{border: none;}
+        
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="left">
+            <div class="logo">
+                <img src="../logo.png" alt="">
+            </div>
+            <div class="leftContainer">
+                <div class="menu">
+                    <div class="title">
+                        <span>在线音乐</span>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-music fa-fw"></i>音乐馆</li>
+                        <li><i class="fas fa-video fa-fw"></i>视频</li>
+                        <li><i class="fas fa-broadcast-tower fa-fw"></i>电台</li>
+                    </ul>
+                </div>
+                <div class="menu">
+                    <div class="title">
+                        <span>我的音乐</span>
+                    </div>
+                    <ul>
+                        <li class="active"><i class="far fa-heart fa-fw"></i>我喜欢</li>
+                        <li><i class="fas fa-desktop fa-fw"></i>本地和下载</li>
+                        <li><i class="fas fa-history fa-fw"></i>播放历史</li>
+                        <li><i class="fas fa-headphones-alt fa-fw"></i>试听列表</li>
+                    </ul>
+                </div>
+                <div class="menu">
+                    <div class="title">
+                        <span>创建的歌单</span>
+                        <i class="far fa-plus-square add"></i>
+                        <i class="fas fa-chevron-up chevron"></i>
+                    </div>
+                    <ul>
+                        <li>新建歌单1</li>
+                        <li>新建歌单2</li>
+                        <li>新建歌单3</li>
+                    </ul>
+                </div>
+                <div class="menu">
+                    <div class="title">
+                        <span>收藏的歌单</span>
+                        <i class="far fa-plus-square add"></i>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <ul>
+                        <li>收藏歌单1</li>
+                        <li>收藏歌单2</li>
+                        <li>收藏歌单3</li>
+                    </ul>
+                </div>
+
+        </div>
+        </div>
+        <div class="right">
+            <div class="top">
+                <div class="search">
+                    <div class="page">
+                        <i class="fas fa-chevron-left"></i>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="searchContainer">
+                        <input type="text" class="searchtext" placeholder="搜索音乐">
+                        <i class="fas fa-search searchbutton"></i>
+                    </div>
+                    <div class="musicradar">
+                        <i class="fas fa-microphone-alt fa-lg"></i>
+                    </div>
+                </div>
+                <div class="information">
+                    <div class="saying">
+                        <i class="fas fa-quote-left fa-fw fa-sm"></i>
+                        <div>凡事以理想为因，实行为果。凡事以理想为因，实行为果。凡事以理想为因，实行为果。</div>
+                        <i class="fas fa-quote-right fa-fw fa-sm"></i>
+                    </div>
+                    <div class="mine">
+                        <div class="photo"></div>
+                        <div class="name">名字最多六字</div>
+                        <i class="fas fa-chevron-down fa-fw"></i>
+                    </div>
+                    <div class="weather">
+                        <i class="fas fa-cloud-sun fa-fw"></i>
+                    </div>
+                    <div class="vip">
+                        <i class="fab fa-vuejs fa-2x fa-fw"></i>
+                    </div>
+
+                </div>
+                <div class="detail">
+                    <div class="myinfo">
+                        <div class="myphoto"></div>
+                        <div class="myname">名字最多六字</div>
+                    </div>
+                    <div class="mymusic">
+                        <div>
+                            <span>等级</span>
+                            <span>0</span>
+                        </div>
+                        <div>
+                            <span>关注</span>
+                            <span>0</span>
+                        </div>
+                        <div>
+                            <span>粉丝</span>
+                            <span>0</span>
+                        </div>
+                    </div>
+                    <div class="myhomepage">
+                        <div>个人主页</div>
+                        <div>退出登录</div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="rightContainer">
+                <div class="designation">
+                        音乐馆
+                </div>
+                <div class="classify">
+                    <ul>
+                        <li>精选</li>
+                        <li>排行</li>
+                        <li>歌手</li>
+                        <li class="active">分类歌单</li>
+                        <li>数字专辑</li>
+                    </ul>
+                </div>
+                <div class="songlist">
+                    <div class="songsort">
+                        <ul>
+                            <li class="activesong">华语</li>
+                            <li>流行</li>
+                            <li>摇滚</li>
+                            <li>民谣</li>
+                            <li>电子</li>
+                            <li>独立</li>
+                            <li>轻音乐</li>
+                            <li>影视原声</li>
+                            <li>ACG</li>
+                        </ul>
+                    </div>
+                    <div class="listgroup">
+                        <div class="list">
+                            <img src="../huayu.png" alt="">
+                            <div>歌单名字歌单名字歌单名字歌单名字</div>
+                        </div>
+                        <div class="list">
+                            <img src="../huayu.png" alt="">
+                            <div>歌单名字</div>
+                        </div>
+                        <div class="list">
+                            <img src="../huayu.png" alt="">
+                            <div>歌单名字</div>
+                        </div>
+                        <div class="list">
+                            <img src="../huayu.png" alt="">
+                            <div>歌单名字</div>
+                        </div>
+                        <div class="list">
+                            <img src="../huayu.png" alt="">
+                            <div>歌单名字</div>
+                        </div>
+                        <div class="list">
+                            <img src="../huayu.png" alt="">
+                            <div>歌单名字</div>
+                        </div>
+                        <div class="list">
+                            <img src="../huayu.png" alt="">
+                            <div>歌单名字</div>
+                        </div>
+                        <div class="list">
+                            <img src="../huayu.png" alt="">
+                            <div>歌单名字</div>
+                        </div>
+                        <div class="list">
+                            <img src="../huayu.png" alt="">
+                            <div>歌单名字</div>
+                        </div>
+                        <div class="list">
+                            <img src="../huayu.png" alt="">
+                            <div>歌单名字</div>
+                        </div>
+                        <div class="list">
+                            <img src="../huayu.png" alt="">
+                            <div>歌单名字</div>
+                        </div>
+                        <div class="list">
+                            <img src="../huayu.png" alt="">
+                            <div>歌单名字</div>
+                        </div>
+
+                        
+                    </div>
+                    
+
+                </div>
+
+            </div>
+            <div class="play">
+                <div class="playsong">
+                    <div class="songphoto">
+                        <img src="../huayu.png" alt="">
+                    </div>
+                    <div class="songinfo">
+                        <div class="songname">
+                            <span>QQ音乐,让生活充满音乐</span>
+                            <span>-</span>
+                            <span>QQ</span>
+                        </div>
+                        <div class="songfeature">
+                            <i class="fas fa-heart fa-fw"></i>
+                            <i class="fas fa-download fa-fw"></i>
+                            <i class="fas fa-comment-dots fa-fw"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="playbutton">
+                    <i class="fas fa-random fa-2x fa-fw"></i>
+                    <i class="fas fa-step-backward fa-2x"></i>
+                    <i class="fas fa-play-circle fa-4x fa-fw start"></i>
+                    <i class="fas fa-step-forward fa-2x fa-fw"></i>
+                    <i class="fas fa-volume-up fa-2x fa-fw"></i>
+                    <audio>
+                        <!-- 音乐 -->
+                    </audio>
+                </div>
+                <div class="playfeature">
+                    <div class="feature">
+                        <span>倍速</span>
+                        <i class="fas fa-chevron-down fa-xs fa-fw"></i>
+                    </div>
+                    <div class="feature">
+                        <span>标准</span>
+                        <i class="fas fa-chevron-down fa-xs fa-fw"></i>
+                    </div>
+                    <div class="feature">
+                        <span class="active">词</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-list-ul fa-fw"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
