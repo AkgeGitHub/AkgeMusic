@@ -1,21 +1,27 @@
 <template>
-  <div id="main">
-    <Tabbar></Tabbar>
-    <Header></Header>
+  <div id="wrapper">
+    <Sidebar></Sidebar>
+	<div id="right-wrap">
+		<Header></Header>
+		<router-view/>
+		<Footer></Footer>
+	</div>
   </div>
 </template>
 
 <script>
-import Tabbar from "@/components/tabbar";
+import Sidebar from "@/components/sidebar";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 
 
 export default {
 	name: "onliemusic",
 	components: {
-		Tabbar,
-		Header
+		Sidebar,
+		Header,
+		Footer,
 	},
 	mounted(){
 	}

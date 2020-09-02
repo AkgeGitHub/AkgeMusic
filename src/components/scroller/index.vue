@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" ref="wrapper">
+  <div class="scroller" ref="scroller">
       <slot></slot>
   </div>
 </template>
@@ -10,7 +10,7 @@ export default {
     name:"scroller",
     mounted(){
         this.$nextTick(()=>{
-            this.scroll=new BScroll(this.$refs.wrapper,{
+            this.scroll=new BScroll(this.$refs.scroller,{
                 tap:true,
                 probeType: 1,
             });
@@ -22,5 +22,5 @@ export default {
 </script>
 
 <style>
-    .wrapper{height: 100%;}
+    .scroller{height: 100%;}
 </style>
