@@ -1,19 +1,29 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import onlineMuiscRouter from "./onlinemusic"
-import myMuiscRouter from "./mymusic"
-import songListRouter from "./songlist"
+import MuischallRouter from "./musichall"
+import VideoRouter from "./video"
+import RadioRouter from "./radio"
+import LikeRouter from "./like"
+import LocalRouter from "./local"
+import HistoryRouter from "./history"
+import SonglistRouter from "./songlist"
+
+
 
 
 Vue.use(VueRouter)
 
   const routes = [
-    onlineMuiscRouter,
-    myMuiscRouter,
-    songListRouter,
+    MuischallRouter,
+    VideoRouter,
+    RadioRouter,
+    LikeRouter,
+    LocalRouter,
+    HistoryRouter,
+    SonglistRouter,
     {
       path:"/*",
-      redirect:"/onlinemusic"
+      redirect:"/musichall"
     }
   
 ]

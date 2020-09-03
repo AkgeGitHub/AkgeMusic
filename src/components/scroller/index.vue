@@ -11,8 +11,12 @@ export default {
     mounted(){
         this.$nextTick(()=>{
             this.scroll=new BScroll(this.$refs.scroller,{
-                tap:true,
                 probeType: 1,
+                startX: 0,
+                click: true,
+                scrollX: true,
+                scrollY: true,
+                listenScroll:true,
             });
         })
 

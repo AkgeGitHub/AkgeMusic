@@ -2,7 +2,6 @@
   <div id="wrapper">
     <Sidebar></Sidebar>
 	<div id="right-wrap">
-		songlist
 		<Header></Header>
 		<router-view/>
 		<Footer></Footer>
@@ -18,7 +17,7 @@ import Footer from "@/components/footer";
 
 
 export default {
-	name: "songlist",
+	name: "musichall",
 	components: {
 		Sidebar,
 		Header,

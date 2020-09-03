@@ -3,6 +3,7 @@
     <Sidebar></Sidebar>
 	<div id="right-wrap">
 		<Header></Header>
+		history
 		<router-view/>
 		<Footer></Footer>
 	</div>
@@ -17,7 +18,7 @@ import Footer from "@/components/footer";
 
 
 export default {
-	name: "onliemusic",
+	name: "history",
 	components: {
 		Sidebar,
 		Header,
