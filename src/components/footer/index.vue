@@ -23,9 +23,7 @@
             <i class="fas fa-play-circle fa-4x fa-fw start"></i>
             <i class="fas fa-step-forward fa-2x fa-fw"></i>
             <i class="fas fa-volume-up fa-2x fa-fw"></i>
-            <audio>
-                <!-- 音乐 -->
-            </audio>
+            <audio :src="this.$store.state.songurl" autoplay></audio>
         </div>
         <div class="nav-tool">
             <div class="tool">
@@ -49,6 +47,17 @@
 <script>
 export default {
     name:"footer",
+    data(){
+        return{
+            
+        }
+    },
+    mounted(){
+        
+    },
+    created(){
+
+    }
 
 }
 </script>

@@ -9,6 +9,10 @@ axios.defaults.withCredentials = true;
 axios.defaults.baseURL = 'http://localhost:3000/';
 Vue.prototype.axios=axios;
 
+// vue-awesome-swiper
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
+Vue.use(VueAwesomeSwiper)
 
 // scroller
 import scroller from '@/components/scroller'

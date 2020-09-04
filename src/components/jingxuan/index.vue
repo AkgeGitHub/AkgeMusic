@@ -11,7 +11,18 @@
             <div>数字专辑</div>
         </div>
         <div class="banner">
-            轮播图
+            <swiper class="swiper" :options="swiperOption">
+                <swiper-slide  v-for="banner in banners" :key="banner.bannerId">
+                    <div class="banner-item">
+                        <a :href="banner.url" target="_blank">
+                            <img :src="banner.imageUrl" alt="">
+                        </a>
+                    </div>
+                </swiper-slide>
+                <div class="swiper-pagination" slot="pagination"></div>
+                <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+                <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+            </swiper>
         </div>
         <div class="selection-list">
             <div class="selection-item">
@@ -24,8 +35,17 @@
                 </div>
                 <div class="selection-item-cont">
                     <div class="item-cont-card" v-for="newsong in newsonglists.slice(0,6)" :key="newsong.id">
-                        <img :src="newsong.picUrl" alt="">
-                        <div>{{newsong.name}}</div>
+                        <div class="card-cover" @click="handleToclick(newsong.id)">
+                            <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
+                            <img :src="newsong.picUrl" alt="" >
+                        </div>
+                        <div class="card-title" :title="newsong.name">{{newsong.name}}</div>
+                        <div class="card-artist">
+                            <span v-for="(artist,index) in newsong.song.artists" :key="artist.id">
+                                <span>{{artist.name}}</span>
+                                <span v-if="index<newsong.song.artists.length-1"> / </span>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -39,8 +59,17 @@
                 </div>
                 <div class="selection-item-cont video">
                     <div class="item-cont-card" v-for="mv in mvlists" :key="mv.id">
-                        <img :src="mv.picUrl" alt="">
-                        <div>{{mv.name}}</div>
+                        <div class="card-cover">
+                            <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
+                            <img :src="mv.picUrl" alt="">
+                        </div>
+                        <div class="card-title" :title="mv.name">{{mv.name}}</div>
+                        <div class="card-artist">
+                            <span v-for="(artist,index) in mv.artists" :key="artist.id">
+                                <span>{{artist.name}}</span>
+                                <span v-if="index<mv.artists.length-1"> / </span>
+                            </span>
+                        </div>
                     </div>
                     
                 </div>
@@ -55,8 +84,11 @@
                 </div>
                 <div class="selection-item-cont">
                     <div class="item-cont-card" v-for="play in playlists" :key="play.id">
-                        <img :src="play.coverImgUrl" alt="">
-                        <div>{{play.name}}</div>
+                        <div class="card-cover">
+                            <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
+                            <img :src="play.coverImgUrl" alt="">
+                        </div>
+                        <div class="card-title" :title="play.name">{{play.name}}</div>
                     </div>
                 </div>
             </div>
@@ -70,27 +102,65 @@
                 </div>
                 <div class="selection-item-cont">
                     <div class="item-cont-card" v-for="dj in djlists" :key="dj.id">
-                        <img :src="dj.picUrl" alt="">
-                        <div>{{dj.name}}</div>
+                        <div class="card-cover">
+                            <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
+                            <img :src="dj.picUrl" alt="">
+                        </div>
+                        <div class="card-title" :title="dj.name">{{dj.name}}</div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
+    name:"jingxuan",
     data(){
         return{
+            isplay:"fasle",
+            banners:[],
             playlists:[],
             mvlists:[],
             newsonglists:[],
-            djlists:[]
+            djlists:[],
+            swiperOption: {
+                autoplay:true,
+                slidesPerView: 3,
+                spaceBetween: 30,
+                slidesPerGroup: 3,
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev'
+                },
+            }
         }
     },
+    components: {
+        swiper,
+        swiperSlide
+    },
+    methods:{
+        handleToclick(songid){
+            this.axios.get("/song/url?id="+songid).then((res)=>{
+                var songurl=res.data.data[0].url;
+                this.$store.commit("SONG",{songurl,songid});
+            })
+        }
+    },
+
     mounted(){
+        this.axios.get("/banner").then((res)=>{
+            this.banners=res.data.banners;
+        })
         this.axios.get("/top/playlist?limit=6&order=hot").then((res)=>{
             this.playlists=res.data.playlists;
         })
@@ -114,7 +184,10 @@ export default {
       .nav div{float: left;height: 36px;margin-right: 54px; line-height: 36px;font-size: 14px;}
       .nav div.active{border-bottom: 1.5px solid rgb(30, 208, 160);color: rgb(30, 208, 160);}
       .nav div:not(.active):hover{color: rgb(30, 208, 160);}
-      .banner{height: 185px;background-color: rgb(159,159,159);font-size: 40px;text-align: center;line-height: 200px;margin-bottom: 30px;}
+      .banner{margin-bottom: 30px;overflow: hidden;border-radius: 20px;}
+      .banner .banner-item{margin-left: 22px;}
+      .banner .banner-item:first-child{margin-left: 0;}
+      .banner .banner-item img{width: 398px;border-radius: 20px;}
       .selection-list{width: 1238px;}
       .selection-list .selection-item{margin-bottom: 15px;overflow: hidden;}
       .selection-list .selection-item .selection-item-header{display: flex;justify-content: space-between;margin-bottom: 16px;}
@@ -123,10 +196,15 @@ export default {
       .selection-list .selection-item .selection-item-header .selection-item-more:hover{color: rgb(30, 208, 160);}
       .selection-list .selection-item .selection-item-header .selection-item-more span{margin-right: 10px;}
       .selection-list .selection-item .selection-item-cont{display: flex;overflow: auto;margin-left: 0;}
-      .selection-list .selection-item .selection-item-cont .item-cont-card{margin-left: 22px;margin-bottom: 15px;}
+      .selection-list .selection-item .selection-item-cont .item-cont-card{width: 188px; margin-left: 22px;margin-bottom: 15px;}
       .selection-list .selection-item .selection-item-cont .item-cont-card:first-child{margin-left: 0px;}
-      .selection-list .selection-item .selection-item-cont .item-cont-card img{width: 188px;margin-bottom: 10px;border-radius: 12px;}
-      .selection-list .selection-item .selection-item-cont .item-cont-card div{width: 188px; font-size: 15px;height: 22px;line-height: 22px;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;}
-      .selection-list .selection-item .selection-item-cont.video .item-cont-card img{width: 293px;}
-      .selection-list .selection-item .selection-item-cont.video .item-cont-card div{width: 293px;}
+      .selection-list .selection-item .selection-item-cont .item-cont-card .card-cover{margin-bottom: 10px;border-radius: 12px;position: relative;}
+      .selection-list .selection-item .selection-item-cont .item-cont-card .card-cover:hover .cover-mask{display: block;}
+      .selection-list .selection-item .selection-item-cont .item-cont-card .card-cover img{width: 188px;border-radius: 12px;}
+      .selection-list .selection-item .selection-item-cont .item-cont-card .card-cover .cover-mask{display: none; border-radius: 12px;width: 100%;height: 100%; position: absolute;top: 0;left: 0; background: rgba(0,0,0,0.6)}
+      .selection-list .selection-item .selection-item-cont .item-cont-card .card-cover .cover-mask .cover-btn{color: white;opacity: 0.6; position: absolute;top: 50%;left: 50%;margin-left: -24px;margin-top: -24px;}
+      .selection-list .selection-item .selection-item-cont .item-cont-card .card-title{font-size: 15px;height: 22px;line-height: 22px;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;}
+      .selection-list .selection-item .selection-item-cont .item-cont-card .card-artist{color: rgb(159,159,159);font-size: 13px;}
+      .selection-list .selection-item .selection-item-cont.video .item-cont-card{width: 293px;}
+      .selection-list .selection-item .selection-item-cont.video .item-cont-card .card-cover img{width: 293px;}
 </style>
