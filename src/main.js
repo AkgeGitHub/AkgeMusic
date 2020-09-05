@@ -18,6 +18,16 @@ Vue.use(VueAwesomeSwiper)
 import scroller from '@/components/scroller'
 Vue.component("scroller",scroller)
 
+// 过滤器
+// 歌曲作者名字
+Vue.filter("arname",function(ar){
+  var arArr=(ar||[]).map(item=>item.name);
+  var arStr=arArr.join(" / ");
+  return arStr;
+})
+
+
+
 Vue.config.productionTip = false
 
 new Vue({

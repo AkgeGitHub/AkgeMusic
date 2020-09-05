@@ -1,7 +1,7 @@
 <template>
     <div class="sidebar">
         <div class="logo">
-            <img src="@/assets/QQMusic.png" alt="">
+            <img src="@/assets/AkgeMusic.png" alt="">
         </div>
         <div class="menu-list">
             <scroller>
@@ -89,7 +89,7 @@ export default {
 <style scoped>
     .sidebar{display: flex;flex-direction: column;height: 100%;background: rgb(240, 240, 240);padding: 0px 24px;}
     .sidebar .logo{padding: 24px 0px;}
-    .sidebar .logo img{height: 25px;padding-left: 12px;}
+    .sidebar .logo img{height: 25px;margin: 0 auto;}
     .sidebar .menu-list{width: 170px;margin: 24px 0px 30px 0px; overflow: auto;}
     .sidebar .menu-list .menu-item{padding-bottom: 30px;}
     .sidebar .menu-list .menu-item .title{color:rgb(136, 136, 136);font-size: 12px;padding-left: 12px;position: relative;}

@@ -37,14 +37,11 @@
                     <div class="item-cont-card" v-for="newsong in newsonglists.slice(0,6)" :key="newsong.id">
                         <div class="card-cover" @click="handleToclick(newsong.id)">
                             <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
-                            <img :src="newsong.picUrl" alt="" >
+                            <img :src="newsong.album.picUrl" alt="" >
                         </div>
                         <div class="card-title" :title="newsong.name">{{newsong.name}}</div>
                         <div class="card-artist">
-                            <span v-for="(artist,index) in newsong.song.artists" :key="artist.id">
-                                <span>{{artist.name}}</span>
-                                <span v-if="index<newsong.song.artists.length-1"> / </span>
-                            </span>
+                            <span>{{newsong.artists | arname}}</span>
                         </div>
                     </div>
                 </div>
@@ -65,10 +62,7 @@
                         </div>
                         <div class="card-title" :title="mv.name">{{mv.name}}</div>
                         <div class="card-artist">
-                            <span v-for="(artist,index) in mv.artists" :key="artist.id">
-                                <span>{{artist.name}}</span>
-                                <span v-if="index<mv.artists.length-1"> / </span>
-                            </span>
+                            <span>{{mv.artists | arname}}</span>
                         </div>
                     </div>
                     
@@ -115,6 +109,7 @@
 </template>
 
 <script>
+
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
@@ -156,22 +151,26 @@ export default {
             })
         }
     },
-
     mounted(){
+        // 轮播图
         this.axios.get("/banner").then((res)=>{
             this.banners=res.data.banners;
         })
-        this.axios.get("/top/playlist?limit=6&order=hot").then((res)=>{
+        // 精品歌单
+        this.axios.get("/top/playlist/highquality&limit=6").then((res)=>{
             this.playlists=res.data.playlists;
         })
+        // 推荐MV
         this.axios.get("/personalized/mv?limit=4").then((res)=>{
             this.mvlists=res.data.result;
         })
-        this.axios.get("/personalized/newsong").then((res)=>{
-            this.newsonglists=res.data.result;
+        // 最新音乐
+        this.axios.get("/top/song").then((res)=>{
+            this.newsonglists=res.data.data;
         })
-        this.axios.get("/personalized/djprogram").then((res)=>{
-            this.djlists=res.data.result;
+        // 热门电台
+        this.axios.get("/dj/hot?limit=6").then((res)=>{
+            this.djlists=res.data.djRadios;
         })
     }
 

@@ -116,8 +116,8 @@
     .header .nav-search .searchbar .search-btn:hover{color: rgb(30, 208, 160);}
     .header .nav-search .music-radar{line-height: 34px;}
     .header .nav-search .music-radar i:hover{color: rgb(30, 208, 160);}
-    .header .nav-search .search-results{position: absolute;top: 40px;left: 70px; width: 248px;height: 331px; padding: 10px 20px;border-radius: 10px; box-shadow: 0px 0px 5px rgb(173, 173, 173); overflow: hidden;background: rgb(255, 255, 255);font-size: 14px;}
-    .header .nav-search .search-results>div{height: 30px;line-height: 25px;border-bottom: 1px solid rgb(227,227,227);}
+    .header .nav-search .search-results{z-index: 999; position: absolute;top: 40px;left: 70px; width: 248px;height: 331px; padding: 10px 20px;border-radius: 10px; box-shadow: 0px 0px 5px rgb(173, 173, 173); overflow: hidden;background: rgb(255, 255, 255);font-size: 14px;}
+    .header .nav-search .search-results div{height: 30px;line-height: 25px;border-bottom: 1px solid rgb(227,227,227);}
     .header .nav-search .search-results ul{height: 300px;overflow: hidden;font-size: 13px;}
     .header .nav-search .search-results ul li{height: 30px;line-height: 30px;text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
     .header .nav-user-center{display: flex;margin-left: 25px;}
