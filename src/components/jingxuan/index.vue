@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="selection-item-cont">
-                    <div class="item-cont-card" v-for="play in playlists" :key="play.id">
+                    <div class="item-cont-card" v-for="play in playlists.slice(0,6)" :key="play.id">
                         <div class="card-cover">
                             <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
                             <img :src="play.coverImgUrl" alt="">
@@ -157,7 +157,7 @@ export default {
             this.banners=res.data.banners;
         })
         // 精品歌单
-        this.axios.get("/top/playlist/highquality&limit=6").then((res)=>{
+        this.axios.get("/top/playlist/highquality").then((res)=>{
             this.playlists=res.data.playlists;
         })
         // 推荐MV

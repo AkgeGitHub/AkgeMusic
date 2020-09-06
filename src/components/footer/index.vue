@@ -22,27 +22,61 @@
             </div>
         </div>
         <div class="nav-play">
-            <i class="fas fa-random fa-2x fa-fw"></i>
-            <i class="fas fa-step-backward fa-2x"></i>
-            <i class="fas fa-4x fa-fw start" :class="{'fa-play-circle':isplay,'fa-pause-circle':ispause}" @click="handleToPaused"></i>
-            <i class="fas fa-step-forward fa-2x fa-fw"></i>
-            <i class="fas fa-volume-up fa-2x fa-fw"></i>
+            <div class="play-btn random"><i class="fas fa-random fa-2x fa-fw"></i></div>
+            <div class="play-btn backward"><i class="fas fa-step-backward fa-2x"></i></div>
+            <div class="play-btn">
+                <i class="fas fa-4x fa-fw start" :class="{'fa-play-circle':isplay,'fa-pause-circle':ispause}" @click="handleToPaused"></i>
+            </div>
+            <div class="play-btn forward"><i class="fas fa-step-forward fa-2x fa-fw"></i></div>
+            <div class="play-btn volume">
+                <i class="fas fa-2x fa-fw" :class="{'fa-volume-up':!isvolmute,'fa-volume-mute':isvolmute}" @click="handleToVolshow"></i>
+                <div class="volume-detail" v-if="isvolshow">
+                    <div class="volume-detail-range">
+                        <input class="volume-range-block" type="range" orient="vertical" defaultValue="50" max="100" min="0" step="1" v-model="volvalue">
+                        <div class="volume-range-value">{{volvalue}}%</div>
+                    </div>
+                    <div class="volume-detail-icon" @click="handleToMute">
+                        <i class="fas fa-2x fa-fw" :class="{'fa-volume-up':!isvolmute,'fa-volume-mute':isvolmute}"></i>
+                    </div>
+                </div>
+            </div>
             <audio ref="audio" :src="this.$store.state.songurl"></audio>
         </div>
         <div class="nav-tool">
-            <div class="tool">
-                <span>倍速</span>
-                <i class="fas fa-chevron-down fa-xs fa-fw"></i>
+            <div class="tool speed">
+                <div class="tool-name">
+                    <span>倍速</span>
+                    <i class="fas fa-chevron-up fa-xs fa-fw"></i>
+                </div>
+                <div class="speed-detail">
+                    <div class="speed-detail-range">
+                        <div class="speed-range-body">
+                            <input class="speed-range-block" type="range" orient="vertical" defaultValue="1" max="1.5" min="0.5" step="0.1">
+                        </div>
+                        <div class="speed-range-value">
+                            <div class="speed-max">1.5</div>
+                            <div class="speed-norm">1.0</div>
+                            <div class="speed-min">0.5</div>
+                            <div class="speed-other"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="tool">
-                <span>标准</span>
-                <i class="fas fa-chevron-down fa-xs fa-fw"></i>
+                <div class="tool-name">
+                    <span>标准</span>
+                    <i class="fas fa-chevron-up fa-xs fa-fw"></i>
+                </div>
             </div>
             <div class="tool">
-                <span class="active">词</span>
+                <div class="tool-name">
+                    <span class="active">词</span>
+                </div>
             </div>
             <div class="tool">
-                <i class="fas fa-list-ul fa-fw"></i>
+                <div class="tool-name">
+                    <i class="fas fa-list-ul fa-fw"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -55,6 +89,9 @@ export default {
         return{
             isplay:true,
             ispause:false,
+            isvolshow:false,
+            isvolmute:false,
+            volvalue:50,
             songdetail:{
                 al:{picUrl:""},
                 ar:"",
@@ -64,46 +101,65 @@ export default {
         }
     },
     methods:{
-        handleToSong(){
+        handleToSong(){ //监听到songid变化，就执行axios请求
             this.axios.get("/song/detail?ids="+this.$store.state.songid).then((res)=>{
                 this.songdetail=res.data.songs[0];
                 this.$nextTick(()=>{
-                    this.$refs.audio.play();
-                    this.ispause=true;
+                    this.$refs.audio.play(); //数据请求成功开始播放
+                    this.ispause=true; // 播放和暂停图标的变化
                     this.isplay=false;
                 })
             })
         },
         handleToPaused(){
-            if (this.$refs.audio.paused) {
+            if (this.songid) { // 判断是否有歌曲
+                if (this.$refs.audio.paused) {
                 this.$refs.audio.play();
-                this.ispause=true;
-                this.isplay=false;
+                    this.ispause=true;
+                    this.isplay=false;
+                }else{
+                    this.$refs.audio.pause();
+                    this.ispause=false;
+                    this.isplay=true;
+                }
+            }
+        },
+        handleToVolshow(){
+            this.isvolshow=!this.isvolshow; // 点击展示和取消音量内容
+        },
+        handleToMute(){
+            this.isvolmute=!this.isvolmute; // 静音和不静音图标的变化
+            if (this.isvolmute) { // 点击之后若为静音图标，则volvalue值为0
+                this.volvalue=0;
             }else{
-                this.$refs.audio.pause();
-                this.ispause=false;
-                this.isplay=true;
+                this.volvalue=50;
             }
         }
     },
     computed:{
         songid () {
-            return this.$store.state.songid
+            return this.$store.state.songid // 获取到store里的songid
         }
     },
     watch:{
-        songid(newvalue){
+        songid(newvalue){ // 监听songid
             if(newvalue){
                 this.handleToSong()
             }
+        },
+        volvalue(newvalue){ // 监听volvalue
+            if (newvalue>0) { // 判断图标是否需要变化
+                this.isvolmute=false; 
+            }else{
+                this.isvolmute=true;
+            }
+            this.$refs.audio.volume=newvalue/100; // 跟随volvalue的值变化音乐音量
         }
     },
     mounted(){
         
     },
-    created(){
 
-    }
 
 }
 </script>
@@ -120,9 +176,28 @@ export default {
     .footer .nav-song .song-cont .cont-op{white-space: nowrap;color: rgb(159,159,159);font-size: 14px;}
     .footer .nav-song .song-cont .cont-op i{margin-right: 10px;}
     .footer .nav-play{display: flex; font-size: 10px;justify-content: space-between;}
-    .footer .nav-play i{line-height: 40px;margin-right: 13px;}
+    .footer .nav-play .play-btn{text-align: center;margin:0px 12px;}
+    .footer .nav-play .play-btn>i{color: rgb(73,80,87);}
+    .footer .nav-play .play-btn.volume{position: relative;}
+    .footer .nav-play .play-btn.volume .volume-detail{z-index: 999; width: 70px;border-radius: 10px; background: white; box-shadow: 0px 0px 5px rgb(173, 173, 173); position: absolute; right: 50%;bottom: 60px;margin-right: -35px;}
+    .footer .nav-play .play-btn.volume .volume-detail .volume-detail-range{margin: 20px 0px;}
+    .footer .nav-play .play-btn.volume .volume-detail .volume-detail-range .volume-range-block{width: 5px;margin:0px  32.5px ; -webkit-appearance:slider-vertical}/**滑块垂直，chrome的适配在css中，firefox的适配在html属性中 */
+    .footer .nav-play .play-btn.volume .volume-detail .volume-detail-range .volume-range-value{font-size: 13px;margin-top: 10px;}
+    .footer .nav-play .play-btn.volume .volume-detail .volume-detail-icon i{padding: 5px 0px; color: rgb(159,159,159);border-top: 1px solid rgb(216, 216, 216)}
+    .footer .nav-play i{line-height: 40px;}
     .footer .nav-play i.start{color: rgb(30, 208, 160);}
-    .footer .nav-tool{width: 412px; display: flex;line-height: 40px;font-size: 14px;justify-content: flex-end;flex-shrink: 0;}
+    .footer .nav-tool{width: 412px; display: flex;justify-content: flex-end;flex-shrink: 0;}
     .footer .nav-tool .tool{margin-left: 14px;}
-    .footer .nav-tool .tool:not(.active):hover{color: rgb(30, 208, 160);}
+    .footer .nav-tool .tool .tool-name{line-height: 40px;font-size: 14px;}
+    .footer .nav-tool .tool .tool-name:hover{color: rgb(30, 208, 160);}
+    .footer .nav-tool .tool.speed{position: relative;}
+    .footer .nav-tool .tool.speed .speed-detail{z-index: 999; width: 70px;height: 250px; border-radius: 10px; background: white; box-shadow: 0px 0px 5px rgb(173, 173, 173); position: absolute; right: 50%;bottom: 60px;margin-right: -35px;}
+    .footer .nav-tool .tool.speed .speed-detail .speed-detail-range{height: 220px; margin: 15px 0px;display: flex;justify-content: space-between;}
+    .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-body{width: 40px;}
+    .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-body .speed-range-block{margin:0 17.5px; width: 5px;height: 220px; -webkit-appearance:slider-vertical}
+    .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-value{width: 30px;height: 220px;font-size: 13px;position: relative;}
+    .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-value div{position: absolute;}
+    .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-value .speed-max{left: 0;bottom: 207px;}/**220-13 [100%-13px]*/
+    .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-value .speed-norm{left: 0;bottom: 103.5px;}/**110-6.5 [50%-13/2px] 除了首尾，位置都按这个算[X%-6.5px] */
+    .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-value .speed-min{left: 0;bottom: 0;}/**0 */
 </style>
