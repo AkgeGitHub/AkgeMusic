@@ -20,6 +20,7 @@
                     <i class="fas fa-comment-dots fa-fw"></i>
                 </div>
             </div>
+            <audio ref="audio" :src="this.$store.state.songurl"></audio>
         </div>
         <div class="nav-play">
             <div class="play-btn random"><i class="fas fa-random fa-2x fa-fw"></i></div>
@@ -40,24 +41,22 @@
                     </div>
                 </div>
             </div>
-            <audio ref="audio" :src="this.$store.state.songurl"></audio>
         </div>
         <div class="nav-tool">
             <div class="tool speed">
-                <div class="tool-name">
-                    <span>倍速</span>
+                <div class="tool-name" @click="handleToSpeedshow">
+                    <span>{{speedname}}</span>
                     <i class="fas fa-chevron-up fa-xs fa-fw"></i>
                 </div>
-                <div class="speed-detail">
+                <div class="speed-detail" v-if="isspeedshow">
                     <div class="speed-detail-range">
                         <div class="speed-range-body">
-                            <input class="speed-range-block" type="range" orient="vertical" defaultValue="1" max="1.5" min="0.5" step="0.1">
+                            <input class="speed-range-block" type="range" orient="vertical" defaultValue="50" max="100" min="0" step="10" v-model="speedvalue">
                         </div>
                         <div class="speed-range-value">
                             <div class="speed-max">1.5</div>
                             <div class="speed-norm">1.0</div>
                             <div class="speed-min">0.5</div>
-                            <div class="speed-other"></div>
                         </div>
                     </div>
                 </div>
@@ -70,7 +69,7 @@
             </div>
             <div class="tool">
                 <div class="tool-name">
-                    <span class="active">词</span>
+                    <p>词</p>
                 </div>
             </div>
             <div class="tool">
@@ -92,6 +91,9 @@ export default {
             isvolshow:false,
             isvolmute:false,
             volvalue:50,
+            speedname:"倍速",
+            speedvalue:50,
+            isspeedshow:false,
             songdetail:{
                 al:{picUrl:""},
                 ar:"",
@@ -134,6 +136,9 @@ export default {
             }else{
                 this.volvalue=50;
             }
+        },
+        handleToSpeedshow(){
+            this.isspeedshow=!this.isspeedshow; // 点击展示和取消倍速内容
         }
     },
     computed:{
@@ -146,6 +151,7 @@ export default {
             if(newvalue){
                 this.handleToSong()
             }
+            this.speedvalue=50; // 监听到歌曲变化速率变回1即50
         },
         volvalue(newvalue){ // 监听volvalue
             if (newvalue>0) { // 判断图标是否需要变化
@@ -154,6 +160,14 @@ export default {
                 this.isvolmute=true;
             }
             this.$refs.audio.volume=newvalue/100; // 跟随volvalue的值变化音乐音量
+        },
+        speedvalue(newvalue){ // 监听speedvalue
+            if (newvalue==50) { // 判断文字是否需要变化
+                this.speedname="倍速"
+            }else{
+                this.speedname=0.5+newvalue/100+"x"; // speedvalue设置的是0-100,step为10，所以这里才需要计算，但同时也方便了其他地方按百分比算
+            }
+            this.$refs.audio.playbackRate=0.5+newvalue/100; // 跟随speedvalue的值变化音乐倍速
         }
     },
     mounted(){
@@ -188,8 +202,9 @@ export default {
     .footer .nav-play i.start{color: rgb(30, 208, 160);}
     .footer .nav-tool{width: 412px; display: flex;justify-content: flex-end;flex-shrink: 0;}
     .footer .nav-tool .tool{margin-left: 14px;}
-    .footer .nav-tool .tool .tool-name{line-height: 40px;font-size: 14px;}
+    .footer .nav-tool .tool .tool-name{line-height: 40px;font-size: 13.5px;text-align: center;}
     .footer .nav-tool .tool .tool-name:hover{color: rgb(30, 208, 160);}
+    .footer .nav-tool .tool .tool-name span{display: inline-block;width: 30px;}
     .footer .nav-tool .tool.speed{position: relative;}
     .footer .nav-tool .tool.speed .speed-detail{z-index: 999; width: 70px;height: 250px; border-radius: 10px; background: white; box-shadow: 0px 0px 5px rgb(173, 173, 173); position: absolute; right: 50%;bottom: 60px;margin-right: -35px;}
     .footer .nav-tool .tool.speed .speed-detail .speed-detail-range{height: 220px; margin: 15px 0px;display: flex;justify-content: space-between;}
@@ -197,7 +212,7 @@ export default {
     .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-body .speed-range-block{margin:0 17.5px; width: 5px;height: 220px; -webkit-appearance:slider-vertical}
     .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-value{width: 30px;height: 220px;font-size: 13px;position: relative;}
     .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-value div{position: absolute;}
-    .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-value .speed-max{left: 0;bottom: 207px;}/**220-13 [100%-13px]*/
-    .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-value .speed-norm{left: 0;bottom: 103.5px;}/**110-6.5 [50%-13/2px] 除了首尾，位置都按这个算[X%-6.5px] */
+    .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-value .speed-max{left: 0;bottom: 207px;}/**220-13 [220*100%-13px]*/
+    .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-value .speed-norm{left: 0;bottom: 103.5px;}/**110-6.5 [220*50%-13/2px] 除了首尾，位置都按这个算[X%-6.5px] */
     .footer .nav-tool .tool.speed .speed-detail .speed-detail-range .speed-range-value .speed-min{left: 0;bottom: 0;}/**0 */
 </style>

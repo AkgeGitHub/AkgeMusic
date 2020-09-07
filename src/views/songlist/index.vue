@@ -2,8 +2,8 @@
   <div id="wrapper">
     <Sidebar></Sidebar>
 	<div id="right-wrap">
-		songlist
 		<Header></Header>
+		songlist
 		<router-view/>
 		<Footer></Footer>
 	</div>
