@@ -7,8 +7,8 @@ export default{
             component:()=>import("@/components/jingxuan")
         },
         {
-            path:"songranking",
-            component:()=>import("@/components/songranking")
+            path:"songrank",
+            component:()=>import("@/components/songrank")
         },
         {
             path:"singer",

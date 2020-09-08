@@ -107,6 +107,8 @@ export default {
             this.axios.get("/song/detail?ids="+this.$store.state.songid).then((res)=>{
                 this.songdetail=res.data.songs[0];
                 this.$nextTick(()=>{
+                    this.$refs.audio.volume=this.volvalue/100; // 设置它初始音量
+                    this.speedvalue=50; // 监听到歌曲变化速率变回1即50
                     this.$refs.audio.play(); //数据请求成功开始播放
                     this.ispause=true; // 播放和暂停图标的变化
                     this.isplay=false;
@@ -151,7 +153,6 @@ export default {
             if(newvalue){
                 this.handleToSong()
             }
-            this.speedvalue=50; // 监听到歌曲变化速率变回1即50
         },
         volvalue(newvalue){ // 监听volvalue
             if (newvalue>0) { // 判断图标是否需要变化
