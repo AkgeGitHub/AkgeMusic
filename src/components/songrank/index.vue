@@ -77,7 +77,7 @@
             <div class="rank-global">
                 <div class="global-title">全球媒体榜</div>
                 <div class="global-cont">
-                    <div class="global-card" v-for="rank in rankslist" :key="rank.id">
+                    <div class="global-card" v-for="rank in rankslist.slice(4)" :key="rank.id">
                         <div class="card-cover">
                             <img :src="rank.coverImgUrl" alt="">
                         </div>
@@ -129,7 +129,7 @@ export default {
         })
         // 全部榜单
         this.axios.get("/toplist/detail").then((res)=>{
-            this.rankslist=res.data.list.slice(4);
+            this.rankslist=res.data.list;
         })
     }
 
@@ -137,6 +137,7 @@ export default {
 </script>
 
 <style scoped>
+    .rank{width: 1238px;}
     .rank .rank-popular{margin-bottom: 30px;display: flex;}
     .rank .rank-popular .popular-big-card{width: 322px; height: 322px;flex-shrink: 0;}
     .rank .rank-popular .popular-big-card .card-cover{border-radius: 10px;box-shadow: 5px 0px 5px rgb(136, 136, 136);}
