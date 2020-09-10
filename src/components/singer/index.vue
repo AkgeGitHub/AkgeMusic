@@ -1,5 +1,5 @@
 <template>
-	<div class="main-content">
+	<div class="main-content"  @scroll="handleToScroll" ref="singer">
     <div class="singer">
         <div class="singer-sort">
             <div class="sort-lang">
@@ -14,99 +14,11 @@
             </div>
         </div>
         <div class="singer-cont">
-            <!-- <div class="popular">
-                <div class="singerinfo">
-                    <img src="" alt="">
-                    <div>名字名字名字名字名字名字名字名字名字名字</div>
-                </div>
-                <div class="singerinfo">
-                    <img src="" alt="">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <img src="" alt="">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <img src="" alt="">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <img src="" alt="">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <img src="" alt="">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <img src="" alt="">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <img src="" alt="">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <img src="" alt="">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <img src="" alt="">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <img src="" alt="">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <img src="" alt="">
-                    <div>名字</div>
-                </div>
-            </div>
-            <div class="other">
-                <div class="singerinfo">
-                    <div>名字名字名字名字名字名字名字名字名字名字</div>
-                </div>
-                <div class="singerinfo">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <div>名字</div>
-                </div>
-                <div class="singerinfo">
-                    <div>名字</div>
-                </div>
-            </div> -->
-            <div class="singer-card" v-for="hotsinger in hotsingerlist" :key="hotsinger.id">
-              <div class="card-cover">
-                <img :src="hotsinger.img1v1Url" alt="">
+            <div class="singer-card" v-for="(singer,index) in singerlist" :key="singer.id">
+              <div class="card-cover" v-if="index<18"> <!-- 设置前18名才有图片 -->
+                <img :src="singer.img1v1Url" alt="">
               </div>
-              <div class="card-name">{{hotsinger.name}}</div>
+              <div class="card-name">{{singer.name}}</div>
             </div>
 
         </div>
@@ -123,6 +35,7 @@
         initial:-1,
         langchoice:0,
         sexchoice:0,
+        pagenum:0, // 分页
         langlist:[
           {lang:"全部",area:-1},
           {lang:"华语",area:7},
@@ -137,7 +50,7 @@
           {sex:"女",type:2},
           {sex:"乐队",type:3}
           ],
-        hotsingerlist:[],
+        singerlist:[],
       }
     },
     computed:{ 
@@ -147,6 +60,11 @@
       }
     },
     methods:{
+      getsingerlist(){
+        this.axios.get("/artist/list?type="+this.type+"&area="+this.area+"&initial=-1").then((res)=>{
+          this.singerlist=res.data.artists;
+        });
+      },
       handleToLang(area,index){
         this.langchoice=index;
         this.area=area;
@@ -155,17 +73,25 @@
         this.sexchoice=index;
         this.type=type;
       },
+      handleToScroll(){ // 滚动到底部加载更多数据
+        let scrollTop = this.$refs.singer.scrollTop;
+        let clientHeight = this.$refs.singer.clientHeight;
+        let scrollHeight = this.$refs.singer.scrollHeight;
+        if (scrollTop + clientHeight >= scrollHeight) {
+            this.pagenum++;
+            this.axios.get("/artist/list?type="+this.type+"&area="+this.area+"&initial=-1&offset="+this.pagenum*30).then((res)=>{
+              this.singerlist=this.singerlist.concat(res.data.artists);
+            });
+        }        
+      }
     },
     mounted(){
-      this.axios.get("/artist/list?type=-1&area=-1&initial=-1").then((res)=>{
-        this.hotsingerlist=res.data.artists;
-      })
+      this.getsingerlist();
     },
     watch:{
       sort(){
-        this.axios.get("/artist/list?type="+this.type+"&area="+this.area+"&initial=-1").then((res)=>{
-          this.hotsingerlist=res.data.artists;
-        })
+        this.getsingerlist();
+        this.pagenum=0; // 类型发生变化,page页重新开始计算
       },
     }
   };
@@ -179,12 +105,6 @@
   .singer .singer-sort .sort-sex{display: flex;font-size: 13px;margin-bottom: 20px;}
   .singer .singer-sort .sort-sex div{width: 80px;height: 32px;border: 1px solid rgb(216, 216, 216);border-radius: 20px;line-height: 32px;text-align: center;margin-right: 10px;}
   .singer .singer-sort .sort-sex div.active{background: rgb(30, 208, 160);color: white;}
-  /* .singer .singer-cont .popular{display: flex;flex-wrap: wrap;text-align: center;}
-  .singer .singer-cont .popular .singerinfo{width: 190px;line-height: 40px;margin-right: 12px;flex-flow: 1;margin-bottom: 10px;}
-  .singer .singer-cont .popular .singerinfo img{display: block;width: 190px;height: 190px; ;border-radius: 50%;}
-  .singer .singer-cont .other{display: flex;flex-wrap: wrap;text-align: center;margin-top: 10px;}
-  .singer .singer-cont .other .singerinfo{width: 190px;line-height: 40px;margin-right: 12px;flex-flow: 1;margin-bottom: 10px;}
-  .singer .singer-cont .singerinfo div{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;} */
   .singer .singer-cont{width: 1238px; display: flex;flex-wrap: wrap;}
   .singer .singer-cont .singer-card{width: 188px;text-align: center;margin-left: 22px;margin-bottom: 22px;}
   .singer .singer-cont .singer-card:nth-of-type(6n+1){margin-left: 0px;}

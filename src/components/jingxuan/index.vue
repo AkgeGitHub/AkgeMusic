@@ -14,16 +14,16 @@
                 <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
             </swiper>
         </div>
-        <div class="selection-list">
-            <div class="selection-item">
-                <div class="selection-item-header">
-                    <div class="selection-item-name">最新音乐</div>
-                    <div class="selection-item-more">
+        <div class="select-list">
+            <div class="select-item">
+                <div class="select-item-header">
+                    <div class="select-item-name">最新音乐</div>
+                    <div class="select-item-more">
                         <span>更多</span>
                         <i class="fas fa-chevron-right"></i>
                     </div>
                 </div>
-                <div class="selection-item-cont">
+                <div class="select-item-cont">
                     <div class="item-cont-card" v-for="newsong in newsonglists.slice(0,6)" :key="newsong.id">
                         <div class="card-cover" @click="handleToclick(newsong.id)">
                             <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
@@ -36,15 +36,15 @@
                     </div>
                 </div>
             </div>
-            <div class="selection-item">
-                <div class="selection-item-header">
-                    <div class="selection-item-name">推荐MV</div>
-                    <div class="selection-item-more">
+            <div class="select-item">
+                <div class="select-item-header">
+                    <div class="select-item-name">推荐MV</div>
+                    <div class="select-item-more">
                         <span>更多</span>
                         <i class="fas fa-chevron-right"></i>
                     </div>
                 </div>
-                <div class="selection-item-cont video">
+                <div class="select-item-cont video">
                     <div class="item-cont-card" v-for="mv in mvlists" :key="mv.id">
                         <div class="card-cover">
                             <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
@@ -58,15 +58,15 @@
                     
                 </div>
             </div>
-            <div class="selection-item">
-                <div class="selection-item-header">
-                    <div class="selection-item-name">精品歌单</div>
-                    <div class="selection-item-more">
+            <div class="select-item">
+                <div class="select-item-header">
+                    <div class="select-item-name">精品歌单</div>
+                    <div class="select-item-more">
                         <span>更多</span>
                         <i class="fas fa-chevron-right"></i>
                     </div>
                 </div>
-                <div class="selection-item-cont">
+                <div class="select-item-cont">
                     <div class="item-cont-card" v-for="play in playlists.slice(0,6)" :key="play.id">
                         <div class="card-cover">
                             <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
@@ -76,15 +76,15 @@
                     </div>
                 </div>
             </div>
-            <div class="selection-item">
-                <div class="selection-item-header">
-                    <div class="selection-item-name">热门电台</div>
-                    <div class="selection-item-more">
+            <div class="select-item">
+                <div class="select-item-header">
+                    <div class="select-item-name">热门电台</div>
+                    <div class="select-item-more">
                         <span>更多</span>
                         <i class="fas fa-chevron-right"></i>
                     </div>
                 </div>
-                <div class="selection-item-cont">
+                <div class="select-item-cont">
                     <div class="item-cont-card" v-for="dj in djlists" :key="dj.id">
                         <div class="card-cover">
                             <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
@@ -168,27 +168,27 @@ export default {
 </script>
 
 <style scoped>
-    .main-content .banner{margin-bottom: 30px;overflow: hidden;border-radius: 20px;}
-    .main-content .banner .banner-item{margin-left: 22px;}
-    .main-content .banner .banner-item:first-child{margin-left: 0;}
-    .main-content .banner .banner-item img{width: 398px;border-radius: 20px;}
-    .main-content .selection-list{width: 1238px;}
-    .main-content .selection-list .selection-item{margin-bottom: 15px;overflow: hidden;}
-    .main-content .selection-list .selection-item .selection-item-header{display: flex;justify-content: space-between;margin-bottom: 16px;}
-    .main-content .selection-list .selection-item .selection-item-header .selection-item-name{font-size: 22px;}
-    .main-content .selection-list .selection-item .selection-item-header .selection-item-more{font-size: 14px;color: rgb(159,159,159);}
-    .main-content .selection-list .selection-item .selection-item-header .selection-item-more:hover{color: rgb(30, 208, 160);}
-    .main-content .selection-list .selection-item .selection-item-header .selection-item-more span{margin-right: 10px;}
-    .main-content .selection-list .selection-item .selection-item-cont{display: flex;overflow: auto;margin-left: 0;}
-    .main-content .selection-list .selection-item .selection-item-cont .item-cont-card{width: 188px; margin-left: 22px;margin-bottom: 15px;}
-    .main-content .selection-list .selection-item .selection-item-cont .item-cont-card:first-child{margin-left: 0px;}
-    .main-content .selection-list .selection-item .selection-item-cont .item-cont-card .card-cover{margin-bottom: 10px;border-radius: 12px;position: relative;}
-    .main-content .selection-list .selection-item .selection-item-cont .item-cont-card .card-cover:hover .cover-mask{display: block;}
-    .main-content .selection-list .selection-item .selection-item-cont .item-cont-card .card-cover img{width: 188px;border-radius: 12px;}
-    .main-content .selection-list .selection-item .selection-item-cont .item-cont-card .card-cover .cover-mask{display: none; border-radius: 12px;width: 100%;height: 100%; position: absolute;top: 0;left: 0; background: rgba(0,0,0,0.6)}
-    .main-content .selection-list .selection-item .selection-item-cont .item-cont-card .card-cover .cover-mask .cover-btn{color: white;opacity: 0.6; position: absolute;top: 50%;left: 50%;margin-left: -24px;margin-top: -24px;}
-    .main-content .selection-list .selection-item .selection-item-cont .item-cont-card .card-title{font-size: 15px;height: 22px;line-height: 22px;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;}
-    .main-content .selection-list .selection-item .selection-item-cont .item-cont-card .card-artist{color: rgb(159,159,159);font-size: 13px;}
-    .main-content .selection-list .selection-item .selection-item-cont.video .item-cont-card{width: 293px;}
-    .main-content .selection-list .selection-item .selection-item-cont.video .item-cont-card .card-cover img{width: 293px;}
+    .banner{margin-bottom: 30px;overflow: hidden;border-radius: 20px;}
+    .banner .banner-item{margin-left: 22px;}
+    .banner .banner-item:first-child{margin-left: 0;}
+    .banner .banner-item img{width: 398px;border-radius: 20px;}
+    .select-list{width: 1238px;}
+    .select-list .select-item{margin-bottom: 15px;overflow: hidden;}
+    .select-list .select-item .select-item-header{display: flex;justify-content: space-between;margin-bottom: 16px;}
+    .select-list .select-item .select-item-header .select-item-name{font-size: 22px;}
+    .select-list .select-item .select-item-header .select-item-more{font-size: 14px;color: rgb(159,159,159);}
+    .select-list .select-item .select-item-header .select-item-more:hover{color: rgb(30, 208, 160);}
+    .select-list .select-item .select-item-header .select-item-more span{margin-right: 10px;}
+    .select-list .select-item .select-item-cont{display: flex;overflow: auto;margin-left: 0;}
+    .select-list .select-item .select-item-cont .item-cont-card{width: 188px; margin-left: 22px;margin-bottom: 15px;}
+    .select-list .select-item .select-item-cont .item-cont-card:first-child{margin-left: 0px;}
+    .select-list .select-item .select-item-cont .item-cont-card .card-cover{margin-bottom: 10px;border-radius: 12px;position: relative;}
+    .select-list .select-item .select-item-cont .item-cont-card .card-cover:hover .cover-mask{display: block;}
+    .select-list .select-item .select-item-cont .item-cont-card .card-cover img{width: 188px;border-radius: 12px;}
+    .select-list .select-item .select-item-cont .item-cont-card .card-cover .cover-mask{display: none; border-radius: 12px;width: 100%;height: 100%; position: absolute;top: 0;left: 0; background: rgba(0,0,0,0.6)}
+    .select-list .select-item .select-item-cont .item-cont-card .card-cover .cover-mask .cover-btn{color: white;opacity: 0.6; position: absolute;top: 50%;left: 50%;margin-left: -24px;margin-top: -24px;}
+    .select-list .select-item .select-item-cont .item-cont-card .card-title{font-size: 15px;height: 22px;line-height: 22px;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .select-list .select-item .select-item-cont .item-cont-card .card-artist{color: rgb(159,159,159);font-size: 13px;}
+    .select-list .select-item .select-item-cont.video .item-cont-card{width: 293px;}
+    .select-list .select-item .select-item-cont.video .item-cont-card .card-cover img{width: 293px;}
 </style>

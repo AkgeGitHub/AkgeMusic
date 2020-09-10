@@ -6,6 +6,7 @@ input{border: none;outline:none}
 html,body{height: 100%;width: 100%;}
 #wrapper{height: 100%;width: 100%; display: flex;}
 #right-wrap{background: rgb(246, 246, 246);display: flex;flex-direction: column; width: 1318px;}
-#main{padding: 0px 40px;overflow: auto;}
+#main{padding: 0px 40px;overflow: auto;display: flex;flex-direction: column;}
+.main-content{height: 100%;overflow: auto;}
 ::-webkit-scrollbar{display: none;}
 .clearfix:after{content: ''; display: block;height: 0;clear: both; }
