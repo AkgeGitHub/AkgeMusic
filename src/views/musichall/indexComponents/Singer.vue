@@ -3,18 +3,18 @@
     <div class="singer">
         <div class="singer-sort">
             <div class="sort-lang">
-                <div v-for="(item,index) in langlist" :key="item.area" @click="handleToLang(item.area,index)" :class="{active:langchoice==index}">
+                <div v-for="(item,index) in langList" :key="item.area" @click="handleToLang(item.area,index)" :class="{active:langChoice==index}">
                   {{item.lang}}
                 </div>
             </div>
             <div class="sort-sex">
-                <div v-for="(item,index) in sexlist" :key="item.type" @click="handleToSex(item.type,index)" :class="{active:sexchoice==index}">
+                <div v-for="(item,index) in sexList" :key="item.type" @click="handleToSex(item.type,index)" :class="{active:sexChoice==index}">
                   {{item.sex}}
                 </div>
             </div>
         </div>
         <div class="singer-cont">
-            <div class="singer-card" v-for="(singer,index) in singerlist" :key="singer.id">
+            <div class="singer-card" v-for="(singer,index) in singerLists" :key="singer.id">
               <div class="card-cover" v-if="index<18"> <!-- 设置前18名才有图片 -->
                 <img :src="singer.img1v1Url" alt="">
               </div>
@@ -33,10 +33,10 @@
         type:-1,
         area:-1,
         initial:-1,
-        langchoice:0,
-        sexchoice:0,
-        pagenum:0, // 分页
-        langlist:[
+        langChoice:0,
+        sexChoice:0,
+        pageNum:0, // 分页
+        langList:[
           {lang:"全部",area:-1},
           {lang:"华语",area:7},
           {lang:"欧美",area:96},
@@ -44,13 +44,14 @@
           {lang:"韩国",area:16},
           {lang:"其他",area:0}
           ],
-        sexlist:[
+        sexList:[
           {sex:"全部",type:-1},
           {sex:"男",type:1},
           {sex:"女",type:2},
           {sex:"乐队",type:3}
           ],
-        singerlist:[],
+        singerLists:[],
+        isSingerDataMore:true
       }
     },
     computed:{ 
@@ -60,38 +61,52 @@
       }
     },
     methods:{
-      getsingerlist(){
+      getSingerListData(){
         this.axios.get("/artist/list?type="+this.type+"&area="+this.area+"&initial=-1").then((res)=>{
-          this.singerlist=res.data.artists;
+          if (res.data.code===200) {
+            this.singerLists=res.data.artists;
+          }
         });
       },
       handleToLang(area,index){
-        this.langchoice=index;
+        this.langChoice=index;
         this.area=area;
       },
       handleToSex(type,index){
-        this.sexchoice=index;
+        this.sexChoice=index;
         this.type=type;
       },
       handleToScroll(){ // 滚动到底部加载更多数据
-        let scrollTop = this.$refs.singer.scrollTop;
+        let scrollTop = Math.ceil(this.$refs.singer.scrollTop); // 因为滚动的时候总会发现高度不够，差那么零点几，所以就给他向上取整，这样也好操作
         let clientHeight = this.$refs.singer.clientHeight;
         let scrollHeight = this.$refs.singer.scrollHeight;
         if (scrollTop + clientHeight >= scrollHeight) {
-            this.pagenum++;
-            this.axios.get("/artist/list?type="+this.type+"&area="+this.area+"&initial=-1&offset="+this.pagenum*30).then((res)=>{
-              this.singerlist=this.singerlist.concat(res.data.artists);
+          this.pageNum++;
+          if (this.isSingerDataMore) {
+            this.axios.get("/artist/list?type="+this.type+"&area="+this.area+"&initial=-1&offset="+this.pageNum*30).then((res)=>{
+              if (res.data.code===200) {
+                if (res.data.more==false && res.data.artists.length==0) { // 判断是否数据全部加载完毕
+                  this.isSingerDataMore=false;
+                }else{
+                  this.singerLists=this.singerLists.concat(res.data.artists);
+                }
+              }else{
+                console.log("请求数据失败")
+              }
             });
-        }        
+          }else{
+            console.log("全部数据已加载完毕")
+          }
+        }
       }
     },
     mounted(){
-      this.getsingerlist();
+      this.getSingerListData();
     },
     watch:{
       sort(){
-        this.getsingerlist();
-        this.pagenum=0; // 类型发生变化,page页重新开始计算
+        this.getSingerListData();
+        this.pageNum=0; // 类型发生变化,page页重新开始计算
       },
     }
   };

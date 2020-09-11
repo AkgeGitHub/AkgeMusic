@@ -1,16 +1,13 @@
 <template>
-  <div>
-      radio
-  </div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name:"radio",
 
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

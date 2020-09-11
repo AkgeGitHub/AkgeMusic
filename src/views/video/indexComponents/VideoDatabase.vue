@@ -1,15 +1,13 @@
 <template>
-  <div>
-      video
-  </div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name:"video",
+
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

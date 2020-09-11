@@ -24,14 +24,14 @@
                     </div>
                 </div>
                 <div class="select-item-cont">
-                    <div class="item-cont-card" v-for="newsong in newsonglists.slice(0,6)" :key="newsong.id">
-                        <div class="card-cover" @click="handleToclick(newsong.id)">
+                    <div class="item-cont-card" v-for="newSong in newSongLists" :key="newSong.id">
+                        <div class="card-cover" @click="handleToclick(newSong.id)">
                             <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
-                            <img :src="newsong.album.picUrl" alt="" >
+                            <img :src="newSong.album.picUrl" alt="" >
                         </div>
-                        <div class="card-title" :title="newsong.name">{{newsong.name}}</div>
+                        <div class="card-title" :title="newSong.name">{{newSong.name}}</div>
                         <div class="card-artist">
-                            <span>{{newsong.artists | arname}}</span>
+                            <span>{{newSong.artists | arname}}</span>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="select-item-cont video">
-                    <div class="item-cont-card" v-for="mv in mvlists" :key="mv.id">
+                    <div class="item-cont-card" v-for="mv in mvLists" :key="mv.id">
                         <div class="card-cover">
                             <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
                             <img :src="mv.picUrl" alt="">
@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="select-item-cont">
-                    <div class="item-cont-card" v-for="play in playlists.slice(0,6)" :key="play.id">
+                    <div class="item-cont-card" v-for="play in playLists" :key="play.id">
                         <div class="card-cover">
                             <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
                             <img :src="play.coverImgUrl" alt="">
@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="select-item-cont">
-                    <div class="item-cont-card" v-for="dj in djlists" :key="dj.id">
+                    <div class="item-cont-card" v-for="dj in djLists" :key="dj.id">
                         <div class="card-cover">
                             <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
                             <img :src="dj.picUrl" alt="">
@@ -104,14 +104,17 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
     name:"jingxuan",
+    components: {
+        swiper,
+        swiperSlide,
+    },
     data(){
         return{
-            isplay:"fasle",
             banners:[],
-            playlists:[],
-            mvlists:[],
-            newsonglists:[],
-            djlists:[],
+            playLists:[],
+            mvLists:[],
+            newSongLists:[],
+            djLists:[],
             swiperOption: {
                 autoplay:true,
                 slidesPerView: 3,
@@ -129,10 +132,6 @@ export default {
             }
         }
     },
-    components: {
-        swiper,
-        swiperSlide,
-    },
     methods:{
         handleToclick(songid){
             this.axios.get("/song/url?id="+songid).then((res)=>{
@@ -144,23 +143,33 @@ export default {
     mounted(){
         // 轮播图
         this.axios.get("/banner").then((res)=>{
-            this.banners=res.data.banners;
+            if (res.data.code===200) {
+                this.banners=res.data.banners;
+            }
         })
         // 精品歌单
         this.axios.get("/top/playlist/highquality").then((res)=>{
-            this.playlists=res.data.playlists;
+            if (res.data.code===200) {
+                this.playLists=res.data.playlists.slice(0,6);
+            }
         })
         // 推荐MV
         this.axios.get("/personalized/mv?limit=4").then((res)=>{
-            this.mvlists=res.data.result;
+            if (res.data.code===200) {
+                this.mvLists=res.data.result;
+            }
         })
         // 最新音乐
         this.axios.get("/top/song").then((res)=>{
-            this.newsonglists=res.data.data;
+            if (res.data.code===200) {
+                this.newSongLists=res.data.data.slice(0,6);
+            }
         })
         // 热门电台
         this.axios.get("/dj/hot?limit=6").then((res)=>{
-            this.djlists=res.data.djRadios;
+            if (res.data.code===200) {
+                this.djLists=res.data.djRadios;
+            }
         })
     }
 

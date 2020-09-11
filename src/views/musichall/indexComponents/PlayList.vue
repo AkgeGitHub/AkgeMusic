@@ -4,13 +4,13 @@
         <div class="playlist-sort">
             <div>热门分类:</div>
             <ul>
-                <li :class="{active:index==catchoice}" @click="handleToCat(hotcat.name,index)" v-for="(hotcat,index) in hotcatlist" :key="hotcat.id">
+                <li :class="{active:index==catChoice}" @click="handleToCat(hotcat.name,index)" v-for="(hotcat,index) in hotCatLists" :key="hotcat.id">
                   {{hotcat.name}}
                 </li>
             </ul>
         </div>
         <div class="playlist-cont">
-            <div class="cont-card" v-for="playlist in playlists" :key="playlist.id">
+            <div class="cont-card" v-for="playlist in playLists" :key="playlist.id">
                 <div class="card-cover">
                   <img :src="playlist.coverImgUrl" alt="">
                 </div>
@@ -27,46 +27,62 @@
 export default {
   data(){
     return{
-      catchoice:0,
-      pagenum:0,
-      cattag:"华语",
-      hotcatlist:[],
-      playlists:[]
+      catChoice:0,
+      pageNum:0,
+      catTag:"华语",
+      hotCatLists:[],
+      playLists:[],
+      isPlayDataMore:true
     }
   },
   methods:{
-    getplaylist(){
-      this.axios.get("/top/playlist?limit=60&cat="+this.cattag+"&order=hot").then((res)=>{
-        this.playlists=res.data.playlists;
+    getPlayListData(){
+      this.axios.get("/top/playlist?limit=60&cat="+this.catTag+"&order=hot").then((res)=>{
+        if (res.data.code===200) {
+          this.playLists=res.data.playlists;
+        }
       })
     },
-    handleToCat(cattag,index){
-      this.cattag=cattag,
-      this.catchoice=index
+    handleToCat(catTag,index){
+      this.catTag=catTag,
+      this.catChoice=index
     },
     handleToScroll(){
-      let scrollTop=this.$refs.playlist.scrollTop;
+      let scrollTop=Math.ceil(this.$refs.playlist.scrollTop);
       let clientHeight=this.$refs.playlist.clientHeight;
       let scrollHeight=this.$refs.playlist.scrollHeight;
       if (scrollTop+clientHeight>=scrollHeight) {
-        this.pagenum++;
-        this.axios.get("/top/playlist?limit=60&cat="+this.cattag+"&order=hot&offset="+this.pagenum*60).then((res)=>{
-          this.playlists=this.playlists.concat(res.data.playlists);
-        })
+        this.pageNum++;
+        if (this.isPlayDataMore) {
+          this.axios.get("/top/playlist?limit=60&cat="+this.catTag+"&order=hot&offset="+this.pageNum*60).then((res)=>{
+            if (res.data.code===200) {
+              if (this.playLists.length==res.data.total) { // 判断是否数据全部加载完毕
+                this.isPlayDataMore=false;
+                console.log(this.playLists.length)
+              }else{
+                this.playLists=this.playLists.concat(res.data.playlists);
+              }
+            }else{
+                console.log("请求数据失败")
+            }
+          })
+        }else{
+          console.log("全部数据已加载完毕")
+        }
       }
     }
   },
   watch:{
-    cattag(){
-      this.getplaylist();
-      this.pagenum=0;
+    catTag(){
+      this.getPlayListData();
+      this.pageNum=0;
     }
   },
   mounted(){
     this.axios.get("/playlist/hot").then((res)=>{
-      this.hotcatlist=res.data.tags;
+      this.hotCatLists=res.data.tags;
     })
-    this.getplaylist();
+    this.getPlayListData();
   }
 
 }

@@ -1,26 +1,26 @@
 export default{
     path:"/musichall",
-    component:()=>import("@/views/musichall"),
+    component:()=>import("@/views/musichall/musichall"),
     children:[
         {
             path:"jingxuan",
-            component:()=>import("@/components/jingxuan")
+            component:()=>import("@/views/musichall/indexComponents/JingXuan")
         },
         {
             path:"songrank",
-            component:()=>import("@/components/songrank")
+            component:()=>import("@/views/musichall/indexComponents/SongRank")
         },
         {
             path:"singer",
-            component:()=>import("@/components/singer")
+            component:()=>import("@/views/musichall/indexComponents/Singer")
         },
         {
             path:"playlist",
-            component:()=>import("@/components/playlist")
+            component:()=>import("@/views/musichall/indexComponents/PlayList")
         },
         {
             path:"album",
-            component:()=>import("@/components/album")
+            component:()=>import("@/views/musichall/indexComponents/Album")
         },
         {
             path:"/musichall",

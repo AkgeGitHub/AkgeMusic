@@ -3,7 +3,7 @@
     <Sidebar></Sidebar>
 	<div id="right-wrap">
 		<Header></Header>
-		history
+		local
 		<router-view/>
 		<Footer></Footer>
 	</div>
@@ -11,14 +11,14 @@
 </template>
 
 <script>
-import Sidebar from "@/components/sidebar";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import Sidebar from "@/components/Sidebar";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 
 
 export default {
-	name: "history",
+	name: "local",
 	components: {
 		Sidebar,
 		Header,
