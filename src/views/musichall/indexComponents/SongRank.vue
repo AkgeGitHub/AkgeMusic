@@ -92,6 +92,7 @@
 
 <script>
 export default {
+    name:"SongRank",
     data(){
         return{
             // 由于想做榜一的图片作为封面，但是网易云榜单摘要的接口里没有，所以只能浪费资源去单独请求这4个榜单

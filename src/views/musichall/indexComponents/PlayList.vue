@@ -25,6 +25,7 @@
 
 <script>
 export default {
+  name:"PlayList",
   data(){
     return{
       catChoice:0,

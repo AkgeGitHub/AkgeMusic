@@ -28,6 +28,7 @@
 
 <script>
 	export default {
+    name:"Singer",
     data(){
       return{
         type:-1,

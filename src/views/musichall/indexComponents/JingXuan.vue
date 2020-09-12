@@ -103,7 +103,7 @@
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
-    name:"jingxuan",
+    name:"JingXuan",
     components: {
         swiper,
         swiperSlide,

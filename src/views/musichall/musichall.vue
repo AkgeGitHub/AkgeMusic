@@ -33,7 +33,7 @@ import Footer from "@/components/Footer";
 
 
 export default {
-	name: "musichall",
+	name: "MusicHall",
 	components: {
 		Sidebar,
 		Header,

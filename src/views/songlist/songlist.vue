@@ -18,7 +18,7 @@ import Footer from "@/components/Footer";
 
 
 export default {
-	name: "songlist",
+	name: "SongList",
 	components: {
 		Sidebar,
 		Header,

@@ -30,7 +30,7 @@ import Footer from "@/components/Footer";
 
 
 export default {
-	name: "video",
+	name: "Video",
 	components: {
 		Sidebar,
 		Header,

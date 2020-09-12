@@ -1,50 +1,51 @@
 <template>
   <div class="main-content" @scroll="handleToScroll" ref="album">
     <div class="album">
-          <div class="album-item hot">
-              <div class="item-header">
-                  <div class="header-name">热门新碟</div>
-              </div>
-              <div class="item-cont">
-                  <div class="cont-card" v-for="album in hotAlbums" :key="album.id">
-                      <div class="card-cover">
-                          <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
-                          <img :src="album.picUrl" alt="" >
-                      </div>
-                      <div class="card-name" :title="album.name">{{album.name}}</div>
-                      <div class="card-artist">
-                          <span>{{album.artists | arname}}</span>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="album-item">
-              <div class="item-header">
-                  <div class="header-name">全部新碟</div>
-                  <div class="header-more">
-                      <span>更多</span>
-                      <i class="fas fa-chevron-right"></i>
-                  </div>
-              </div>
-              <div class="item-cont">
-                  <div class="cont-card" v-for="album in allAlbums" :key="album.id">
-                      <div class="card-cover">
-                          <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
-                          <img :src="album.picUrl" alt="" >
-                      </div>
-                      <div class="card-name" :title="album.name">{{album.name}}</div>
-                      <div class="card-artist">
-                          <span>{{album.artists | arname}}</span>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+        <div class="album-item hot">
+            <div class="item-header">
+                <div class="header-name">热门新碟</div>
+            </div>
+            <div class="item-cont">
+                <div class="cont-card" v-for="album in hotAlbums" :key="album.id">
+                    <div class="card-cover">
+                        <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
+                        <img :src="album.picUrl" alt="" >
+                    </div>
+                    <div class="card-name" :title="album.name">{{album.name}}</div>
+                    <div class="card-artist">
+                        <span>{{album.artists | arname}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="album-item">
+            <div class="item-header">
+                <div class="header-name">全部新碟</div>
+                <div class="header-more">
+                    <span>更多</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+            <div class="item-cont">
+                <div class="cont-card" v-for="album in allAlbums" :key="album.id">
+                    <div class="card-cover">
+                        <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
+                        <img :src="album.picUrl" alt="" >
+                    </div>
+                    <div class="card-name" :title="album.name">{{album.name}}</div>
+                    <div class="card-artist">
+                        <span>{{album.artists | arname}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  name:"Album",
   data(){
     return{
       allAlbums:[],
