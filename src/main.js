@@ -15,7 +15,7 @@ import 'swiper/dist/css/swiper.css'
 Vue.use(VueAwesomeSwiper)
 
 // scroller
-import scroller from '@/components/scroller'
+import scroller from '@/components/Scroller'
 Vue.component("scroller",scroller)
 
 // 过滤器
