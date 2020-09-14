@@ -1,44 +1,27 @@
 <template>
-  <div id="wrapper">
-    <Sidebar></Sidebar>
-	<div id="right-wrap">
-		<Header></Header>
-		<div id="main">
-			<div class="main-header">
-				<div class="title">音乐馆</div>
-				<div class="nav clearfix">
-					<router-link tag="div" to="/musichall/jingxuan">精选</router-link>
-					<router-link tag="div" to="/musichall/songrank">排行</router-link>
-					<router-link tag="div" to="/musichall/singer">歌手</router-link>
-					<router-link tag="div" to="/musichall/playlist">分类歌单</router-link>
-					<router-link tag="div" to="/musichall/album">数字专辑</router-link>
-				</div>
+	<div id="main">
+		<div class="main-header">
+			<div class="title">音乐馆</div>
+			<div class="nav clearfix">
+				<router-link tag="div" to="/musichall/jingxuan">精选</router-link>
+				<router-link tag="div" to="/musichall/songrank">排行</router-link>
+				<router-link tag="div" to="/musichall/singer">歌手</router-link>
+				<router-link tag="div" to="/musichall/playlist">分类歌单</router-link>
+				<router-link tag="div" to="/musichall/album">数字专辑</router-link>
 			</div>
-
-			<keep-alive>
-				<router-view/>
-			</keep-alive>
-			
 		</div>
-		<Footer></Footer>
+
+		<keep-alive>
+			<router-view/>
+		</keep-alive>
+		
 	</div>
-  </div>
 </template>
 
 <script>
-import Sidebar from "@/components/Sidebar";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-
-
 
 export default {
 	name: "MusicHall",
-	components: {
-		Sidebar,
-		Header,
-		Footer,
-	},
 	mounted(){
 	}
 };

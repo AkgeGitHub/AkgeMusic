@@ -25,7 +25,7 @@
                 </div>
                 <div class="select-item-cont">
                     <div class="item-cont-card" v-for="newSong in newSongLists" :key="newSong.id">
-                        <div class="card-cover" @click="handleToclick(newSong.id)">
+                        <div class="card-cover" @click="handleToSong(newSong.id)">
                             <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
                             <img :src="newSong.album.picUrl" alt="" >
                         </div>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="select-item-cont">
-                    <div class="item-cont-card" v-for="play in playLists" :key="play.id">
+                    <div class="item-cont-card" v-for="play in playLists" :key="play.id" @click="handleToPlaylist(play.id)">
                         <div class="card-cover">
                             <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
                             <img :src="play.coverImgUrl" alt="">
@@ -133,11 +133,14 @@ export default {
         }
     },
     methods:{
-        handleToclick(songid){
+        handleToSong(songid){
             this.axios.get("/song/url?id="+songid).then((res)=>{
                 var songurl=res.data.data[0].url;
                 this.$store.commit("SONG",{songurl,songid});
             })
+        },
+        handleToPlaylist(id){
+            this.$router.push("/songlist/detail/"+id)
         }
     },
     mounted(){

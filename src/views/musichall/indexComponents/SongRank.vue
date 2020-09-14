@@ -4,70 +4,22 @@
             <div class="rank-popular">
                 <div class="popular-big-card">
                     <div class="card-cover">
-                        <img :src="raiseTopImg" alt="">
+                        <img :src="popularRank[0].coverImgUrl" alt="" @click="handleToPlaylist(popularRank[0].id)">
                     </div>
                 </div>
                 <div class="popular-small-card">
-                    <div class="popular-card">
+                    <div class="popular-card" v-for="rank in popularRank" :key="rank.id" @click="handleToPlaylist(rank.id)">
                         <div class="card-cover">
-                            <img :src="raiseTopImg" alt="">
+                            <img :src="rank.coverImgUrl" alt="">
                         </div>
                         <div class="card-cont">
-                            <h3 class="cont-title">飙升榜</h3>
+                            <h3 class="cont-title">{{rank.name}}</h3>
                             <ul class="cont-body">
-                                <li v-for="(raise,index) in raiseRank" :key="raise.id">
+                                <li v-for="(item,index) in rank.tracks" :key="item.id">
                                     <span>{{index+1}} </span>
-                                    <span>{{raise.name}}</span>
+                                    <span>{{item.name}}</span>
                                     <span> - </span>
-                                    <span>{{raise.ar | arname}}</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="popular-card">
-                        <div class="card-cover">
-                            <img :src="newTopImg" alt="">
-                        </div>
-                        <div class="card-cont">
-                            <h3 class="cont-title">新歌榜</h3>
-                            <ul class="cont-body">
-                                <li v-for="(newsong,index) in newRank" :key="newsong.id">
-                                    <span>{{index+1}} </span>
-                                    <span>{{newsong.name}}</span>
-                                    <span> - </span>
-                                    <span>{{newsong.ar | arname}}</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="popular-card">
-                        <div class="card-cover">
-                            <img :src="ortopImg" alt="">
-                        </div>
-                        <div class="card-cont">
-                            <h3 class="cont-title">原创榜</h3>
-                            <ul class="cont-body">
-                                <li v-for="(origin,index) in originRank" :key="origin.id">
-                                    <span>{{index+1}} </span>
-                                    <span>{{origin.name}}</span>
-                                    <span> - </span>
-                                    <span>{{origin.ar | arname}}</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="popular-card">
-                        <div class="card-cover">
-                            <img :src="hotTopImg" alt="">
-                        </div>
-                        <div class="card-cont">
-                            <h3 class="cont-title">热歌榜</h3>
-                            <ul class="cont-body">
-                                <li v-for="(hot,index) in hotRank" :key="hot.id">
-                                    <span>{{index+1}} </span>
-                                    <span>{{hot.name}}</span>
-                                    <span> - </span>
-                                    <span>{{hot.ar | arname}}</span>
+                                    <span>{{item.ar | arname}}</span>
                                 </li>
                             </ul>
                         </div>
@@ -77,7 +29,7 @@
             <div class="rank-global">
                 <div class="global-title">全球媒体榜</div>
                 <div class="global-cont">
-                    <div class="global-card" v-for="rank in rankLists.slice(4)" :key="rank.id">
+                    <div class="global-card" v-for="rank in rankLists.slice(4)" :key="rank.id" @click="handleToPlaylist(rank.id)">
                         <div class="card-cover">
                             <img :src="rank.coverImgUrl" alt="">
                         </div>
@@ -95,38 +47,41 @@ export default {
     name:"SongRank",
     data(){
         return{
-            // 由于想做榜一的图片作为封面，但是网易云榜单摘要的接口里没有，所以只能浪费资源去单独请求这4个榜单
-            raiseRank:[], // 飙升榜
-            raiseTopImg:"",// 榜一图片
-            newRank:[], // 新歌榜
-            newTopImg:"",
-            originRank:[], // 原创榜
-            ortopImg:"",
-            hotRank:[], // 热歌榜
-            hotTopImg:"",
             rankLists:[], // 全部榜单
+            popularRank:[
+                {name:"飙升榜",id:19723756,coverImgUrl:"",tracks:[]},
+                {name:"新歌榜",id:3779629,coverImgUrl:"",tracks:[]},
+                {name:"原创榜",id:2884035,coverImgUrl:"",tracks:[]},
+                {name:"热歌榜",id:3778678,coverImgUrl:"",tracks:[]}
+            ]
+        }
+    },
+    methods:{
+        handleToPlaylist(id){
+            this.$router.push("/songlist/detail/"+id)
         }
     },
     mounted(){
+        // 由于想做榜一的图片作为封面，但是网易云榜单摘要的接口里没有，所以只能浪费资源去单独请求这4个榜单
         // 飙升榜
         this.axios.get("/playlist/detail?id=19723756").then((res)=>{
-            this.raiseRank=res.data.playlist.tracks.slice(0,3);
-            this.raiseTopImg=res.data.playlist.tracks[0].al.picUrl;
+            this.popularRank[0].tracks=res.data.playlist.tracks.slice(0,3);
+            this.popularRank[0].coverImgUrl=res.data.playlist.tracks[0].al.picUrl;
         })
         // 新歌榜
         this.axios.get("/playlist/detail?id=3779629").then((res)=>{
-            this.newRank=res.data.playlist.tracks.slice(0,3);
-            this.newTopImg=res.data.playlist.tracks[0].al.picUrl;
+            this.popularRank[1].tracks=res.data.playlist.tracks.slice(0,3);
+            this.popularRank[1].coverImgUrl=res.data.playlist.tracks[0].al.picUrl;
         })
         // 原创榜
         this.axios.get("/playlist/detail?id=2884035").then((res)=>{
-            this.originRank=res.data.playlist.tracks.slice(0,3);
-            this.ortopImg=res.data.playlist.tracks[0].al.picUrl;
+            this.popularRank[2].tracks=res.data.playlist.tracks.slice(0,3);
+            this.popularRank[2].coverImgUrl=res.data.playlist.tracks[0].al.picUrl;
         })
         // 热歌榜
         this.axios.get("/playlist/detail?id=3778678").then((res)=>{
-            this.hotRank=res.data.playlist.tracks.slice(0,3);
-            this.hotTopImg=res.data.playlist.tracks[0].al.picUrl;
+            this.popularRank[3].tracks=res.data.playlist.tracks.slice(0,3);
+            this.popularRank[3].coverImgUrl=res.data.playlist.tracks[0].al.picUrl;
         })
         // 全部榜单
         this.axios.get("/toplist/detail").then((res)=>{

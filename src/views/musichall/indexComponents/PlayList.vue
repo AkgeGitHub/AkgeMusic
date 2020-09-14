@@ -10,7 +10,7 @@
             </ul>
         </div>
         <div class="playlist-cont">
-            <div class="cont-card" v-for="playlist in playLists" :key="playlist.id">
+            <div class="cont-card" v-for="playlist in playLists" :key="playlist.id" @click="handleToPlaylist(playlist.id)">
                 <div class="card-cover">
                   <img :src="playlist.coverImgUrl" alt="">
                 </div>
@@ -71,6 +71,9 @@ export default {
           console.log("全部数据已加载完毕")
         }
       }
+    },
+    handleToPlaylist(id){
+      this.$router.push("/songlist/detail/"+id)
     }
   },
   watch:{

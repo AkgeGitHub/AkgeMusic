@@ -7,10 +7,10 @@
             </div>
             <div class="song-cont">
                 <div class="cont-title">
-                    <span>{{songdetail.name}}</span>
+                    <span :title="songdetail.name">{{songdetail.name}}</span>
                     <span v-if="songdetail.name"> - </span>
                     <span v-else>AkgeMusic音乐世界</span>
-                    <span class="title-ar">
+                    <span class="title-ar" :title="songdetail.ar | arname">
                         {{songdetail.ar | arname}}
                     </span>
                 </div>
@@ -118,7 +118,7 @@ export default {
         handleToPaused(){
             if (this.songid) { // 判断是否有歌曲
                 if (this.$refs.audio.paused) {
-                this.$refs.audio.play();
+                    this.$refs.audio.play();
                     this.ispause=true;
                     this.isplay=false;
                 }else{
@@ -182,11 +182,11 @@ export default {
 <style scoped>
     .footer{display: flex;justify-content: space-between; height: 40px; padding: 10px 40px;border-top: 2px solid rgb(216, 216, 216);}
     .footer .nav-song{display: flex;width: 412px;}
-    .footer .nav-song .song-cover{position: relative; width: 40px;height: 40px;border-radius: 6px;overflow: hidden;margin-right: 13px;}
+    .footer .nav-song .song-cover{position: relative; width: 40px;height: 40px;border-radius: 6px;margin-right: 13px;}
     .footer .nav-song .song-cover img{width: 40px;height: 40px;}
     .footer .nav-song .song-cover .cover-base{position: absolute;top: 50%;left: 0; margin-top: -16px;color: rgb(131, 131, 131);}/**设置了固定宽度(fa-fw)和父元素一样宽,所以left为0 */
     .footer .nav-song .song-cont{display: flex;flex-direction: column;height: 40px;justify-content: space-between;}
-    .footer .nav-song .song-cont .cont-title{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 13px;}
+    .footer .nav-song .song-cont .cont-title{width: 359px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 13px;}
     .footer .nav-song .song-cont .cont-title .title-ar{color: rgb(131, 131, 131);}
     .footer .nav-song .song-cont .cont-op{white-space: nowrap;color: rgb(159,159,159);font-size: 14px;}
     .footer .nav-song .song-cont .cont-op i{margin-right: 10px;}

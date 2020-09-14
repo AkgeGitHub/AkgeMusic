@@ -1,29 +1,17 @@
 <template>
-  <div id="wrapper">
-    <Sidebar></Sidebar>
-	<div id="right-wrap">
-		<Header></Header>
-		songlist
-		<router-view/>
-		<Footer></Footer>
-	</div>
-  </div>
+	<keep-alive>
+		<router-view :key="playId" />
+	</keep-alive>
 </template>
 
 <script>
-import Sidebar from "@/components/Sidebar";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-
-
-
 export default {
 	name: "SongList",
-	components: {
-		Sidebar,
-		Header,
-		Footer,
-	},
+	computed:{
+        playId(){
+            return this.$route.params.playid // 给视图加上当前歌单的id作为key值，以此作为区分
+        }
+    },
 	mounted(){
 	}
 };

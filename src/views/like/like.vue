@@ -1,45 +1,25 @@
 <template>
-  <div id="wrapper">
-    <Sidebar></Sidebar>
-	<div id="right-wrap">
-		<Header></Header>
-		<div id="main">
-			<div class="main-header">
-				<div class="title">我喜欢</div>
-				<div class="nav clearfix">
-					<router-link tag="div" to="/like/songs">歌曲</router-link>
-					<router-link tag="div" to="/like/playlist">歌单</router-link>
-					<router-link tag="div" to="/like/album">专辑</router-link>
-					<router-link tag="div" to="/like/video">视频</router-link>
-				</div>
+	<div id="main">
+		<div class="main-header">
+			<div class="title">我喜欢</div>
+			<div class="nav clearfix">
+				<router-link tag="div" to="/like/songs">歌曲</router-link>
+				<router-link tag="div" to="/like/playlist">歌单</router-link>
+				<router-link tag="div" to="/like/album">专辑</router-link>
+				<router-link tag="div" to="/like/video">视频</router-link>
 			</div>
-
-			<keep-alive>
-				<router-view/>
-			</keep-alive>
-			
 		</div>
-		<Footer></Footer>
+
+		<keep-alive>
+			<router-view/>
+		</keep-alive>
+		
 	</div>
-  </div>
 </template>
 
 <script>
-import Sidebar from "@/components/Sidebar";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-
-
-
 export default {
-	name: "like",
-	components: {
-		Sidebar,
-		Header,
-		Footer,
-	},
-	mounted(){
-	}
+	name: "Like",
 };
 </script>
 

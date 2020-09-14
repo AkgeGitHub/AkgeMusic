@@ -43,7 +43,7 @@
                                 <i class="fas fa-history fa-fw"></i>
                                 播放历史
                             </router-link>
-                            <router-link tag="li" to="/songlist">
+                            <router-link tag="li" to="/shitin">
                                 <i class="fas fa-headphones-alt fa-fw"></i>
                                 试听列表
                             </router-link>
@@ -56,9 +56,7 @@
                             <i class="fas fa-chevron-up chevron"></i>
                         </div>
                         <ul>
-                            <li>新建歌单1</li>
-                            <li>新建歌单2</li>
-                            <li>新建歌单3</li>
+                            <router-link tag="li" :to="'/songlist/detail/'+play.id" v-for="play in playlist" :key="play.id" >{{play.name}}</router-link>
                         </ul>
                     </div>
                     <div class="menu-item">
@@ -82,7 +80,18 @@
 
 <script>
 export default {
-    name:"sidebar"
+    name:"sidebar",
+    data(){ // 测试数据
+        return{
+            playlist:[
+                {name:"官方华语歌单",id:2829883282},
+                {name:"官方欧美歌单",id:2829816518},
+                {name:"官方日语歌单",id:2829896389}
+            ]
+        }
+    },
+    methods:{
+    }
 }
 </script>
 
