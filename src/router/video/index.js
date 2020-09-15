@@ -7,6 +7,12 @@ export default{
             component:()=>import("@/views/video/indexComponents/MvDatabase")
         },
         {
+            path:"detail/:mvid",
+            components:{
+                detail:()=>import("@/views/video/MvDetail")
+            },
+        },
+        {
             path:"/video",
             redirect:"/video/mvdb"
         }

@@ -8,6 +8,8 @@
 			<router-view/>
 		</keep-alive>
 		
+		<router-view name="detail"/>
+		
 	</div>
 </template>
 

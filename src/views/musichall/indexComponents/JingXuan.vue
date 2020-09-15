@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="select-item-cont video">
-                    <div class="item-cont-card" v-for="mv in mvLists" :key="mv.id">
+                    <div class="item-cont-card" v-for="mv in mvLists" :key="mv.id" @click="handleToVideo(mv.id)">
                         <div class="card-cover">
                             <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
                             <img :src="mv.picUrl" alt="">
@@ -141,6 +141,9 @@ export default {
         },
         handleToPlaylist(id){
             this.$router.push("/songlist/detail/"+id)
+        },
+        handleToVideo(id){
+             this.$router.push("/video/detail/"+id)
         }
     },
     mounted(){

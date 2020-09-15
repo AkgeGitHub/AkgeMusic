@@ -1,6 +1,6 @@
 <template>
-  <div class="main-content">
-    <div class="mv">
+    <div class="main-content">
+        <div class="mv">
         <div class="mv-item newest">
             <div class="item-header">
                 <div class="header-name">最新MV</div>
@@ -9,7 +9,7 @@
                 </ul>
             </div>
             <div class="item-cont">
-                <div class="cont-card" v-for="mv in newestMvList" :key="mv.id">
+                <div class="cont-card" v-for="mv in newestMvList" :key="mv.id" @click="handleToVideo(mv.id)">
                     <div class="card-cover">
                         <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
                         <img :src="mv.cover" alt="" >
@@ -29,7 +29,7 @@
                 </ul>
             </div>
             <div class="item-cont">
-                <div class="cont-card" v-for="(mv,index) in rankMvList" :key="mv.id">
+                <div class="cont-card" v-for="(mv,index) in rankMvList" :key="mv.id"  @click="handleToVideo(mv.id)">
                     <div class="card-cover">
                         <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
                         <div class="cover-rank">{{index+1}}</div>
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="item-cont">
-                <div class="cont-card" v-for="mv in neteaseMvList" :key="mv.id">
+                <div class="cont-card" v-for="mv in neteaseMvList" :key="mv.id"  @click="handleToVideo(mv.id)">
                     <div class="card-cover">
                         <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
                         <img :src="mv.cover" alt="" >
@@ -63,8 +63,11 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
+
+
+        </div>
+	</div>
 </template>
 
 <script>
@@ -113,6 +116,9 @@ export default {
         handleToRankMv(cat,index){
             this.rankCatChoice=index;
             this.rankArea=cat;
+        },
+        handleToVideo(id){
+             this.$router.push("/video/detail/"+id)
         }
     },
     mounted(){

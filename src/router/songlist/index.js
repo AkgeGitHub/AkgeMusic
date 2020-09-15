@@ -3,8 +3,16 @@ export default{
     component:()=>import("@/views/songlist/songlist"),
     children:[
         {
+            path:"detail/:playid/songs",
+            component:()=>import("@/views/songlist/indexComponents/Songs")
+        },
+        {
+            path:"detail/:playid/comment",
+            component:()=>import("@/views/songlist/indexComponents/Comment")
+        },
+        {
             path:"detail/:playid",
-            component:()=>import("@/views/songlist/indexComponents/Detail")
+            redirect:"detail/:playid/songs"
         }
     ]
 

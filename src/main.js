@@ -41,6 +41,11 @@ Vue.filter("time",function(timestamp){
   var time=commonTime.getFullYear()+"年"+(commonTime.getMonth()+1)+"月"+commonTime.getDate()+"日"
   return time;
 })
+Vue.filter("exactTime",function(timestamp){
+  var commonTime = new Date(timestamp)
+  var exactTime=commonTime.toLocaleString('chinese',{hour12:false});
+  return exactTime;
+})
 
 
 
