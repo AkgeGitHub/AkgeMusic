@@ -1,48 +1,48 @@
 <template>
     <div class="main-content">
         <div class="mv">
-        <div class="mv-item newest">
-            <div class="item-header">
-                <div class="header-name">最新MV</div>
-                <ul>
-                    <li :class="{active:index==newestCatChoice}" v-for="(mvCat,index) in mvCatList" @click="handleToNewestMv(mvCat.cat,index)"  :key="mvCat.id">{{mvCat.cat}}</li>
-                </ul>
-            </div>
-            <div class="item-cont">
-                <div class="cont-card" v-for="mv in newestMvList" :key="mv.id" @click="handleToVideo(mv.id)">
-                    <div class="card-cover">
-                        <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
-                        <img :src="mv.cover" alt="" >
-                    </div>
-                    <div class="card-name" :title="mv.name">{{mv.name}}</div>
-                    <div class="card-artist">
-                        <span>{{mv.artists | arname}}</span>
+            <div class="mv-item newest">
+                <div class="item-header">
+                    <div class="header-name">最新MV</div>
+                    <ul>
+                        <li :class="{active:index==newestCatChoice}" v-for="(mvCat,index) in mvCatList" @click="handleToNewestMv(mvCat.cat,index)"  :key="mvCat.id">{{mvCat.cat}}</li>
+                    </ul>
+                </div>
+                <div class="item-cont">
+                    <div class="cont-card" v-for="mv in newestMvList" :key="mv.id" @click="handleToVideo(mv.id)">
+                        <div class="card-cover">
+                            <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
+                            <img :src="mv.cover" alt="" >
+                        </div>
+                        <div class="card-name" :title="mv.name">{{mv.name}}</div>
+                        <div class="card-artist">
+                            <span>{{mv.artists | arname}}</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="mv-item">
-            <div class="item-header">
-                <div class="header-name">MV排行榜</div>
-                <ul>
-                    <li :class="{active:index==rankCatChoice}" v-for="(mvCat,index) in mvCatList" @click="handleToRankMv(mvCat.cat,index)"  :key="mvCat.id">{{mvCat.cat}}</li>
-                </ul>
-            </div>
-            <div class="item-cont">
-                <div class="cont-card" v-for="(mv,index) in rankMvList" :key="mv.id"  @click="handleToVideo(mv.id)">
-                    <div class="card-cover">
-                        <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
-                        <div class="cover-rank">{{index+1}}</div>
-                        <img :src="mv.cover" alt="" >
-                    </div>
-                    <div class="card-name" :title="mv.name">{{mv.name}}</div>
-                    <div class="card-artist">
-                        <span>{{mv.artists | arname}}</span>
+            <div class="mv-item">
+                <div class="item-header">
+                    <div class="header-name">MV排行榜</div>
+                    <ul>
+                        <li :class="{active:index==rankCatChoice}" v-for="(mvCat,index) in mvCatList" @click="handleToRankMv(mvCat.cat,index)"  :key="mvCat.id">{{mvCat.cat}}</li>
+                    </ul>
+                </div>
+                <div class="item-cont">
+                    <div class="cont-card" v-for="(mv,index) in rankMvList" :key="mv.id"  @click="handleToVideo(mv.id)">
+                        <div class="card-cover">
+                            <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
+                            <div class="cover-rank">{{index+1}}</div>
+                            <img :src="mv.cover" alt="" >
+                        </div>
+                        <div class="card-name" :title="mv.name">{{mv.name}}</div>
+                        <div class="card-artist">
+                            <span>{{mv.artists | arname}}</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="mv-item">
+            <div class="mv-item">
             <div class="item-header">
                 <div class="header-name">网易出品</div>
                 <div class="header-more">

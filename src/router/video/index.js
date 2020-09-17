@@ -9,7 +9,7 @@ export default{
         {
             path:"detail/:mvid",
             components:{
-                detail:()=>import("@/views/video/MvDetail")
+                detail:()=>import("@/views/video/indexComponents/MvDetail")
             },
         },
         {

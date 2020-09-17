@@ -125,6 +125,6 @@
   .singer .singer-cont .singer-card{width: 188px;text-align: center;margin-left: 22px;margin-bottom: 22px;}
   .singer .singer-cont .singer-card:nth-of-type(6n+1){margin-left: 0px;}
   .singer .singer-cont .singer-card .card-cover{width: 188px;height: 188px;margin-bottom: 8px;}
-  .singer .singer-cont .singer-card .card-cover img{height: 186px;height: 186px;border-radius: 50%;border: 1px solid rgb(216,216,216);}
+  .singer .singer-cont .singer-card .card-cover img{width: 186px;height: 186px;border-radius: 50%;border: 1px solid rgb(216,216,216);}
   .singer .singer-cont .singer-card .card-name{height: 20px;;line-height: 20px;}
 </style>

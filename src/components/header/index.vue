@@ -6,8 +6,8 @@
                 <i class="fas fa-chevron-right"></i>
             </div>
             <div class="searchbar">
-                <input type="text" class="search-input" placeholder="搜索音乐" v-model="searchname" @focus="handleToFocus" @blur="searchresshow=false">
-                <i class="fas fa-search search-btn"></i>
+                <input type="text" class="search-input" placeholder="搜索音乐" v-model="searchname" @keyup.enter="handleToSearch(searchname)" @focus="handleToFocus" @blur="searchresshow=false">
+                <i class="fas fa-search search-btn" @click="handleToSearch(searchname)"></i>
             </div>
             <div class="music-radar">
                 <i class="fas fa-microphone-alt fa-lg"></i>
@@ -69,6 +69,9 @@
                     this.source("终止请求");
                 }
             },
+            handleToSearch(searchname){
+                this.$router.push('/search/detail/'+searchname+"/songs") 
+            }
         },
         watch:{
             searchname(newval){

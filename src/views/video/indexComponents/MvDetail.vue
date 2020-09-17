@@ -120,7 +120,7 @@ export default {
   .video-body .video-comment{margin-top: 40px;}
   .video-body .video-comment .comment-block{margin-bottom: 20px;}
   .video-body .video-comment .comment-block .block-title{height: 20px;line-height: 20px; font-size: 14.5px;}
-  .video-body .video-comment .comment-block .block-commentlist{margin-top: 10px;padding: 15px; background: rgb(238, 238, 238);border-radius: 10px;}
+  .video-body .video-comment .comment-block .block-commentlist{margin-top: 10px;padding: 15px; background: rgb(240, 240, 240);border-radius: 10px;}
   .video-body .video-comment .comment-block .block-commentlist .comment{display: flex;margin-bottom: 15px;}
   .video-body .video-comment .comment-block .block-commentlist .comment .comment-avatar{margin-top: 4px; margin-right: 10px;}
   .video-body .video-comment .comment-block .block-commentlist .comment .comment-avatar img{width: 35px; height: 35px;border-radius: 50%;border: 1px solid rgb(201, 201, 201);}
@@ -131,7 +131,7 @@ export default {
   .video-body .video-comment .comment-block .block-commentlist .comment .comment-cont .cont-footer span{margin-right: 20px;}
   .video-body .video-comment .comment-block .block-commentlist .comment .comment-cont .cont-footer .time{display: inline-block;width: 140px;}
   .video-description{width: 393px;padding: 0px 20px;}
-  .video-description .desc-intro{background: rgb(238, 238, 238);border-radius: 10px;}
+  .video-description .desc-intro{background: rgb(240, 240, 240);border-radius: 10px;}
   .video-description .desc-intro .intro-cover img{width: 100%;border-radius: 10px;}
   .video-description .desc-intro .intro-cont{padding:10px 15px; font-size: 13.5px;color: rgb(131, 131, 131);}
   .video-description .desc-intro .intro-cont div{line-height: 30px;}

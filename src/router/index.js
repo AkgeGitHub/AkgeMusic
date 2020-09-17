@@ -7,6 +7,7 @@ import LikeRouter from "./like"
 import LocalRouter from "./local"
 import HistoryRouter from "./history"
 import SonglistRouter from "./songlist"
+import SearchRouter from "./search"
 
 
 
@@ -21,6 +22,7 @@ Vue.use(VueRouter)
     LocalRouter,
     HistoryRouter,
     SonglistRouter,
+    SearchRouter,
     {
       path:"/*",
       redirect:"/musichall"
