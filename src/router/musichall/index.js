@@ -1,6 +1,6 @@
 export default{
     path:"/musichall",
-    component:()=>import("@/views/musichall/musichall"),
+    component:()=>import("@/views/musichall"),
     children:[
         {
             path:"jingxuan",

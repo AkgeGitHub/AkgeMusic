@@ -6,7 +6,7 @@ import RadioRouter from "./radio"
 import LikeRouter from "./like"
 import LocalRouter from "./local"
 import HistoryRouter from "./history"
-import SonglistRouter from "./songlist"
+import PlaylistRouter from "./playlist"
 import SearchRouter from "./search"
 
 
@@ -21,7 +21,7 @@ Vue.use(VueRouter)
     LikeRouter,
     LocalRouter,
     HistoryRouter,
-    SonglistRouter,
+    PlaylistRouter,
     SearchRouter,
     {
       path:"/*",

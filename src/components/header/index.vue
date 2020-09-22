@@ -2,25 +2,27 @@
     <div class="header">
         <div class="nav-search">
             <div class="page">
-                <i class="fas fa-chevron-left"></i>
-                <i class="fas fa-chevron-right"></i>
+                <a href=""><i class="fas fa-chevron-left" @click.prevent="handleToBack"></i></a>
+                <a href=""><i class="fas fa-chevron-right" @click.prevent="handleToGo"></i></a>
             </div>
             <div class="searchbar">
-                <input type="text" class="search-input" placeholder="搜索音乐" v-model="searchname" @keyup.enter="handleToSearch(searchname)" @focus="handleToFocus" @blur="searchresshow=false">
-                <i class="fas fa-search search-btn" @click="handleToSearch(searchname)"></i>
+                <input type="text" class="search-input" placeholder="搜索音乐" v-model="searchname" @keyup.enter="handleToSearch(searchname)" @click="handleToClick">
+                <a href=""><i class="fas fa-search search-btn" @click.prevent="handleToSearch(searchname)"></i></a>
             </div>
             <div class="music-radar">
                 <i class="fas fa-microphone-alt fa-lg"></i>
             </div>
             <div class="search-results" v-if="searchresshow">
-                <div>在线音乐</div>
-                <ul>
-                    <li v-for="song in songslist" :key="song.id">
-                        <span>{{song.name}}</span>
-                        <span> - </span>
-                        <span v-for="ar in song.ar" :key="ar.id">{{ar.name}} </span>
-                    </li>
-                </ul>                
+                <div class="res-title">在线音乐</div>
+                <div class="res-cont">
+                    <div href="" v-for="song in songslist" :key="song.id" @click.prevent="handleToSearch(song.name)">
+                        <a href="">
+                            <span>{{song.name}}</span>
+                            <span> - </span>
+                            <span>{{song.ar | arname}} </span>
+                        </a>
+                    </div>
+                </div>                
             </div>
         </div>
         <div class="nav-user-center">
@@ -47,7 +49,7 @@
 
 <script>
     export default{
-        name:"header",
+        name:"Header",
         data(){
             return{
                 searchresshow:false,
@@ -59,9 +61,9 @@
             
         },
         methods:{
-            handleToFocus(){
+            handleToClick(){
                 if (this.songslist!="") {
-                    this.searchresshow=true;
+                    this.searchresshow=!this.searchresshow;
                 }
             },
             cancelRequest() {
@@ -70,7 +72,16 @@
                 }
             },
             handleToSearch(searchname){
-                this.$router.push('/search/detail/'+searchname+"/songs") 
+                if (searchname) {
+                    this.$router.push('/search/detail/'+searchname)     
+                }
+                
+            },
+            handleToBack(){
+                this.$router.go(-1)
+            },
+            handleToGo(){
+                this.$router.go(1)
             }
         },
         watch:{
@@ -78,7 +89,7 @@
                 var that=this;
                 this.cancelRequest();
                 if (newval!="") {
-                    this.axios.get("/cloudsearch?keywords="+newval+"&limit=10",{
+                    this.axios.get("/cloudsearch?keywords="+newval+"&limit=10",{ // 搜索
                         cancelToken: new this.axios.CancelToken(function(c) {
                             that.source = c;
                         })
@@ -120,9 +131,9 @@
     .header .nav-search .music-radar{line-height: 34px;}
     .header .nav-search .music-radar i:hover{color: rgb(30, 208, 160);}
     .header .nav-search .search-results{z-index: 999; position: absolute;top: 40px;left: 70px; width: 248px;height: 331px; padding: 10px 20px;border-radius: 10px; box-shadow: 0px 0px 5px rgb(173, 173, 173); overflow: hidden;background: rgb(255, 255, 255);font-size: 14px;}
-    .header .nav-search .search-results div{height: 30px;line-height: 25px;border-bottom: 1px solid rgb(227,227,227);}
-    .header .nav-search .search-results ul{height: 300px;overflow: hidden;font-size: 13px;}
-    .header .nav-search .search-results ul li{height: 30px;line-height: 30px;text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+    .header .nav-search .search-results .res-title{height: 30px;line-height: 25px;border-bottom: 1px solid rgb(227,227,227);}
+    .header .nav-search .search-results .res-cont{height: 300px;overflow: hidden;font-size: 13px;}
+    .header .nav-search .search-results .res-cont div{height: 30px;line-height: 30px;text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
     .header .nav-user-center{display: flex;margin-left: 25px;}
     .header .nav-user-center .saying{display: flex;}
     .header .nav-user-center .saying i{margin:0px 10px;color: rgb(159,159,159);line-height: 34px;}

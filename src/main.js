@@ -9,9 +9,23 @@ import store from './store'
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SongsList from '@/components/SongsList';
+import MvsList from '@/components/MvsList';
+import AlbumsList from '@/components/AlbumsList';
+import SingersList from '@/components/SingersList';
+import PlayLists from '@/components/PlayLists';
+import CommentsList from '@/components/CommentsList';
+import RadiosList from '@/components/RadiosList';
 Vue.component("Sidebar",Sidebar)
 Vue.component("Header",Header)
 Vue.component("Footer",Footer)
+Vue.component("SongsList",SongsList)
+Vue.component("MvsList",MvsList)
+Vue.component("AlbumsList",AlbumsList)
+Vue.component("SingersList",SingersList)
+Vue.component("PlayLists",PlayLists)
+Vue.component("CommentsList",CommentsList)
+Vue.component("RadiosList",RadiosList)
 
 // axios
 import axios from 'axios'

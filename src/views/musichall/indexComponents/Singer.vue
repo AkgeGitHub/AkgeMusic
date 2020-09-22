@@ -1,28 +1,19 @@
 <template>
 	<div class="main-content"  @scroll="handleToScroll" ref="singer">
-    <div class="singer">
-        <div class="singer-sort">
-            <div class="sort-lang">
-                <div v-for="(item,index) in langList" :key="item.area" @click="handleToLang(item.area,index)" :class="{active:langChoice==index}">
-                  {{item.lang}}
-                </div>
-            </div>
-            <div class="sort-sex">
-                <div v-for="(item,index) in sexList" :key="item.type" @click="handleToSex(item.type,index)" :class="{active:sexChoice==index}">
-                  {{item.sex}}
-                </div>
-            </div>
-        </div>
-        <div class="singer-cont">
-            <div class="singer-card" v-for="(singer,index) in singerLists" :key="singer.id">
-              <div class="card-cover" v-if="index<18"> <!-- 设置前18名才有图片 -->
-                <img :src="singer.img1v1Url" alt="">
-              </div>
-              <div class="card-name">{{singer.name}}</div>
-            </div>
-
-        </div>
-    </div>
+    <SingersList :singersList='singersList'>
+      <div class="singer-sort">
+          <div class="sort-lang">
+              <a href="" v-for="(item,index) in langList" :key="item.area" @click.prevent="handleToLang(item.area,index)" :class="{active:langChoice==index}">
+                {{item.lang}}
+              </a>
+          </div>
+          <div class="sort-sex">
+              <a href="" v-for="(item,index) in sexList" :key="item.type" @click.prevent="handleToSex(item.type,index)" :class="{active:sexChoice==index}">
+                {{item.sex}}
+              </a>
+          </div>
+      </div>
+    </SingersList>
   </div>
 </template>
 
@@ -51,7 +42,7 @@
           {sex:"女",type:2},
           {sex:"乐队",type:3}
           ],
-        singerLists:[],
+        singersList:[],
         isSingerDataMore:true
       }
     },
@@ -65,7 +56,7 @@
       getSingerListData(){
         this.axios.get("/artist/list?type="+this.type+"&area="+this.area+"&initial=-1").then((res)=>{
           if (res.data.code===200) {
-            this.singerLists=res.data.artists;
+            this.singersList=res.data.artists;
           }
         });
       },
@@ -89,7 +80,7 @@
                 if (res.data.more==false && res.data.artists.length==0) { // 判断是否数据全部加载完毕
                   this.isSingerDataMore=false;
                 }else{
-                  this.singerLists=this.singerLists.concat(res.data.artists);
+                  this.singersList=this.singersList.concat(res.data.artists);
                 }
               }else{
                 console.log("请求数据失败")
@@ -116,11 +107,11 @@
 <style scoped>
   .singer{display: flex;flex-direction: column;}
   .singer .singer-sort .sort-lang{display: flex;font-size: 13px;margin:5px 0px 15px 0px;}
-  .singer .singer-sort .sort-lang div{width: 80px;height: 32px;border: 1px solid rgb(216, 216, 216);border-radius: 20px;line-height: 32px;text-align: center;margin-right: 10px;}
-  .singer .singer-sort .sort-lang div.active{background: rgb(30, 208, 160);color: white;}
+  .singer .singer-sort .sort-lang a{display: block; width: 80px;height: 32px;border: 1px solid rgb(216, 216, 216);border-radius: 20px;line-height: 32px;text-align: center;margin-right: 10px;}
+  .singer .singer-sort .sort-lang a.active{background: rgb(30, 208, 160);color: white;}
   .singer .singer-sort .sort-sex{display: flex;font-size: 13px;margin-bottom: 20px;}
-  .singer .singer-sort .sort-sex div{width: 80px;height: 32px;border: 1px solid rgb(216, 216, 216);border-radius: 20px;line-height: 32px;text-align: center;margin-right: 10px;}
-  .singer .singer-sort .sort-sex div.active{background: rgb(30, 208, 160);color: white;}
+  .singer .singer-sort .sort-sex a{display: block; width: 80px;height: 32px;border: 1px solid rgb(216, 216, 216);border-radius: 20px;line-height: 32px;text-align: center;margin-right: 10px;}
+  .singer .singer-sort .sort-sex a.active{background: rgb(30, 208, 160);color: white;}
   .singer .singer-cont{width: 1238px; display: flex;flex-wrap: wrap;}
   .singer .singer-cont .singer-card{width: 188px;text-align: center;margin-left: 22px;margin-bottom: 22px;}
   .singer .singer-cont .singer-card:nth-of-type(6n+1){margin-left: 0px;}

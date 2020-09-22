@@ -36,22 +36,20 @@
 		<div class="songlist-cont">
 			<div class="cont-nav">
 				<div class="nav-left">
-					<router-link tag="div" :to="'/songlist/detail/'+this.playId+'/songs'">歌曲</router-link>
-					<router-link tag="div" :to="'/songlist/detail/'+this.playId+'/comment'">评论</router-link>
+                    <a href="" :class="{active:activeIndex==index}" v-for="(cat,index) in category" :key="cat.id" @click.prevent="handleToClick(index)">{{cat.name}}</a>
 				</div>
 				<div class="nav-right">
 					<div>
-						<i class="fas fa-search"></i>搜索
+						<i class="fas fa-search"></i> 搜索
 					</div>
 					<div>
-						<i class="fas fa-sort-alpha-down"></i>排序
+						<i class="fas fa-sort-alpha-down"></i> 排序
 					</div>
 				</div>
 			</div>
 
-			<keep-alive>
-				<router-view />
-			</keep-alive>
+            <SongsList :songsList='songsList' v-show="showIndex==0"></SongsList>
+            <CommentsList :commentsList='commentsList' :hotCommentsList='hotCommentsList' v-show="showIndex==1"></CommentsList>
 
 		</div>
     </div>
@@ -64,19 +62,56 @@ export default {
         return{
             songDetail:{},
             creator:[],
+            songsList:[],
+            commentsList:[],
+            hotCommentsList:[],
+            category:[
+                {name:"歌曲",id:"0"},
+                {name:"评论",id:"1"}
+            ],
+            showIndex:0,
+            activeIndex:0
+
         }
     },
     methods:{
-        getSongDetail(){
+         getPlayListDetail(){
+            // 获取歌单信息和歌单内容
             this.axios.get("/playlist/detail?id="+this.playId).then((res)=>{
                 if (res.data.code===200) {
                     this.songDetail=res.data.playlist
 					this.creator=res.data.playlist.creator
+                    // 未登录返回的playlist中的tracks是不完整的,trackIds是完整的
+                    // 可拿全部 trackIds 请求一次 song/detail 接口获取所有歌曲的详情
+                    var trackIds=res.data.playlist.trackIds
+                    var idsArr=trackIds.map(item=>item.id)
+                    var idsStr=idsArr.join(",")
+                    this.axios("/song/detail?ids="+idsStr).then((res)=>{
+                        if (res.data.code===200) {
+                            this.songsList=res.data.songs
+                        }
+                    })
                 }else{
                     console.log("请求数据失败")
                 }
+            }),
+            
+            // 获取歌单评论
+            this.axios.get("/comment/playlist?id="+this.playId).then((res)=>{
+                this.commentsList=res.data.comments
+                this.hotCommentsList=res.data.hotComments.slice(0,5) // 取前5条热评
             })
         },
+        handleToSong(songid){
+            this.axios.get("/song/url?id="+songid).then((res)=>{
+                var songurl=res.data.data[0].url;
+                this.$store.commit("SONG",{songurl,songid});
+            })
+        },
+        handleToClick(index){
+            this.showIndex=index,
+            this.activeIndex=index
+        }
 	},
 	computed:{
 		playId(){
@@ -84,12 +119,12 @@ export default {
 		}
 	},
 	mounted(){
-        this.getSongDetail()
+        this.getPlayListDetail()
 	},
 	watch:{
         $route(newvalue){
             if (newvalue) {
-                this.getSongDetail()
+                this.getPlayListDetail()
             }
         }
     }
@@ -112,8 +147,8 @@ export default {
 	.songlist-des .des-cont .cont-btn div i{margin-right: 4px;}
 	.songlist-cont .cont-nav{display: flex;flex-wrap: wrap;overflow: hidden;margin-top: 20px;justify-content: space-between;}
     .songlist-cont .cont-nav .nav-left{display: flex;flex-wrap:wrap; overflow: hidden;font-size: 14px;}
-    .songlist-cont .cont-nav .nav-left div{height: 32px;margin-right: 50px;line-height: 32px;}
-    .songlist-cont .cont-nav .nav-left div.router-link-active{color: rgb(30, 208, 160);border-bottom: 1px solid rgb(30, 208, 160);}
+    .songlist-cont .cont-nav .nav-left a{display: block; height: 32px;margin-right: 50px;line-height: 32px;}
+    .songlist-cont .cont-nav .nav-left a.active{color: rgb(30, 208, 160);border-bottom: 1px solid rgb(30, 208, 160);}
     .songlist-cont .cont-nav .nav-right{display: flex;flex-wrap: wrap;overflow: hidden;font-size: 13px;}
     .songlist-cont .cont-nav .nav-right div{height: 36px;margin-left: 30px;line-height: 36px;}
 </style>

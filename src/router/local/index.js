@@ -1,5 +1,5 @@
 export default{
     path:"/local",
-    component:()=>import("@/views/local/local"),
+    component:()=>import("@/views/local"),
 
 }

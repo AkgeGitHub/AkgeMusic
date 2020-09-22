@@ -1,20 +1,18 @@
 export default{
     path:"/video",
-    component:()=>import("@/views/video/video"),
+    component:()=>import("@/views/video"),
     children:[
         {
-            path:"mvdb",
-            component:()=>import("@/views/video/indexComponents/MvDatabase")
+            path:"mvlibrary",
+            component:()=>import("@/views/video/indexComponents/MvLibrary")
         },
         {
             path:"detail/:mvid",
-            components:{
-                detail:()=>import("@/views/video/indexComponents/MvDetail")
-            },
+            component:()=>import("@/views/video/indexComponents/MvDetail")
         },
         {
             path:"/video",
-            redirect:"/video/mvdb"
+            redirect:"/video/mvlibrary"
         }
     ]
 

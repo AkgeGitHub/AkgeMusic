@@ -1,6 +1,6 @@
 export default{
     path:"/like",
-    component:()=>import("@/views/like/like"),
+    component:()=>import("@/views/like"),
     children:[
         {
             path:"songs",

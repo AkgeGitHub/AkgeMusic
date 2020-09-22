@@ -1,6 +1,6 @@
 export default{
     path:"/radio",
-    component:()=>import("@/views/radio/radio"),
+    component:()=>import("@/views/radio"),
     children:[
         {
             path:"radiostation",

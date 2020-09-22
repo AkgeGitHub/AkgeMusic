@@ -4,36 +4,42 @@
             <div class="rank-popular">
                 <div class="popular-big-card">
                     <div class="card-cover">
-                        <img :src="popularRank[0].coverImgUrl" alt="" @click="handleToPlaylist(popularRank[0].id)">
+                        <a href=""><img :src="popularRank[0].coverImgUrl" alt="" @click.prevent="handleToPlaylist(popularRank[0].id)"></a>
                     </div>
                 </div>
                 <div class="popular-small-card">
-                    <div class="popular-card" v-for="rank in popularRank" :key="rank.id" @click="handleToPlaylist(rank.id)">
-                        <div class="card-cover">
-                            <img :src="rank.coverImgUrl" alt="">
-                        </div>
-                        <div class="card-cont">
-                            <h3 class="cont-title">{{rank.name}}</h3>
-                            <ul class="cont-body">
-                                <li v-for="(item,index) in rank.tracks" :key="item.id">
-                                    <span>{{index+1}} </span>
-                                    <span>{{item.name}}</span>
-                                    <span> - </span>
-                                    <span>{{item.ar | arname}}</span>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="popular-card" v-for="rank in popularRank" :key="rank.id" @click.prevent="handleToPlaylist(rank.id)">
+                        <a href="">
+                            <div class="card-cover">
+                                <img :src="rank.coverImgUrl" alt="">
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="card-cont">
+                                <h3 class="cont-title">{{rank.name}}</h3>
+                                <ul class="cont-body">
+                                    <li v-for="(item,index) in rank.tracks" :key="item.id">
+                                        <span>{{index+1}} </span>
+                                        <span>{{item.name}}</span>
+                                        <span> - </span>
+                                        <span>{{item.ar | arname}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="rank-global">
                 <div class="global-title">全球媒体榜</div>
                 <div class="global-cont">
-                    <div class="global-card" v-for="rank in rankLists.slice(4)" :key="rank.id" @click="handleToPlaylist(rank.id)">
-                        <div class="card-cover">
-                            <img :src="rank.coverImgUrl" alt="">
-                        </div>
-                        <div class="card-des" :title="rank.name">{{rank.name}}</div>
+                    <div class="global-card" v-for="rank in rankLists.slice(4)" :key="rank.id" @click.prevent="handleToPlaylist(rank.id)">
+                        <a href="">
+                            <div class="card-cover">
+                                <img :src="rank.coverImgUrl" alt="">
+                            </div>
+                            <div class="card-des" :title="rank.name">{{rank.name}}</div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -58,7 +64,7 @@ export default {
     },
     methods:{
         handleToPlaylist(id){
-            this.$router.push("/songlist/detail/"+id)
+            this.$router.push("/playlist/detail/"+id)
         }
     },
     mounted(){

@@ -7,7 +7,7 @@
 <script>
 import BScroll from "better-scroll"
 export default {
-    name:"scroller",
+    name:"Scroller",
     mounted(){
         this.$nextTick(()=>{
             this.scroll=new BScroll(this.$refs.scroller,{

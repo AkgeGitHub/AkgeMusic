@@ -49,42 +49,15 @@
 
 <script>
 export default {
-    name:"Comment",
-    data(){
-        return{
-            commentsList:[],
-            hotCommentsList:[]
-        }
-    },
-    computed:{
-        playId(){
-            return this.$route.params.playid
-        }
-    },
-    methods:{
-        getCommentsList(){
-            this.axios.get("/comment/playlist?id="+this.playId).then((res)=>{
-                this.commentsList=res.data.comments
-                this.hotCommentsList=res.data.hotComments.slice(0,5) // 取前5条热评
-            })
-        }
-    },
-    mounted(){
-        this.getCommentsList()
-    },
-    watch:{
-        $route(newvalue){
-            if (newvalue) {
-                this.getCommentsList()
-            }
-        }
-    }
+    name:'CommentsList',
+    props:['commentsList','hotCommentsList'],
 }
 </script>
 
 <style scoped>
     .cont-comment-block{margin: 15px 0px 25px 0px;}
     .cont-comment-block .block-title{height: 20px;line-height: 20px;font-size: 14.5px;margin-bottom: 10px;}
+    .cont-comment-block .block-commentlist{margin-top: 10px;padding: 15px; background: rgb(240, 240, 240);border-radius: 15px;}
     .cont-comment-block .block-commentlist .comment{display: flex;margin-bottom: 15px;}
     .cont-comment-block .block-commentlist .comment .comment-avatar{margin-top: 4px; margin-right: 10px;}
     .cont-comment-block .block-commentlist .comment .comment-avatar img{width: 35px; height: 35px;border-radius: 50%;border: 1px solid rgb(201, 201, 201);}

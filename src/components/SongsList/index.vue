@@ -1,19 +1,19 @@
 <template>
     <div class="songs">
         <div class="song-item header">
-            <div class="songname">歌曲</div>
-            <div class="arname">歌手</div>
-            <div class="alname">专辑</div>
-            <div class="duration">时长</div>
+            <div class="songname"><a href="">歌曲</a></div>
+            <div class="arname"><a href="">歌手</a></div>
+            <div class="alname"><a href="">专辑</a></div>
+            <div class="duration"><a href="">时长</a></div>
         </div>
-        <div class="song-item" v-for="song in songsList" :key="song.id" @click="handleToSong(song.id)">
+        <div class="song-item" v-for="song in songsList" :key="song.id" @click.prevent="handleToSong(song.id)">
             <div class="songname">
                 <i class="far fa-heart fas fa-heart fa-fw"></i>
-                {{song.name}}
+                <a href="">{{song.name}}</a>
             </div>
-            <div class="arname">{{song.ar | arname}}</div>
-            <div class="alname">{{song.al.name}}</div>
-            <div class="duration">{{song.dt | duration}}</div>
+            <div class="arname"><a href="">{{song.ar | arname}}</a></div>
+            <div class="alname"><a href="">{{song.al.name}}</a></div>
+            <div class="duration"><a href="">{{song.dt | duration}}</a></div>
         </div>
 
     </div>   
@@ -21,7 +21,8 @@
 
 <script>
 export default {
-    name:"Songs",
+    name:'SongsList',
+    props: ['songsList'],
     filters: {
         duration: function (dt) {
             var commonTime=new Date(dt);
@@ -32,42 +33,20 @@ export default {
             return duration;
         }
     },
-    data(){
-        return{
-            songsList:[]
-
-        }
-    },
-    computed:{
-        keywords(){
-            return this.$route.params.keywords
-        },
-    },
     methods:{
-        getSearchRes(){
-            this.axios.get("/cloudsearch?keywords="+this.keywords+"&type=1").then((res)=>{
-                if (res.data.code===200) {
-                    this.songsList=res.data.result.songs
-                }else{
-                    console.log("请求数据失败")
+        handleToSong(songid){
+            this.axios.get("/check/music?id="+songid).then((res)=>{ // 判断音乐是否可用
+                if (res.data.success===true) {
+                    this.$store.commit("SONG",{songid});
+                }
+            }).catch((err)=>{
+                if (err) {
+                    alert("音乐暂不能播放")
                 }
             })
         },
-        handleToSong(songid){
-            this.axios.get("/song/url?id="+songid).then((res)=>{
-                var songurl=res.data.data[0].url;
-                this.$store.commit("SONG",{songurl,songid});
-            })
-        },
-    },
-    mounted(){
-        this.getSearchRes()
-    },
-    watch:{
-       keywords(){
-           this.getSearchRes()
-       }
-    },
+    }
+
 
 }
 </script>
@@ -75,7 +54,8 @@ export default {
 <style scoped>
     .songs{font-size: 14px;}
     .songs .song-item{height: 30px;display: flex;justify-content: space-between;margin-bottom: 8px;padding: 5px; font-size: 14px;}
-    .songs .song-item.header{color: rgb(136, 136, 136);margin:  8px 0px;}
+    .songs .song-item.header{margin:  8px 0px;}
+    .songs .song-item.header a{color: rgb(136, 136, 136);}
     .songs .song-item div{padding-right: 15px;line-height: 30px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .songs .song-item div i{color: rgb(159,159,159);margin-right: 8px;}
     .songs .song-item:first-of-type div i{color: rgb(255,106,106);}

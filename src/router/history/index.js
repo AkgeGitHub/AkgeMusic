@@ -1,5 +1,5 @@
 export default{
     path:"/history",
-    component:()=>import("@/views/history/history"),
+    component:()=>import("@/views/history"),
 
 }

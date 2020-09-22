@@ -2,21 +2,23 @@
   <div class="main-content" @scroll="handleToScroll" ref="playlist">
     <div class="playlist">
         <div class="playlist-sort">
-            <div>热门分类:</div>
-            <ul>
-                <li :class="{active:index==catChoice}" @click="handleToCat(hotcat.name,index)" v-for="(hotcat,index) in hotCatLists" :key="hotcat.id">
+            <div class="sort-name">热门分类:</div>
+            <div class="sort-cont">
+                <a href="" :class="{active:index==catChoice}" @click.prevent="handleToCat(hotcat.name,index)" v-for="(hotcat,index) in hotCatLists" :key="hotcat.id">
                   {{hotcat.name}}
-                </li>
-            </ul>
+                </a>
+            </div>
         </div>
         <div class="playlist-cont">
-            <div class="cont-card" v-for="playlist in playLists" :key="playlist.id" @click="handleToPlaylist(playlist.id)">
+            <div class="cont-card" v-for="playlist in playLists" :key="playlist.id" @click.prevent="handleToPlaylist(playlist.id)">
+              <a href="">
                 <div class="card-cover">
                   <img :src="playlist.coverImgUrl" alt="">
                 </div>
                 <div class="card-name" :title="playlist.name">
                   {{playlist.name}}
                 </div>
+              </a>
             </div>
         </div>
     </div>
@@ -73,7 +75,10 @@ export default {
       }
     },
     handleToPlaylist(id){
-      this.$router.push("/songlist/detail/"+id)
+      if (id) {
+        console.log(id)
+        this.$router.push("/playlist/detail/"+id)
+      }
     }
   },
   watch:{
@@ -94,10 +99,10 @@ export default {
 
 <style scoped>
   .playlist .playlist-sort{margin: 5px 0px 20px 0px;display: flex;}
-  .playlist .playlist-sort div{font-size: 13px;line-height: 32px;margin-right: 15px;}
-  .playlist .playlist-sort ul{display: flex;flex-wrap: wrap}
-  .playlist .playlist-sort ul li{width: 80px;height: 32px;font-size: 13px;line-height: 32px;text-align: center;border: 1px solid rgb(216, 216, 216); border-radius: 20px;margin-right: 15px;}
-  .playlist .playlist-sort ul li.active{background: rgb(30, 208, 160);color: white;}
+  .playlist .playlist-sort .sort-name{font-size: 13px;line-height: 32px;margin-right: 15px;}
+  .playlist .playlist-sort .sort-cont{display: flex;flex-wrap: wrap}
+  .playlist .playlist-sort .sort-cont a{display: block; width: 80px;height: 32px;font-size: 13px;line-height: 32px;text-align: center;border: 1px solid rgb(216, 216, 216); border-radius: 20px;margin-right: 15px;}
+  .playlist .playlist-sort .sort-cont a.active{background: rgb(30, 208, 160);color: white;}
   .playlist .playlist-cont{width: 1238px; display: flex;flex-wrap: wrap;}
   .playlist .playlist-cont .cont-card{width: 188px;margin-left: 22px;margin-bottom: 22px;}
   .playlist .playlist-cont .cont-card:nth-of-type(6n+1){margin-left: 0px;}

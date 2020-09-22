@@ -20,7 +20,7 @@
                     <i class="fas fa-comment-dots fa-fw"></i>
                 </div>
             </div>
-            <audio ref="audio" :src="this.$store.state.songurl"></audio>
+            <audio ref="audio" :src="songurl"></audio>
         </div>
         <div class="nav-play">
             <div class="play-btn random"><i class="fas fa-random fa-2x fa-fw"></i></div>
@@ -83,7 +83,7 @@
 
 <script>
 export default {
-    name:"footer",
+    name:"Footer",
     data(){
         return{
             isplay:true,
@@ -98,13 +98,17 @@ export default {
                 al:{picUrl:""},
                 ar:"",
                 name:""
-            }
+            },
+            songurl:""
 
         }
     },
     methods:{
         handleToSong(){ //监听到songid变化，就执行axios请求
-            this.axios.get("/song/detail?ids="+this.$store.state.songid).then((res)=>{
+            this.axios.get("/song/url?id="+this.songid).then((res)=>{
+                this.songurl=res.data.data[0].url;
+            })
+            this.axios.get("/song/detail?ids="+this.songid).then((res)=>{
                 this.songdetail=res.data.songs[0];
                 this.$nextTick(()=>{
                     this.$refs.audio.volume=this.volvalue/100; // 设置它初始音量
@@ -114,6 +118,7 @@ export default {
                     this.isplay=false;
                 })
             })
+            
         },
         handleToPaused(){
             if (this.songid) { // 判断是否有歌曲

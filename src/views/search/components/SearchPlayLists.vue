@@ -2,9 +2,9 @@
     <div class="playlist">
         <div class="playlist-cont">
             <div class="cont-item" v-for="playlist in playLists" :key="playlist.id" >
-                <div class="item-cover">
-                  <img :src="playlist.coverImgUrl" alt="">
-                  <div>{{playlist.name}}</div>
+                <div class="item-cover"  @click.prevent="handleToPlaylist(playlist.id)">
+                    <a href=""><img :src="playlist.coverImgUrl" alt=""></a>
+                    <a href=""><div>{{playlist.name}}</div></a>
                 </div>
                 <div class="item-ar">by {{playlist.creator.nickname}}</div>
                 <div class="item-songsum">{{playlist.trackCount}} 首</div>
@@ -17,39 +17,15 @@
 
 <script>
 export default {
-    name:"PlayList",
-    data(){
-        return{
-            playLists:[]
-
-        }
-    },
+    props:['playLists'],
     methods:{
-        getSearchRes(){
-            this.axios.get("/cloudsearch?keywords="+this.keywords+"&type=1000").then((res)=>{
-                if (res.data.code===200) {
-                    this.playLists=res.data.result.playlists
-                }else{
-                    console.log("请求数据失败")
-                }
-            })
-        },
-       
-    },
-    computed:{
-        keywords(){
-            return this.$route.params.keywords
-        },
-       
-    },
-    mounted(){
-        this.getSearchRes()
-    },
-    watch:{
-       keywords(){
-           this.getSearchRes()
-       },
-    },
+        handleToPlaylist(id){
+            if (id) {
+                console.log(id)
+                this.$router.push("/playlist/detail/"+id)
+            }
+        }
+    }
 
 }
 </script>
