@@ -1,19 +1,19 @@
 <template>
     <div class="songs">
         <div class="song-item header">
-            <div class="songname"><a href="">歌曲</a></div>
-            <div class="arname"><a href="">歌手</a></div>
-            <div class="alname"><a href="">专辑</a></div>
-            <div class="duration"><a href="">时长</a></div>
+            <div class="item-3x">歌曲</div>
+            <div class="item-2x">歌手</div>
+            <div class="item-2x">专辑</div>
+            <div class="item-x">时长</div>
         </div>
         <div class="song-item" v-for="song in songsList" :key="song.id" @click.prevent="handleToSong(song.id)">
-            <div class="songname">
+            <div class="item-3x">
                 <i class="far fa-heart fas fa-heart fa-fw"></i>
                 <a href="">{{song.name}}</a>
             </div>
-            <div class="arname"><a href="">{{song.ar | arname}}</a></div>
-            <div class="alname"><a href="">{{song.al.name}}</a></div>
-            <div class="duration"><a href="">{{song.dt | duration}}</a></div>
+            <div class="item-2x"><a href="">{{song.ar | arname}}</a></div>
+            <div class="item-2x"><a href="">{{song.al.name}}</a></div>
+            <div class="item-x"><a href="">{{song.dt | duration}}</a></div>
         </div>
 
     </div>   
@@ -54,15 +54,14 @@ export default {
 <style scoped>
     .songs{font-size: 14px;}
     .songs .song-item{height: 30px;display: flex;justify-content: space-between;margin-bottom: 8px;padding: 5px; font-size: 14px;}
-    .songs .song-item.header{margin:  8px 0px;}
-    .songs .song-item.header a{color: rgb(136, 136, 136);}
+    .songs .song-item.header{margin:  8px 0px;color: rgb(136, 136, 136);}
     .songs .song-item div{padding-right: 15px;line-height: 30px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .songs .song-item div i{color: rgb(159,159,159);margin-right: 8px;}
     .songs .song-item:first-of-type div i{color: rgb(255,106,106);}
     .songs .song-item .songname{width: 460.5px;}
     .songs .song-item:not(.header) .songname:hover{color: rgb(30, 208, 160);}
-    .songs .song-item .arname{width: 307px;}
-    .songs .song-item .alname{width: 307px;}
-    .songs .song-item .duration{width: 153.5px;}
+    .songs .song-item .item-3x{flex: 37.5%;}
+    .songs .song-item .item-2x{flex: 25%;}
+    .songs .song-item .item-x{flex: 12.5%;}
 
 </style>

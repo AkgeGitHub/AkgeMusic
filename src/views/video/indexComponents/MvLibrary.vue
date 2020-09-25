@@ -1,6 +1,6 @@
 <template>
     <div class="main-content">
-        <div class="main-header">
+        <div class="main-cont-title">
 			<div class="title">视频</div>
 		</div>
         <MvsList title='最新MV' :mvsList='newestMvList'>
@@ -88,6 +88,6 @@ export default {
 </script>
 
 <style scoped>
-    .main-header{width: 100%; background: rgb(246,246,246);}
-	.main-header .title{font-size: 30px;margin-bottom: 20px;}
+    .main-cont-title{width: 100%; background: rgb(246,246,246);}
+	.main-cont-title .title{font-size: 30px;margin-bottom: 20px;}
 </style>

@@ -17,7 +17,7 @@
         <MusicList title='最新音乐' :songsList='newSongLists' :isMore='true'></MusicList>
         <MvsList title='推荐MV' :isMore='true' :mvsList='mvsList'></MvsList>
         <PlayLists title='推荐歌单' :playLists='playLists' :isMore='true'></PlayLists>
-        <RadiosList title='推荐电台' :radiosList='djLists'></RadiosList>
+        <RadiosList title='推荐电台' :radiosList='djLists' :isShowAuthor='true'></RadiosList>
     </div>
 </template>
 
@@ -101,10 +101,10 @@ export default {
                 this.newSongLists=res.data.data.slice(0,6);
             }
         })
-        // 热门电台
-        this.axios.get("/personalized/djprogram?limit=6").then((res)=>{
+        // 推荐电台
+        this.axios.get("/dj/recommend").then((res)=>{
             if (res.data.code===200) {
-                this.djLists=res.data.result;
+                this.djLists=res.data.djRadios.slice(0,6);
             }
         })
     }

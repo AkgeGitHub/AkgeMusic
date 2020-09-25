@@ -7,6 +7,10 @@ export default{
             component:()=>import("@/views/radio/indexComponents/RadioStation")
         },
         {
+            path:"detail/:djid",
+            component:()=>import("@/views/radio/indexComponents/RadioDetail")
+        },
+        {
             path:"/radio",
             redirect:"/radio/radiostation"
         }

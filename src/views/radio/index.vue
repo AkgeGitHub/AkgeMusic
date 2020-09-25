@@ -1,8 +1,5 @@
 <template>
 	<div id="main">
-		<div class="main-header">
-			<div class="title">电台</div>
-		</div>
 
 		<keep-alive>
 			<router-view/>
@@ -20,6 +17,4 @@ export default {
 </script>
 
 <style scoped>
-	.main-header{width: 100%; background: rgb(246,246,246);}
-	.main-header .title{font-size: 30px;margin-bottom: 20px;}
 </style>

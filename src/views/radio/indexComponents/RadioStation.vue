@@ -1,5 +1,8 @@
 <template>
     <div class="main-content">
+        <div class="main-cont-title">
+			<div class="title">电台</div>
+		</div>
         <div class="banner">
             <swiper class="swiper" :options="swiperOption">
                 <swiper-slide  v-for="banner in banners" :key="banner.url"> <!-- targertId key值重复 -->
@@ -15,7 +18,7 @@
             </swiper>
         </div>
         
-        <RadiosList title='推荐节目' :radiosList='rcmdDjList' :isShowAuthor='true'></RadiosList>
+        <ProgramCards title='推荐节目' :programsList='rcmdDjList' :isShowAuthor='true'></ProgramCards>
         <RadiosList title='热门电台' :radiosList='hotDjList' :isShowAuthor='true'></RadiosList>
        
     </div>
@@ -25,11 +28,13 @@
 
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import ProgramCards from "@/views/radio/components/ProgramCards"
 export default {
     name:"RadioStation",
     components: {
         swiper,
         swiperSlide,
+        ProgramCards
     },
     data(){
         return{
@@ -60,6 +65,7 @@ export default {
                 this.banners=res.data.data;
             }
         })
+        // 注意节目的id(programs[x].id)和电台的id(programs[x].radio.id)是不同的，要想获得音频应该传入的是节目下的radio中的id(programs[x].radio.id)
         // 推荐节目
         this.axios.get("/program/recommend?limit=12").then((res)=>{
             if (res.data.code===200) {
@@ -78,6 +84,8 @@ export default {
 </script>
 
 <style scoped>
+	.main-cont-title{width: 100%; background: rgb(246,246,246);}
+	.main-cont-title .title{font-size: 30px;margin-bottom: 20px;}
     .banner{margin-bottom: 30px;overflow: hidden;border-radius: 20px;}
     .banner .banner-item{margin-left: 22px;}
     .banner .banner-item:first-child{margin-left: 0;}

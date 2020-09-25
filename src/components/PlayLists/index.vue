@@ -28,7 +28,6 @@ export default {
     methods:{
         handleToPlaylist(id){
             if (id) {
-                console.log(id)
                 this.$router.push("/playlist/detail/"+id)
             }
         }
