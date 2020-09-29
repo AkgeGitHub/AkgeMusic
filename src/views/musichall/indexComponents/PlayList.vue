@@ -4,19 +4,19 @@
         <div class="playlist-sort">
             <div class="sort-name">热门分类:</div>
             <div class="sort-cont">
-                <a href="" :class="{active:index==catChoice}" @click.prevent="handleToCat(hotcat.name,index)" v-for="(hotcat,index) in hotCatLists" :key="hotcat.id">
-                  {{hotcat.name}}
+                <a href="" :class="{active:index==catChoice}" @click.prevent="handleToCat(item.name,index)" v-for="(item,index) in hotCatLists" :key="item.id">
+                  {{item.name}}
                 </a>
             </div>
         </div>
         <div class="playlist-cont">
-            <div class="cont-card" v-for="playlist in playLists" :key="playlist.id" @click.prevent="handleToPlaylist(playlist.id)">
+            <div class="cont-card" v-for="item in playLists" :key="item.id" @click.prevent="handleToPlaylist(item.id)">
               <a href="">
                 <div class="card-cover">
-                  <img :src="playlist.coverImgUrl" alt="">
+                  <img :src="item.coverImgUrl" alt="">
                 </div>
-                <div class="card-name" :title="playlist.name">
-                  {{playlist.name}}
+                <div class="card-name" :title="item.name">
+                  {{item.name}}
                 </div>
               </a>
             </div>

@@ -8,15 +8,15 @@
             </div>
         </div>
         <div class="musicList-cont">
-            <div class="cont-card" v-for="song in songsList" :key="song.id" @click.prevent="handleToSong(song.id)">
+            <div class="cont-card" v-for="item in list" :key="item.id" @click.prevent="handleToSong(item.id)">
                 <a href="">
                     <div class="card-cover">
                         <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
-                        <img :src="song.album.picUrl" alt="" >
+                        <img :src="item.album.picUrl" alt="" >
                     </div>
-                    <div class="card-title" :title="song.name">{{song.name}}</div>
+                    <div class="card-title" :title="item.name">{{item.name}}</div>
                     <div class="card-artist">
-                        <span :title="song.artists | arname">{{song.artists | arname}}</span>
+                        <span :title="item.artists | arname">{{item.artists | arname}}</span>
                     </div>
                 </a>
             </div>
@@ -26,7 +26,7 @@
 
 <script>
 export default {
-    props:['title','songsList','isMore'],
+    props:['title','list','isMore'],
     methods:{
         handleToSong(songid){
             this.axios.get("/check/music?id="+songid).then((res)=>{ // 判断音乐是否可用

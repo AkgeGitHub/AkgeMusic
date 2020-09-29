@@ -33,7 +33,7 @@
 
             </div>
         </div>
-        <ProgramsList :programsList='RadioSongList'></ProgramsList>
+        <ProgramsList :list='RadioSongList'></ProgramsList>
 
     </div>
 </template>

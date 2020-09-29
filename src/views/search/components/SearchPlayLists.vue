@@ -1,14 +1,14 @@
 <template>
     <div class="playlist">
         <div class="playlist-cont">
-            <div class="cont-item" v-for="playlist in playLists" :key="playlist.id" >
-                <div class="item-cover"  @click.prevent="handleToPlaylist(playlist.id)">
-                    <a href=""><img :src="playlist.coverImgUrl" alt=""></a>
-                    <a href=""><div>{{playlist.name}}</div></a>
+            <div class="cont-item" v-for="item in list" :key="item.id" >
+                <div class="item-cover"  @click.prevent="handleToPlaylist(item.id)">
+                    <a href=""><img :src="item.coverImgUrl" alt=""></a>
+                    <a href=""><div>{{item.name}}</div></a>
                 </div>
-                <div class="item-ar">by {{playlist.creator.nickname}}</div>
-                <div class="item-songsum">{{playlist.trackCount}} 首</div>
-                <div class="item-playcount">{{playlist.playCount}} 次播放</div>
+                <div class="item-ar">by {{item.creator.nickname}}</div>
+                <div class="item-songsum">{{item.trackCount}} 首</div>
+                <div class="item-playcount">{{item.playCount}} 次播放</div>
                 
             </div>
         </div>
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-    props:['playLists'],
+    props:['list'],
     methods:{
         handleToPlaylist(id){
             if (id) {

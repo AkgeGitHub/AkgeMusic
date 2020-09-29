@@ -1,13 +1,13 @@
 <template>
     <div class="programs">
-        <div class="program-item" v-for="program in programsList" :key="program.mainSong.id" @click.prevent="handleToSong(program.mainSong.id)">
+        <div class="program-item" v-for="item in list" :key="item.mainSong.id" @click.prevent="handleToSong(item.mainSong.id)">
             <div class="item-3x">
-                <span>{{program.serialNum}} </span>
-                <a href="">{{program.mainSong.name}}</a>
+                <span>{{item.serialNum}} </span>
+                <a href="">{{item.mainSong.name}}</a>
             </div>
-            <div class="item-2x"><a href="">{{program.mainSong.duration | duration}}</a></div>
-            <div class="item-2x"><a href="">播放 {{program.listenerCount}}</a></div>
-            <div class="item-x"><a href="">赞 {{program.likedCount}}</a></div>
+            <div class="item-2x"><a href="">{{item.mainSong.duration | duration}}</a></div>
+            <div class="item-2x"><a href="">播放 {{item.listenerCount}}</a></div>
+            <div class="item-x"><a href="">赞 {{item.likedCount}}</a></div>
         </div>
 
     </div>   
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-    props: ['programsList'],
+    props: ['list'],
     filters: {
         duration: function (dt) {
             var commonTime=new Date(dt);

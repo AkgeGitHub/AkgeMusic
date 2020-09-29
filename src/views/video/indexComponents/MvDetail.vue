@@ -4,7 +4,7 @@
         <div class="video-main">
           <video :src="mvUrl" controls autoplay></video>
         </div>
-        <CommentsList :commentsList='commentsList' :hotCommentsList='hotCommentsList'></CommentsList>
+        <CommentsList :list='commentsList' :hotList='hotCommentsList'></CommentsList>
       </div>
       <div class="video-description">
         <div class="desc-intro">

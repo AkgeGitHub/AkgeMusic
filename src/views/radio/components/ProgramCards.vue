@@ -4,16 +4,16 @@
             <div class="header-name">{{title}}</div>
         </div>
         <div class="program-cont">
-            <div class="cont-card" v-for="(program,index) in programsList" :key="program.mainSong.id" @click.prevent="handleToSong(program.mainSong.id)">  <!--注意节目的id和电台的id是不同的，要想获得音频应该传入的是节目下的radio中的id -->
+            <div class="cont-card" v-for="(item,index) in list" :key="item.mainSong.id" @click.prevent="handleToSong(item.mainSong.id)">  <!--注意节目的id和电台的id是不同的，要想获得音频应该传入的是节目下的radio中的id -->
                 <a href="">
                     <div class="card-cover">
                         <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
                         <div class="cover-rank" v-if="isRank">{{index+1}}</div>
-                        <img :src="program.coverUrl" alt="" >
+                        <img :src="item.coverUrl" alt="" >
                     </div>
-                    <div class="card-name" :title="program.name">{{program.name}}</div>
+                    <div class="card-name" :title="item.name">{{item.name}}</div>
                     <div class="card-artist" v-if="isShowAuthor">
-                        <span>{{program.mainSong.artists | arname}}</span>
+                        <span>{{item.mainSong.artists | arname}}</span>
                     </div>
                 </a>
             </div>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-    props:['title','programsList','isMore','isRank','isShowAuthor'],
+    props:['title','list','isMore','isRank','isShowAuthor'],
     methods:{
         handleToSong(songid){
             this.axios.get("/check/music?id="+songid).then((res)=>{ // 判断音乐是否可用

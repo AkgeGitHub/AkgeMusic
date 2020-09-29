@@ -4,14 +4,14 @@
             <div class="header-name">{{title}}</div>
         </div>
         <div class="album-cont">
-            <div class="cont-card" v-for="album in albumsList" :key="album.id">
+            <div class="cont-card" v-for="item in list" :key="item.id">
                 <div class="card-cover">
                     <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
-                    <img :src="album.picUrl" alt="" >
+                    <img :src="item.picUrl" alt="" >
                 </div>
-                <div class="card-name" :title="album.name">{{album.name}}</div>
+                <div class="card-name" :title="item.name">{{item.name}}</div>
                 <div class="card-artist">
-                    <span>{{album.artists | arname}}</span>
+                    <span>{{item.artists | arname}}</span>
                 </div>
             </div>
         </div>
@@ -21,7 +21,10 @@
 <script>
 export default {
     name:"AlbumsList",
-    props:['albumsList','title']
+    props:{
+        list:Array,
+        title:String
+    }
 }
 </script>
 

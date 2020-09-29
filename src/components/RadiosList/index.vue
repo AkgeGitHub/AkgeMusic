@@ -4,16 +4,16 @@
             <div class="header-name">{{title}}</div>
         </div>
         <div class="radio-cont">
-            <div class="cont-card" v-for="(radio,index) in radiosList" :key="radio.id" @click.prevent="handleToRadio(radio.id)">
+            <div class="cont-card" v-for="(item,index) in list" :key="item.id" @click.prevent="handleToRadio(item.id)">
                 <a href="">
                     <div class="card-cover">
                         <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
                         <div class="cover-rank" v-if="isRank">{{index+1}}</div>
-                        <img :src="radio.coverUrl || radio.picUrl" alt="" >
+                        <img :src="item.coverUrl || item.picUrl" alt="" >
                     </div>
-                    <div class="card-name" :title="radio.name">{{radio.name}}</div>
+                    <div class="card-name" :title="item.name">{{item.name}}</div>
                     <div class="card-artist" v-if="isShowAuthor">
-                        <span>{{radio.creatorName || radio.dj.nickname}}</span>
+                        <span>{{item.creatorName || item.dj.nickname}}</span>
                     </div>
                 </a>
             </div>
@@ -24,7 +24,7 @@
 <script>
 export default {
     name:'RadiosList',
-    props:['title','radiosList','isMore','isRank','isShowAuthor'],
+    props:['title','list','isMore','isRank','isShowAuthor'],
     methods:{
         handleToRadio(id){
             if (id) {

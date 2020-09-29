@@ -1,6 +1,6 @@
 <template>
 	<div class="main-content"  @scroll="handleToScroll" ref="singer">
-    <SingersList :singersList='singersList'>
+    <SingersList :list='singersList'>
       <div class="singer-sort">
           <div class="sort-lang">
               <a href="" v-for="(item,index) in langList" :key="item.area" @click.prevent="handleToLang(item.area,index)" :class="{active:langChoice==index}">

@@ -8,13 +8,13 @@
             </div>
         </div>
         <div class="playLists-cont">
-            <div class="cont-card" v-for="play in playLists" :key="play.id" @click.prevent="handleToPlaylist(play.id)">
+            <div class="cont-card" v-for="item in list" :key="item.id" @click.prevent="handleToPlaylist(item.id)">
                 <a href="">
                     <div class="card-cover">
                         <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
-                        <img :src="play.picUrl" alt="">
+                        <img :src="item.picUrl" alt="">
                     </div>
-                    <div class="card-title" :title="play.name">{{play.name}}</div>
+                    <div class="card-title" :title="item.name">{{item.name}}</div>
                 </a>
             </div>
         </div>
@@ -24,7 +24,7 @@
 <script>
 export default {
     name:'PlayLists',
-    props:['title','playLists','isMore'],
+    props:['title','list','isMore'],
     methods:{
         handleToPlaylist(id){
             if (id) {

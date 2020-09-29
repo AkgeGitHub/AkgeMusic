@@ -6,14 +6,14 @@
             <div class="item-2x">专辑</div>
             <div class="item-x">时长</div>
         </div>
-        <div class="song-item" v-for="song in songsList" :key="song.id" @click.prevent="handleToSong(song.id)">
+        <div class="song-item" v-for="item in list" :key="item.id" @click.prevent="handleToSong(item.id)">
             <div class="item-3x">
                 <i class="far fa-heart fas fa-heart fa-fw"></i>
-                <a href="">{{song.name}}</a>
+                <a href="">{{item.name}}</a>
             </div>
-            <div class="item-2x"><a href="">{{song.ar | arname}}</a></div>
-            <div class="item-2x"><a href="">{{song.al.name}}</a></div>
-            <div class="item-x"><a href="">{{song.dt | duration}}</a></div>
+            <div class="item-2x"><a href="">{{item.ar | arname}}</a></div>
+            <div class="item-2x"><a href="">{{item.al.name}}</a></div>
+            <div class="item-x"><a href="">{{item.dt | duration}}</a></div>
         </div>
 
     </div>   
@@ -22,7 +22,7 @@
 <script>
 export default {
     name:'SongsList',
-    props: ['songsList'],
+    props: ['list'],
     filters: {
         duration: function (dt) {
             var commonTime=new Date(dt);

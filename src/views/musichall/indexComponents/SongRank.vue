@@ -8,17 +8,17 @@
                     </div>
                 </div>
                 <div class="popular-small-card">
-                    <div class="popular-card" v-for="rank in popularRank" :key="rank.id" @click.prevent="handleToPlaylist(rank.id)">
+                    <div class="popular-card" v-for="item in popularRank" :key="item.id" @click.prevent="handleToPlaylist(item.id)">
                         <a href="">
                             <div class="card-cover">
-                                <img :src="rank.coverImgUrl" alt="">
+                                <img :src="item.coverImgUrl" alt="">
                             </div>
                         </a>
                         <a href="">
                             <div class="card-cont">
-                                <h3 class="cont-title">{{rank.name}}</h3>
+                                <h3 class="cont-title">{{item.name}}</h3>
                                 <ul class="cont-body">
-                                    <li v-for="(item,index) in rank.tracks" :key="item.id">
+                                    <li v-for="(item,index) in item.tracks" :key="item.id">
                                         <span>{{index+1}} </span>
                                         <span>{{item.name}}</span>
                                         <span> - </span>
@@ -33,12 +33,12 @@
             <div class="rank-global">
                 <div class="global-title">全球媒体榜</div>
                 <div class="global-cont">
-                    <div class="global-card" v-for="rank in rankLists.slice(4)" :key="rank.id" @click.prevent="handleToPlaylist(rank.id)">
+                    <div class="global-card" v-for="item in rankLists.slice(4)" :key="item.id" @click.prevent="handleToPlaylist(item.id)">
                         <a href="">
                             <div class="card-cover">
-                                <img :src="rank.coverImgUrl" alt="">
+                                <img :src="item.coverImgUrl" alt="">
                             </div>
-                            <div class="card-des" :title="rank.name">{{rank.name}}</div>
+                            <div class="card-des" :title="item.name">{{item.name}}</div>
                         </a>
                     </div>
                 </div>

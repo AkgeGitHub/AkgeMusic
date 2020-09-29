@@ -2,17 +2,17 @@
   <div id="main">
 		<div class="main-header">
 			<div class="nav clearfix">
-				<a href="" :class="{active:activeIndex==index}" v-for="(cat,index) in category" :key="cat.type" @click.prevent="handleToClick(index)">
-					{{cat.name}}
+				<a href="" :class="{active:activeIndex==index}" v-for="(item,index) in category" :key="item.type" @click.prevent="handleToClick(index)">
+					{{item.name}}
 				</a>
 			</div>
 		</div>
 
-		<SongsList :songsList="songsList" v-show="showIndex==0"></SongsList>
-        <MvsList :mvsList='mvsList' v-show="showIndex==1"></MvsList>
-        <AlbumsList :albumsList='albumsList' v-show="showIndex==2"></AlbumsList>
-        <SearchPlayLists :playLists='playLists' v-show="showIndex==3"></SearchPlayLists>
-        <SingersList :singersList='singersList' v-show="showIndex==4"></SingersList>
+		<SongsList :list="songsList" v-show="showIndex==0"></SongsList>
+        <MvsList :list='mvsList' v-show="showIndex==1"></MvsList>
+        <AlbumsList :list='albumsList' v-show="showIndex==2"></AlbumsList>
+        <SearchPlayLists :list='playLists' v-show="showIndex==3"></SearchPlayLists>
+        <SingersList :list='singersList' v-show="showIndex==4"></SingersList>
 		
 	</div>
 </template>

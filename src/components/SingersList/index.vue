@@ -2,11 +2,11 @@
   <div class="singer">
     <slot></slot>
     <div class="singer-cont">
-        <div class="singer-card" v-for="(singer,index) in singersList" :key="singer.id">
+        <div class="singer-card" v-for="(item,index) in list" :key="item.id">
         <div class="card-cover" v-if="index<12"> <!-- 设置前12名才有图片 -->
-            <img :src="singer.img1v1Url" alt="">
+            <img :src="item.img1v1Url" alt="">
         </div>
-        <div class="card-name">{{singer.name}}</div>
+        <div class="card-name">{{item.name}}</div>
         </div>
     </div>
   </div>
@@ -15,7 +15,7 @@
 <script>
     export default {
       name:'SingersList',
-      props:['singersList']
+      props:['list']
   };
 </script>
 

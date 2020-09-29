@@ -1,7 +1,7 @@
 <template>
   <div class="main-content" @scroll="handleToScroll" ref="album">
-    <AlbumsList  albumstitle='热门新碟' :albumsList='hotAlbums'></AlbumsList>
-    <AlbumsList  albumstitle='全部新碟' :albumsList='allAlbums'></AlbumsList>
+    <AlbumsList  title='热门新碟' :list='hotAlbums'></AlbumsList>
+    <AlbumsList  title='全部新碟' :list='allAlbums'></AlbumsList>
   </div>
 </template>
 

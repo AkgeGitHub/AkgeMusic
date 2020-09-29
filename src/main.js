@@ -16,6 +16,7 @@ import SingersList from '@/components/SingersList';
 import PlayLists from '@/components/PlayLists';
 import CommentsList from '@/components/CommentsList';
 import RadiosList from '@/components/RadiosList';
+import SearchBox from '@/components/SearchBox';
 Vue.component("Sidebar",Sidebar)
 Vue.component("Header",Header)
 Vue.component("Footer",Footer)
@@ -26,6 +27,7 @@ Vue.component("SingersList",SingersList)
 Vue.component("PlayLists",PlayLists)
 Vue.component("CommentsList",CommentsList)
 Vue.component("RadiosList",RadiosList)
+Vue.component("SearchBox",SearchBox)
 
 // axios
 import axios from 'axios'

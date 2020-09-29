@@ -9,16 +9,16 @@
             </div>
         </div>
         <div class="mvs-cont">
-            <div class="cont-card" v-for="(mv,index) in mvsList" :key="mv.id" @click.prevent="handleToVideo(mv.id)">
+            <div class="cont-card" v-for="(item,index) in list" :key="item.id" @click.prevent="handleToVideo(item.id)">
                 <a href="">
                     <div class="card-cover">
                         <div class="cover-mask"><i class="fas fa-play-circle fa-3x cover-btn"></i></div>
                         <div class="cover-rank" v-if="isRank">{{index+1}}</div>
-                        <img :src="mv.cover || mv.picUrl" alt="" >
+                        <img :src="item.cover || item.picUrl" alt="" >
                     </div>
-                    <div class="card-name" :title="mv.name">{{mv.name}}</div>
+                    <div class="card-name" :title="item.name">{{item.name}}</div>
                     <div class="card-artist">
-                        <span>{{mv.artists | arname}}</span>
+                        <span>{{item.artists | arname}}</span>
                     </div>
                 </a>
             </div>
@@ -29,7 +29,7 @@
 <script>
 export default {
     name:'MvsList',
-    props:['title','mvsList','isRank','isMore'],
+    props:['title','list','isRank','isMore'],
     methods:{
         handleToVideo(id){
             this.$router.push("/video/detail/"+id)

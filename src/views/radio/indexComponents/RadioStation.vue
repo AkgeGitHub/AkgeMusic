@@ -18,8 +18,8 @@
             </swiper>
         </div>
         
-        <ProgramCards title='推荐节目' :programsList='rcmdDjList' :isShowAuthor='true'></ProgramCards>
-        <RadiosList title='热门电台' :radiosList='hotDjList' :isShowAuthor='true'></RadiosList>
+        <ProgramCards title='推荐节目' :list='rcmdDjList' :isShowAuthor='true'></ProgramCards>
+        <RadiosList title='热门电台' :list='hotDjList' :isShowAuthor='true'></RadiosList>
        
     </div>
 </template>

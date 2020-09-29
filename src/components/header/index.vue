@@ -6,25 +6,15 @@
                 <a href=""><i class="fas fa-chevron-right" @click.prevent="handleToGo"></i></a>
             </div>
             <div class="searchbar">
-                <input type="text" class="search-input" placeholder="搜索音乐" v-model="searchname" @keyup.enter="handleToSearch(searchname)" @click="handleToClick">
-                <a href=""><i class="fas fa-search search-btn" @click.prevent="handleToSearch(searchname)"></i></a>
+                <input type="text" class="search-input" placeholder="搜索音乐" v-model="searchSongName" @keyup.enter="handleToSearch(searchSongName)" @click="handleToClick" @focus="isFocus=true" @blur="isFocus=false">
+                <a href=""><i class="fas fa-search search-btn" @click.prevent="handleToSearch(searchSongName)"></i></a>
             </div>
             <div class="music-radar">
                 <i class="fas fa-microphone-alt fa-lg"></i>
             </div>
-            <div class="search-results" v-if="searchresshow">
-                <div class="res-title">在线音乐</div>
-                <div class="res-cont">
-                    <div href="" v-for="song in songslist" :key="song.id" @click.prevent="handleToSearch(song.name)">
-                        <a href="">
-                            <span>{{song.name}}</span>
-                            <span> - </span>
-                            <span>{{song.ar | arname}} </span>
-                        </a>
-                    </div>
-                </div>                
-            </div>
+            <SearchBox :songsList="songsList" :isShow="isResShow"  @getSearchName="getSearchValue"></SearchBox>
         </div>
+        
         <div class="nav-user-center">
             <div class="saying">
                 <i class="fas fa-quote-left fa-fw fa-sm"></i>
@@ -52,18 +42,24 @@
         name:"Header",
         data(){
             return{
-                searchresshow:false,
-                searchname:"",
-                songslist:[]
+                isResShow:false,
+                isFocus:false,
+                searchSongName:"",
+                songsList:[]
             }
         },
         mounted(){
-            
+            var that=this;
+            document.addEventListener("click",function (e) { // 监听整个文档点击事件，点击非输入框的地方searchBox消失
+                if(e.target.className!='search-input'){
+                    that.isResShow=false;
+                }
+            })
         },
         methods:{
             handleToClick(){
-                if (this.songslist!="") {
-                    this.searchresshow=!this.searchresshow;
+                if (this.songsList!="") {
+                    this.isResShow=!this.isResShow;
                 }
             },
             cancelRequest() {
@@ -71,11 +67,14 @@
                     this.source("终止请求");
                 }
             },
-            handleToSearch(searchname){
-                if (searchname) {
-                    this.$router.push('/search/detail/'+searchname)     
+            handleToSearch(searchSongName){
+                if (searchSongName) {
+                    this.$router.push('/search/detail/'+searchSongName)
+                    this.isResShow=false
                 }
-                
+            },
+            getSearchValue(searchValue){ // 获取searchBox组件点击时传过来的搜索值,同时将搜索值赋值到输入框中
+                this.searchSongName=searchValue;
             },
             handleToBack(){
                 this.$router.go(-1)
@@ -85,7 +84,7 @@
             }
         },
         watch:{
-            searchname(newval){
+            searchSongName(newval){
                 var that=this;
                 this.cancelRequest();
                 if (newval!="") {
@@ -95,9 +94,11 @@
                         })
                     }).then((res)=>{
                         if (res.data.result.songCount>0) {
-                            this.songslist=res.data.result.songs;
+                            this.songsList=res.data.result.songs;
                             this.$nextTick(()=>{
-                                this.searchresshow=true;
+                                if (this.isFocus) { // 判断是否聚焦于当前搜索框，聚焦则显示结果，不聚焦就不显示
+                                    this.isResShow=true;
+                                }
                             })
                         }
                     }).catch((err) => {
@@ -108,10 +109,11 @@
                         }
                     })
                 }else{
-                    this.songslist="";
-                    this.searchresshow=false;
+                    this.songsList="";
+                    this.isResShow=false;
                 }
-            }
+            },
+            
         }
     }
 
@@ -130,10 +132,6 @@
     .header .nav-search .searchbar .search-btn:hover{color: rgb(30, 208, 160);}
     .header .nav-search .music-radar{line-height: 34px;}
     .header .nav-search .music-radar i:hover{color: rgb(30, 208, 160);}
-    .header .nav-search .search-results{z-index: 999; position: absolute;top: 40px;left: 70px; width: 248px;height: 331px; padding: 10px 20px;border-radius: 10px; box-shadow: 0px 0px 5px rgb(173, 173, 173); overflow: hidden;background: rgb(255, 255, 255);font-size: 14px;}
-    .header .nav-search .search-results .res-title{height: 30px;line-height: 25px;border-bottom: 1px solid rgb(227,227,227);}
-    .header .nav-search .search-results .res-cont{height: 300px;overflow: hidden;font-size: 13px;}
-    .header .nav-search .search-results .res-cont div{height: 30px;line-height: 30px;text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
     .header .nav-user-center{display: flex;margin-left: 25px;}
     .header .nav-user-center .saying{display: flex;}
     .header .nav-user-center .saying i{margin:0px 10px;color: rgb(159,159,159);line-height: 34px;}

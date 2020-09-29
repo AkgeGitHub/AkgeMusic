@@ -58,7 +58,7 @@
                 </div>
                 <div class="tool speed">
                     <a href="">
-                        <div class="tool-name" @click.prevent="handleToSpeedshow">
+                        <div class="tool-name name-speed" @click.prevent.stop="handleToSpeedshow">
                             <span>{{speedName}}</span>
                             <i class="fas fa-chevron-up fa-xs fa-fw"></i>
                         </div> 
@@ -107,7 +107,7 @@
 export default {
     name:"Footer",
     filters: {
-        duration: function (dt) {
+        duration: function (dt) { // 时间戳格式化
             var commonTime=new Date(dt);
             var h=(commonTime.getHours()-8)>9?commonTime.getHours()-8:"0"+commonTime.getHours()-8;
             var m=commonTime.getMinutes()>9?commonTime.getMinutes():"0"+commonTime.getMinutes();
@@ -115,7 +115,7 @@ export default {
             var duration=h>0?(h+":"+m+":"+s):(m+":"+s);
             return duration;
         },
-        currentTime: function (ct) {
+        currentTime: function (ct) {  // 秒数格式化
             var hour=Math.floor(ct/360);
             var minute=Math.floor(ct/60%60);
             var second=Math.floor(ct%60);
@@ -128,22 +128,22 @@ export default {
     },
     data(){
         return{
-            isPlaying:false,
-            isVolShow:false,
-            isVolMute:false,
-            volValue:50,
-            speedName:"倍速",
-            speedValue:50,
-            isSpeedShow:false,
-            barWidth:0,
-            songDetail:{
+            isPlaying:false, // 是否正在播放
+            isVolShow:false, // 是否展示音量详情
+            isVolMute:false, // 是否静音
+            volValue:50, // 音量初始值
+            speedName:"倍速", // 倍速名称
+            speedValue:50, // 倍速展示
+            isSpeedShow:false, // 是否展示倍速详情
+            barWidth:0, // 进度条宽度
+            songDetail:{ // 歌曲详情
                 al:{picUrl:""},
                 ar:"",
                 name:""
             },
-            songUrl:"",
-            songCurrentTime:0,
-            songDuration:0
+            songUrl:"", // 歌曲url
+            songCurrentTime:0, // 歌曲当前时间
+            songDuration:0 // 歌曲时长
 
         }
     },
@@ -188,12 +188,12 @@ export default {
         handleToSpeedshow(){
             this.isSpeedShow=!this.isSpeedShow; // 点击展示和取消倍速内容
         },
-        handleToTimeupdate(){
+        handleToTimeupdate(){ //监听timeupdate事件
             this.songCurrentTime=Math.floor(this.audio.currentTime) 
             var per=this.audio.currentTime / this.audio.duration;
             this.barWidth=per*100
         },
-        handleToEnded(){
+        handleToEnded(){ // 音乐结束时触发的事件
             this.barWidth=0,
             this.isPlaying=false;
         }
@@ -231,7 +231,12 @@ export default {
         
     },
     mounted(){
-        
+        var that=this;
+        document.addEventListener("click",function (e) { // 点击非音量的地方音量详情消失消失
+            if(e.target.className!='tool-name name-speed'){ // 记得给tool-name name-speed添加.prevent.stop阻止默认行为和事件冒泡，因为我在外层套了一个a标签
+                that.isSpeedShow=false;
+            }
+        })
     },
 
 

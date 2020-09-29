@@ -1,20 +1,20 @@
 <template>
     <div class="cont-comment">
-        <div class="cont-comment-block" v-if="hotCommentsList.length>0">
+        <div class="cont-comment-block" v-if="hotList.length>0">
             <div class="block-title">精彩评论</div>
             <div class="block-commentlist">
-                <div class="comment" v-for="comment in hotCommentsList" :key="comment.commentId">
+                <div class="comment" v-for="item in hotList" :key="item.commentId">
                 <div class="comment-avatar">
-                    <img :src="comment.user.avatarUrl" alt="">
+                    <img :src="item.user.avatarUrl" alt="">
                 </div>
                 <div  class="comment-cont">
                     <div class="cont-body">
-                        <span class="detail-nickname">{{comment.user.nickname}} : </span>
-                        <span>{{comment.content}}</span>
+                        <span class="detail-nickname">{{item.user.nickname}} : </span>
+                        <span>{{item.content}}</span>
                     </div>
                     <div class="cont-footer">
-                        <span class="time">{{comment.time | time}}</span>
-                        <span><i class="far fa-thumbs-up fa-fw"></i>({{comment.likedCount}})</span>
+                        <span class="time">{{item.time | time}}</span>
+                        <span><i class="far fa-thumbs-up fa-fw"></i>({{item.likedCount}})</span>
                         <span><i class="fas fa-share-alt fa-fw"></i>分享</span>
                     </div>
                 </div>
@@ -25,18 +25,18 @@
         <div class="cont-comment-block">
             <div class="block-title">全部评论</div>
             <div class="block-commentlist">
-                <div class="comment" v-for="comment in commentsList" :key="comment.commentId">
+                <div class="comment" v-for="item in list" :key="item.commentId">
                     <div class="comment-avatar">
-                        <img :src="comment.user.avatarUrl" alt="">
+                        <img :src="item.user.avatarUrl" alt="">
                     </div>
                     <div  class="comment-cont">
                         <div class="cont-body">
-                            <span class="detail-nickname">{{comment.user.nickname}} : </span>
-                            <span>{{comment.content}}</span>
+                            <span class="detail-nickname">{{item.user.nickname}} : </span>
+                            <span>{{item.content}}</span>
                         </div>
                         <div class="cont-footer">
-                            <span class="time">{{comment.time | exactTime}}</span>
-                            <span><i class="far fa-thumbs-up fa-fw"></i>({{comment.likedCount}})</span>
+                            <span class="time">{{item.time | exactTime}}</span>
+                            <span><i class="far fa-thumbs-up fa-fw"></i>({{item.likedCount}})</span>
                             <span><i class="fas fa-share-alt fa-fw"></i>分享</span>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
 <script>
 export default {
     name:'CommentsList',
-    props:['commentsList','hotCommentsList'],
+    props:['list','hotList'],
 }
 </script>
 

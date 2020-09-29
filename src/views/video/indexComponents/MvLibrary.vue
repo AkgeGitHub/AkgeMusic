@@ -3,17 +3,17 @@
         <div class="main-cont-title">
 			<div class="title">视频</div>
 		</div>
-        <MvsList title='最新MV' :mvsList='newestMvList'>
+        <MvsList title='最新MV' :list='newestMvList'>
             <div class="header-sort">
-                <a href="" :class="{active:index==newestCatChoice}" v-for="(mvCat,index) in mvCatList" @click.prevent="handleToNewestMv(mvCat.cat,index)"  :key="mvCat.id">{{mvCat.cat}}</a>
+                <a href="" :class="{active:index==newestCatChoice}" v-for="(item,index) in mvCatList" @click.prevent="handleToNewestMv(item.cat,index)"  :key="item.id">{{item.cat}}</a>
             </div>
         </MvsList>
-        <MvsList title='MV排行榜' :mvsList='rankMvList' :isRank='true'>
+        <MvsList title='MV排行榜' :list='rankMvList' :isRank='true'>
             <div class="header-sort">
-                <a href="" :class="{active:index==rankCatChoice}" v-for="(mvCat,index) in mvCatList" @click.prevent="handleToRankMv(mvCat.cat,index)"  :key="mvCat.id">{{mvCat.cat}}</a>
+                <a href="" :class="{active:index==rankCatChoice}" v-for="(item,index) in mvCatList" @click.prevent="handleToRankMv(item.cat,index)"  :key="item.id">{{item.cat}}</a>
             </div>
         </MvsList>
-        <MvsList title='网易出品' :mvsList='neteaseMvList' :isMore='true'></MvsList>
+        <MvsList title='网易出品' :list='neteaseMvList' :isMore='true'></MvsList>
 	</div>
 </template>
 

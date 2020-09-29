@@ -36,7 +36,7 @@
 		<div class="songlist-cont">
 			<div class="cont-nav">
 				<div class="nav-left">
-                    <a href="" :class="{active:activeIndex==index}" v-for="(cat,index) in category" :key="cat.id" @click.prevent="handleToClick(index)">{{cat.name}}</a>
+                    <a href="" :class="{active:activeIndex==index}" v-for="(item,index) in category" :key="item.id" @click.prevent="handleToClick(index)">{{item.name}}</a>
 				</div>
 				<div class="nav-right">
 					<div>
@@ -48,8 +48,8 @@
 				</div>
 			</div>
 
-            <SongsList :songsList='songsList' v-show="showIndex==0"></SongsList>
-            <CommentsList :commentsList='commentsList' :hotCommentsList='hotCommentsList' v-show="showIndex==1"></CommentsList>
+            <SongsList :list='songsList' v-show="showIndex==0"></SongsList>
+            <CommentsList :list='commentsList' :hotList='hotCommentsList' v-show="showIndex==1"></CommentsList>
 
 		</div>
     </div>

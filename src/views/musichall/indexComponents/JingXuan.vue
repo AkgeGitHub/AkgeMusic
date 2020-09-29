@@ -14,10 +14,10 @@
                 <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
             </swiper>
         </div>
-        <MusicList title='最新音乐' :songsList='newSongLists' :isMore='true'></MusicList>
-        <MvsList title='推荐MV' :isMore='true' :mvsList='mvsList'></MvsList>
-        <PlayLists title='推荐歌单' :playLists='playLists' :isMore='true'></PlayLists>
-        <RadiosList title='推荐电台' :radiosList='djLists' :isShowAuthor='true'></RadiosList>
+        <MusicList title='最新音乐' :list='newSongLists' :isMore='true'></MusicList>
+        <MvsList title='推荐MV'  :list='mvsList' :isMore='true'></MvsList>
+        <PlayLists title='推荐歌单' :list='playLists' :isMore='true'></PlayLists>
+        <RadiosList title='推荐电台' :list='djLists' :isShowAuthor='true'></RadiosList>
     </div>
 </template>
 
